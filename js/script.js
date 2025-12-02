@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initQuoteForm();
   initSmoothScrolling();
   initPricingToggle();
+  initPortfolioFilter();
 
   // Navbar scroll effect
   function initNavbar() {
@@ -68,7 +69,106 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Counter animation
+  // Portfolio filtering functionality
+  function initPortfolioFilter() {
+    const filterButtons = document.querySelectorAll(".filter-tab");
+    const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+    console.log(
+      "Portfolio Filter Initialized:",
+      filterButtons.length,
+      "buttons,",
+      portfolioItems.length,
+      "items"
+    );
+
+    if (filterButtons.length === 0) return;
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        console.log("Filter clicked:", this.getAttribute("data-filter"));
+
+        // Remove active class from all buttons
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+        // Add active class to clicked button
+        this.classList.add("active");
+
+        // Get filter value
+        const filterValue = this.getAttribute("data-filter");
+
+        // Filter portfolio items with staggered animation
+        portfolioItems.forEach((item, index) => {
+          const itemCategories = item.getAttribute("data-category").split(" ");
+          console.log(
+            "Item categories:",
+            itemCategories,
+            "Filter:",
+            filterValue
+          );
+
+          if (filterValue === "all") {
+            setTimeout(() => {
+              item.classList.remove("hide");
+              item.style.display = "block";
+            }, index * 50);
+          } else {
+            if (itemCategories.includes(filterValue)) {
+              setTimeout(() => {
+                item.classList.remove("hide");
+                item.style.display = "block";
+                console.log("Showing item with categories:", itemCategories);
+              }, index * 50);
+            } else {
+              item.classList.add("hide");
+              setTimeout(() => {
+                if (item.classList.contains("hide")) {
+                  item.style.display = "none";
+                  console.log("Hiding item with categories:", itemCategories);
+                }
+              }, 200);
+            }
+          }
+        });
+      });
+    });
+
+    // Initialize with 'all' filter - ensure all items are visible
+    portfolioItems.forEach((item) => {
+      item.classList.remove("hide");
+      item.style.display = "block";
+    });
+
+    const allButton = document.querySelector('[data-filter="all"]');
+    if (allButton) {
+      allButton.classList.add("active");
+    }
+
+    // Load More functionality
+    const loadMoreBtn = document.getElementById("loadMore");
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", function () {
+        const spinner = this.querySelector(".spinner-border");
+
+        // Show loading state
+        if (spinner) {
+          spinner.classList.remove("d-none");
+        }
+        this.disabled = true;
+
+        // Simulate loading more projects
+        setTimeout(() => {
+          if (spinner) {
+            spinner.classList.add("d-none");
+          }
+          this.disabled = false;
+
+          // You can add logic here to actually load more projects
+          showNotification("More projects loaded successfully!", "success");
+        }, 2000);
+      });
+    }
+  } // Counter animation
   function initCounters() {
     const counters = document.querySelectorAll(".counter");
     const observerOptions = {
@@ -456,6 +556,79 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   initBackToTop();
+  initMobileOptimizations();
+
+  // Mobile optimizations
+  function initMobileOptimizations() {
+    // Prevent zoom on input focus for iOS
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+      const inputs = document.querySelectorAll(
+        'input[type="text"], input[type="email"], input[type="tel"], textarea'
+      );
+      inputs.forEach((input) => {
+        input.style.fontSize = "16px";
+      });
+    }
+
+    // Improve touch targets
+    const touchTargets = document.querySelectorAll(
+      ".btn, .nav-link, .social-links a"
+    );
+    touchTargets.forEach((target) => {
+      if (window.innerWidth <= 768) {
+        target.style.minHeight = "44px";
+        target.style.minWidth = "44px";
+      }
+    });
+
+    // Optimize images for mobile
+    const images = document.querySelectorAll("img");
+    images.forEach((img) => {
+      img.style.maxWidth = "100%";
+      img.style.height = "auto";
+    });
+
+    // Mobile menu auto-close
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+    const navbarCollapse = document.querySelector(".navbar-collapse");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (
+          window.innerWidth <= 991 &&
+          navbarCollapse.classList.contains("show")
+        ) {
+          const toggleBtn = document.querySelector(".navbar-toggler");
+          toggleBtn.click();
+        }
+      });
+    });
+
+    // Handle orientation change
+    window.addEventListener("orientationchange", function () {
+      setTimeout(() => {
+        window.scrollTo(0, window.scrollY);
+      }, 500);
+    });
+
+    // Optimize scroll performance
+    let ticking = false;
+
+    function updateOnScroll() {
+      // Your scroll functions here
+      ticking = false;
+    }
+
+    function requestScrollUpdate() {
+      if (!ticking) {
+        requestAnimationFrame(updateOnScroll);
+        ticking = true;
+      }
+    }
+
+    // Replace scroll event listeners with optimized version
+    window.addEventListener("scroll", requestScrollUpdate);
+  }
 });
 
 // Service worker registration (optional, for PWA features)

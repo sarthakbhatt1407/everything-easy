@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="index.html">
+      <i class="fas fa-code me-2"></i>Everything Easy
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="services.html">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="portfolio.html">Portfolio</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary ms-2" href="index.html#quote">Get Quote</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- JavaScript to set active nav link -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get current page name
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
+
+    // Remove active class from all nav links
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.classList.remove("active");
+    });
+
+    // Set active class based on current page
+    let activeId = "";
+    switch (currentPage) {
+      case "index.html":
+      case "":
+        activeId = "nav-home";
+        break;
+      case "about.html":
+        activeId = "nav-about";
+        break;
+      case "services.html":
+        activeId = "nav-services";
+        break;
+      case "portfolio.html":
+        activeId = "nav-portfolio";
+        break;
+      case "contact.html":
+        activeId = "nav-contact";
+        break;
+    }
+
+    if (activeId) {
+      const activeLink = document.getElementById(activeId);
+      if (activeLink) {
+        activeLink.classList.add("active");
+      }
+    }
+
+    console.log("Navigation loaded successfully");
+  });
+</script>
