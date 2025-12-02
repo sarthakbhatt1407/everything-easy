@@ -2635,6 +2635,7 @@ html {
   }
   
   .cta-buttons {
+    display: flex;
     flex-direction: column;
     gap: 1rem;
   }
@@ -2845,6 +2846,79 @@ html {
   
   .contact-icon i {
     font-size: 2rem !important;
+  }
+}
+
+/* Portfolio Filter Mobile & Desktop Optimization */
+.filter-tabs .nav-link {
+  padding: 10px 16px;
+  margin: 0 5px 10px 5px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.filter-tabs .nav-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 102, 204, 0.2);
+}
+
+.filter-tabs .nav-link.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.filter-tabs .nav-link i {
+  font-size: 0.9rem;
+}
+
+/* Mobile Optimizations for Filter Tabs */
+@media (max-width: 767.98px) {
+  .filter-tabs .nav {
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap !important;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .filter-tabs .nav-link {
+    flex-shrink: 0;
+    padding: 12px 18px;
+    margin: 0 8px 0 0;
+    font-size: 0.9rem;
+    min-width: fit-content;
+  }
+  
+  .filter-tabs .nav-link:last-child {
+    margin-right: 20px; /* Extra margin for better scrolling */
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .filter-tabs .nav::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .filter-tabs .nav {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .filter-tabs .nav-link {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    margin: 0 6px 0 0;
+  }
+  
+  .filter-tabs .nav-link i {
+    font-size: 0.8rem;
   }
 }
 
