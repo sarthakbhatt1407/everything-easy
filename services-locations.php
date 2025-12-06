@@ -68,128 +68,45 @@
     </section>
 
     <!-- Web Development Services by Location -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="fw-bold mb-3">
-              <i class="fas fa-globe text-primary me-3"></i>Web Development
-              Services
-            </h2>
-            <p class="text-muted">
-              Professional website development across India
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Dehradun
-              </h5>
-              <p class="text-muted">
-                Custom website development services in Dehradun with modern
-                design and functionality.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Rishikesh
-              </h5>
-              <p class="text-muted">
-                Responsive and SEO-friendly website development services in
-                Rishikesh.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Delhi
-              </h5>
-              <p class="text-muted">
-                Professional web development services in Delhi NCR with
-                cutting-edge technology.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Gurgaon
-              </h5>
-              <p class="text-muted">
-                Enterprise-grade website development solutions in Gurgaon.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Noida
-              </h5>
-              <p class="text-muted">
-                Innovative web development services in Noida for businesses of
-                all sizes.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Mumbai
-              </h5>
-              <p class="text-muted">
-                Premium website development services in Mumbai with modern
-                frameworks.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Bangalore
-              </h5>
-              <p class="text-muted">
-                Tech-driven web development solutions in Bangalore's IT hub.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Pune
-              </h5>
-              <p class="text-muted">
-                Scalable and secure web development services in Pune.
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
-              <h5 class="fw-bold mb-3">
-                <i class="fas fa-check-circle text-success me-2"></i>Web
-                Development in Hyderabad
-              </h5>
-              <p class="text-muted">
-                Advanced web development services in Hyderabad with latest
-                technologies.
-              </p>
-            </div>
-          </div>
-        </div>
+<section class="py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2 class="fw-bold mb-3">
+          <i class="fas fa-globe text-primary me-3"></i>Web Development Services
+        </h2>
+        <p class="text-muted">
+          Professional website development across India
+        </p>
       </div>
-    </section>
+    </div>
+
+    <?php
+    require_once 'backend/config.php';
+$conn = getDBConnection();
+ 
+    // Fetch all locations
+    $locations = mysqli_query($conn, "SELECT location_name, city_name , slug FROM locations ORDER BY id ASC");
+    ?>
+
+    <div class="row">
+  <?php while ($loc = mysqli_fetch_assoc($locations)) { ?>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
+        <h5 class="fw-bold mb-3">
+          <a style="color: black;" href="/it-services/<?php echo $loc['slug']; ?>">
+            <i class="fas fa-check-circle text-success me-2"></i>
+            Website Development in <?php echo $loc['location_name']; ?>
+          </a>
+        </h5>
+      </div>
+    </div>
+  <?php } ?>
+</div>
+
+  </div>
+</section>
+
 
     <!-- App Development Services by Location -->
     <section class="py-5 bg-light">

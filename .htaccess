@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^it-services/([A-Za-z0-9-]+)/?$ it-services.php?slug=$1 [L,QSA]
