@@ -27,7 +27,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="https://everythingeasy.in/assets/css/style.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Navigation Container -->
@@ -2643,10 +2643,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Navbar Loader -->
-    <script src="/js/navbar-loader.js"></script>
+    <script src="https://everythingeasy.in/assets/js/navbar-loader.js"></script>
 
     <!-- Footer Loader -->
-    <script src="/js/footer-loader.js"></script>
+    <script src="https://everythingeasy.in/assets/js/footer-loader.js"></script>
 
     <!-- FAQ Toggle Script -->
     <script>

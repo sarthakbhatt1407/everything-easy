@@ -94,7 +94,7 @@ $conn = getDBConnection();
     <div class="col-lg-4 col-md-6 mb-4">
       <div class="service-card h-100 p-4 bg-white rounded shadow-sm">
         <h5 class="fw-bold mb-3">
-          <a style="color: black;" href="/e2/it-services/<?php echo $loc['slug']; ?>">
+          <a style="color: black;" href="it-services/<?php echo $loc['slug']; ?>">
             <i class="fas fa-check-circle text-success me-2"></i>
             Website Development in <?php echo $loc['location_name']; ?>
           </a>
