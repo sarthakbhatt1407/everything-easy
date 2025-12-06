@@ -100,11 +100,28 @@ body {
   background-size: cover;
 }
 
+/* Dynamic height for hero section */
+.dynamic-height {
+  min-height: calc(100vh - 70px); /* Standard navbar height */
+  display: flex;
+  align-items: center;
+}
+
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .hero-section {
     padding-top: 80px;
     text-align: center;
+  }
+  
+  .dynamic-height {
+    min-height: calc(100vh - 70px); /* Smaller navbar on mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .dynamic-height {
+    min-height: calc(100vh - 65px); /* Extra small screens */
   }
 
   .hero-section .display-4 {
@@ -1055,6 +1072,10 @@ footer .text-danger {
 @media (max-width: 991px) {
   .hero-section {
     padding-top: 90px;
+  }
+  
+  .dynamic-height {
+    min-height: calc(100vh - 75px); /* Medium screens */
   }
 
   .display-4 {
