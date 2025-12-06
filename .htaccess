@@ -1,2 +1,15 @@
 RewriteEngine On
-RewriteRule ^it-services/([A-Za-z0-9-]+)/?$ it-services.php?slug=$1 [L,QSA]
+RewriteBase /e2/
+
+# ---- FIX: Never rewrite CSS / JS / Images ----
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico)$ [NC]
+RewriteRule .* - [L]
+
+# ---- Fix: Never rewrite assets folder ----
+RewriteCond %{REQUEST_URI} ^/e2/assets/ [NC]
+RewriteRule .* - [L]
+
+# ---- Your Pretty URL Rule ----
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^it-services/([^/]+)/?$ it-services.php?slug=$1 [L,QSA]
