@@ -5,7 +5,7 @@
  */
 
 // Database credentials
-define('DB_HOST', '198.12.242.197');
+define('DB_HOST', '103.47.14.176');
 define('DB_USER', 'everythingeasyuser');
 define('DB_PASS', 'nU7H[I7#gN)d');
 define('DB_NAME', 'EverythingeasyDatabase');
