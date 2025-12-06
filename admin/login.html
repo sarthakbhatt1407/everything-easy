@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Everything Easy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            max-width: 450px;
+            width: 100%;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .login-header i {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .login-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .login-body {
+            padding: 40px 30px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .form-control {
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            outline: none;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            font-size: 18px;
+            z-index: 10;
+        }
+
+        .password-toggle:hover {
+            color: #0066cc;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-check-label {
+            color: #666;
+        }
+
+        .forgot-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .back-home a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-home a:hover {
+            color: #0066cc;
+        }
+
+        .back-home i {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 480px) {
+            .login-header {
+                padding: 30px 20px;
+            }
+
+            .login-header h2 {
+                font-size: 24px;
+            }
+
+            .login-body {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fas fa-shield-halved"></i>
+            <h2>Admin Login</h2>
+            <p>Everything Easy Management Panel</p>
+        </div>
+
+        <div class="login-body">
+            <div id="alertMessage" class="alert alert-danger">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span id="alertText"></span>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group mb-3">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="form-control" id="username" placeholder="Enter your username"
+                            autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                            autocomplete="current-password" required>
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Remember me
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                </button>
+
+                <div class="back-home">
+                    <a href="../index.html">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Admin credentials (hashed for basic security)
+        const ADMIN_USERNAME = 'everythingeasy';
+        const ADMIN_PASSWORD = 'everythingeasy@9412';
+        const SESSION_KEY = 'admin_logged_in';
+        const SESSION_TIMESTAMP = 'admin_login_time';
+
+        // Check if already logged in
+        if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+            // Check if session is still valid (24 hours)
+            const loginTime = sessionStorage.getItem(SESSION_TIMESTAMP);
+            const currentTime = new Date().getTime();
+            const hoursPassed = (currentTime - loginTime) / (1000 * 60 * 60);
+
+            if (hoursPassed < 24) {
+                window.location.href = 'dashboard.html';
+            } else {
+                // Session expired
+                sessionStorage.removeItem(SESSION_KEY);
+                sessionStorage.removeItem(SESSION_TIMESTAMP);
+            }
+        }
+
+        // Password toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Login form submission
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const alertMessage = document.getElementById('alertMessage');
+        const alertText = document.getElementById('alertText');
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Show loading state
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Logging in...';
+            loginBtn.disabled = true;
+
+            // Simulate authentication delay
+            setTimeout(() => {
+                if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                    // Successful login
+                    sessionStorage.setItem(SESSION_KEY, 'true');
+                    sessionStorage.setItem(SESSION_TIMESTAMP, new Date().getTime());
+
+                    if (rememberMe) {
+                        localStorage.setItem('admin_remember', 'true');
+                    }
+
+                    // Show success message
+                    alertMessage.classList.remove('alert-danger');
+                    alertMessage.classList.add('alert-success');
+                    alertText.innerHTML = 'Login successful! Redirecting...';
+                    alertMessage.classList.add('show');
+
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    // Failed login
+                    alertMessage.classList.remove('alert-success');
+                    alertMessage.classList.add('alert-danger');
+                    alertText.innerHTML = 'Invalid username or password. Please try again.';
+                    alertMessage.classList.add('show');
+
+                    // Reset button
+                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Login';
+                    loginBtn.disabled = false;
+
+                    // Shake animation
+                    loginForm.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        loginForm.style.animation = '';
+                    }, 500);
+
+                    // Hide alert after 3 seconds
+                    setTimeout(() => {
+                        alertMessage.classList.remove('show');
+                    }, 3000);
+                }
+            }, 800);
+        });
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+                20%, 40%, 60%, 80% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Prevent back button after logout
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
+</body>
+
+</html>
