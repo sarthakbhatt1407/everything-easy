@@ -5,10 +5,10 @@
  */
 
 // Database credentials
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'everything_easy');
+define('DB_HOST', '198.12.242.197');
+define('DB_USER', 'everythingeasyuser');
+define('DB_PASS', 'nU7H[I7#gN)d');
+define('DB_NAME', 'EverythingeasyDatabase');
 
 // Create connection
 function getDBConnection() {
