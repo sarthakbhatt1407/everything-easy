@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Active navigation highlighting
+  // Active navigation highlighting (only for hash-based links)
   function updateActiveNav() {
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
@@ -382,10 +382,17 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // Only update links that have hash-based hrefs (starting with #)
+    // Don't touch page-based navigation links
     navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === "#" + currentSection) {
-        link.classList.add("active");
+      const href = link.getAttribute("href");
+
+      // Only process hash-based links
+      if (href && href.startsWith("#")) {
+        link.classList.remove("active");
+        if (href === "#" + currentSection) {
+          link.classList.add("active");
+        }
       }
     });
   }
