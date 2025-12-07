@@ -37,13 +37,7 @@
               Website Development Services in Dehradun
             </h1>
             <p class="lead mb-4 text-white" style="font-size: 1.35rem;">
-              Unlock the power of professional website development and elevate
-              your business presence in Dehradun with our expert web
-              development services. With over 10+ years of experience, we
-              specialize in creating successful websites that drive results.
-              Our expert team focuses on boosting your online presence and
-              helping you dominate search results in Dehradun, turning
-              visitors into valuable customers.
+             Unleash the power of professional website development and take your business to a higher level with the best web development services in Dehradun. Our service develops successful websites for results with more than 10+ years of experience. Our expert team focuses on boosting your online presence and helping you dominate search results in Dehradun, turning visitors into valuable customers.
             </p>
           </div>
         </div>
