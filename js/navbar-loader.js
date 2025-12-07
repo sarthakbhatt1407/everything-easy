@@ -32,13 +32,16 @@ function setActiveNavLink() {
   document.querySelectorAll(".navbar-nav .nav-link").forEach((link) => {
     const href = link.getAttribute("href");
 
-    // Direct match for exact page names
-    if (href === currentPage) {
+    // Direct match for exact page names (with or without leading slash)
+    if (href === currentPage || href === `/${currentPage}`) {
       link.classList.add("active");
       console.log("Activated link:", href);
     }
     // Special case: it-services.html should activate Services link
-    else if (currentPage === "it-services.html" && href === "services.html") {
+    else if (
+      currentPage === "it-services.html" &&
+      (href === "services.html" || href === "/services.html")
+    ) {
       link.classList.add("active");
       console.log("Activated Services for it-services.html");
     }
