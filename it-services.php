@@ -48,7 +48,7 @@
               <h1 class="display-4 fw-bold mb-4 text-white">
                 Website Development Services in Dehradun
               </h1>
-              <p class="lead mb-4 text-white">
+              <p class="lead mb-4 text-white" style="font-size: 1.35rem;">
                 Unlock the power of professional website development and elevate
                 your business presence in Dehradun with our expert web
                 development services. With over 10+ years of experience, we
