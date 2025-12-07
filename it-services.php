@@ -869,7 +869,7 @@
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-         Whether it's responsive design, e-commerce development, or custom web applications, we take a holistic approach towards each of these strategies to ensure long-term success for your brand. Try EverythingEasy Technology, a reliable <strong> website development company in Dehradun </strongs>, and watch your business grow.
+         Whether it's responsive design, e-commerce development, or custom web applications, we take a holistic approach towards each of these strategies to ensure long-term success for your brand. Try EverythingEasy Technology, a reliable <strong> website development company in Dehradun </strong>, and watch your business grow.
 
         </p>
       </div>
