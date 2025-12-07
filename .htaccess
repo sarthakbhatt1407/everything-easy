@@ -8,7 +8,7 @@ RewriteRule .* - [L]
 RewriteCond %{REQUEST_URI} ^assets/ [NC]
 RewriteRule .* - [L]
 
-# ---- Your Pretty URL Rule ----
+# ---- Rewrite HTML page with slug ----
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^it-services/([^/]+)/?$ it-services.php?slug=$1 [L,QSA]
+RewriteRule ^it-services/([^/]+)/?$ it-services.html?slug=$1 [L,QSA]

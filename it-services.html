@@ -33,6 +33,17 @@
     <!-- Navigation Container -->
     <div id="navbar-container"></div>
 
+    <script>
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+
+  console.log("Slug = " + slug);
+
+  // Example: print slug inside HTML
+  document.getElementById("page-title").innerHTML = slug.replaceAll("-", " ");
+</script>
+
+
     <!-- Hero Section -->
     <section class="service-hero">
       <div class="container">
