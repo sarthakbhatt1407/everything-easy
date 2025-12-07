@@ -82,7 +82,7 @@
                 margin-left: auto;
                 margin-right: auto;
               "
-              id="contact-form"
+              id="hero-contact-form"
             >
               <div class="card-body p-3 p-md-4">
                 <h4
@@ -158,14 +158,14 @@
                       "
                     >
                       <option value="">Select Service*</option>
-                      <option value="custom-website">
-                        Custom Website Development
+                      <option value="web-development">Web Development</option>
+                      <option value="app-development">
+                        Mobile App Development
                       </option>
-                      <option value="wordpress">WordPress Development</option>
-                      <option value="ecommerce">E-Commerce Website</option>
-                      <option value="responsive">Responsive Design</option>
-                      <option value="redesign">Website Redesign</option>
-                      <option value="maintenance">Website Maintenance</option>
+                      <option value="cloud-solutions">Cloud Solutions</option>
+                      <option value="seo">E-Commerce Development</option>
+                      <option value="seo">UI/UX Design</option>
+                      <option value="seo">Digital Marketing</option>
                       <option value="other">Other Services</option>
                     </select>
                   </div>
@@ -1421,8 +1421,7 @@
             phone: formData.get("phone"),
             service: formData.get("service"),
             message:
-              formData.get("message") ||
-              "Quick quote request from IT services page",
+              formData.get("message") || "Quick quote request from homepage",
           };
 
           // Show loading state
@@ -1491,9 +1490,10 @@
         });
       }
 
-      // Initialize form when DOM is loaded
+      // Initialize both forms when DOM is loaded
       document.addEventListener("DOMContentLoaded", function () {
         submitQuoteForm("heroQuoteForm", "heroFormResult");
+        submitQuoteForm("bottomQuoteForm", "bottomFormResult");
       });
     </script>
   </body>
