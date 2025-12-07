@@ -1,36 +1,34 @@
 <?php
-header("Content-Type: application/json");
 require_once 'backend/config.php';
 
-// Allow only POST requests
+// Allow only POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["status" => "error", "message" => "Invalid request method"]);
-    exit;
+    sendJSONResponse(false, "Invalid request method");
 }
 
-// Required fields checking
+$conn = getDBConnection();
+
+// Required fields
 $required = ['fullName', 'email', 'phone', 'position', 'experience', 'coverLetter'];
 
 foreach ($required as $field) {
     if (empty($_POST[$field])) {
-        echo json_encode(["status" => "error", "message" => "$field is required"]);
-        exit;
+        sendJSONResponse(false, "$field is required");
     }
 }
 
 // Escape inputs
-$fullName = mysqli_real_escape_string($mysqli, $_POST['fullName']);
-$email = mysqli_real_escape_string($mysqli, $_POST['email']);
-$phone = mysqli_real_escape_string($mysqli, $_POST['phone']);
-$position = mysqli_real_escape_string($mysqli, $_POST['position']);
+$fullName = $conn->real_escape_string($_POST['fullName']);
+$email = $conn->real_escape_string($_POST['email']);
+$phone = $conn->real_escape_string($_POST['phone']);
+$position = $conn->real_escape_string($_POST['position']);
 $experience = (int) $_POST['experience'];
-$portfolio = mysqli_real_escape_string($mysqli, $_POST['portfolio'] ?? '');
-$coverLetter = mysqli_real_escape_string($mysqli, $_POST['coverLetter']);
+$portfolio = $conn->real_escape_string($_POST['portfolio'] ?? '');
+$coverLetter = $conn->real_escape_string($_POST['coverLetter']);
 
-// File Upload Handling
+// =============== FILE UPLOAD ================
 if (!isset($_FILES['resume'])) {
-    echo json_encode(["status" => "error", "message" => "Resume file is required"]);
-    exit;
+    sendJSONResponse(false, "Resume file is required");
 }
 
 $resume = $_FILES['resume'];
@@ -38,33 +36,42 @@ $allowed_ext = ['pdf'];
 $file_ext = strtolower(pathinfo($resume['name'], PATHINFO_EXTENSION));
 
 if (!in_array($file_ext, $allowed_ext)) {
-    echo json_encode(["status" => "error", "message" => "Only PDF file allowed"]);
-    exit;
+    sendJSONResponse(false, "Only PDF files are allowed");
 }
 
 if ($resume['size'] > 5 * 1024 * 1024) { // 5MB
-    echo json_encode(["status" => "error", "message" => "File too large. Max 5MB"]);
-    exit;
+    sendJSONResponse(false, "File too large. Maximum allowed size is 5MB");
 }
 
-$uploadDir = "upload/";
+// Create upload folder if not exists
+$uploadDir = __DIR__ . "/upload/";
+
+if (!file_exists($uploadDir)) {
+    mkdir($uploadDir, 0755, true);
+}
+
 $fileName = uniqid("RESUME_") . "." . $file_ext;
 $uploadPath = $uploadDir . $fileName;
+$dbFilePath = "backend/upload/" . $fileName;
 
+// Upload file
 if (!move_uploaded_file($resume['tmp_name'], $uploadPath)) {
-    echo json_encode(["status" => "error", "message" => "File upload failed"]);
-    exit;
+    logError("File upload failed: " . $resume['name']);
+    sendJSONResponse(false, "Failed to upload resume");
 }
 
-// Insert into database
+// =============== INSERT QUERY ================
 $sql = "INSERT INTO job_applications 
-        (full_name, email, phone, position, experience, portfolio, cover_letter, resume_path)
+        (full_name, email, phone, position, experience, portfolio, cover_letter, resume_path) 
         VALUES 
-        ('$fullName', '$email', '$phone', '$position', $experience, '$portfolio', '$coverLetter', '$uploadPath')";
+        ('$fullName', '$email', '$phone', '$position', $experience, '$portfolio', '$coverLetter', '$dbFilePath')";
 
-if (mysqli_query($mysqli, $sql)) {
-    echo json_encode(["status" => "success", "message" => "Application submitted successfully"]);
+if ($conn->query($sql)) {
+    sendJSONResponse(true, "Application submitted successfully");
 } else {
-    echo json_encode(["status" => "error", "message" => "Database error: " . mysqli_error($mysqli)]);
+    logError("DB Insert Error: " . $conn->error);
+    sendJSONResponse(false, "Database error occurred");
 }
+
+closeDBConnection($conn);
 ?>
