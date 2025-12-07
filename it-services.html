@@ -1402,6 +1402,12 @@
         const form = document.getElementById(formId);
         const formResult = document.getElementById(resultId);
 
+        // Check if form exists before adding event listener
+        if (!form) {
+          console.warn(`Form with ID "${formId}" not found`);
+          return;
+        }
+
         form.addEventListener("submit", function (e) {
           e.preventDefault();
 
@@ -1432,7 +1438,7 @@
           submitBtn.disabled = true;
 
           // Submit via AJAX
-          fetch("backend/submit-quote.php", {
+          fetch("https://everythingeasy.in/backend/submit-quote.php", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -1490,10 +1496,9 @@
         });
       }
 
-      // Initialize both forms when DOM is loaded
+      // Initialize form when DOM is loaded
       document.addEventListener("DOMContentLoaded", function () {
         submitQuoteForm("heroQuoteForm", "heroFormResult");
-        submitQuoteForm("bottomQuoteForm", "bottomFormResult");
       });
     </script>
   </body>
