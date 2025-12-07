@@ -858,6 +858,24 @@ footer .container {
   left: 0;
 }
 
+/* Footer Contact */
+.footer-contact h6 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.footer-contact h6::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--primary-color);
+}
+
 /* Footer Links - Mobile Center Alignment */
 @media (max-width: 991px) {
   .footer-about,
@@ -900,24 +918,6 @@ footer .container {
     transform: none;
   }
 }
-}
-
-/* Footer Contact */
-.footer-contact h6 {
-  color: #fff;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.footer-contact h6::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background: var(--primary-color);
 }
 
 .contact-item {

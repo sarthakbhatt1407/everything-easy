@@ -91,11 +91,13 @@
                 >
                   Get a Free Quote
                 </h4>
-                <form>
+                <form id="heroQuoteForm" class="hero-quote-form">
                   <div class="mb-2">
                     <input
                       type="text"
                       class="form-control"
+                      id="heroName"
+                      name="name"
                       placeholder="Your Name*"
                       required
                       style="
@@ -111,6 +113,8 @@
                     <input
                       type="email"
                       class="form-control"
+                      id="heroEmail"
+                      name="email"
                       placeholder="Your Email*"
                       required
                       style="
@@ -126,6 +130,8 @@
                     <input
                       type="tel"
                       class="form-control"
+                      id="heroPhone"
+                      name="phone"
                       placeholder="Phone Number*"
                       required
                       style="
@@ -140,6 +146,8 @@
                   <div class="mb-2">
                     <select
                       class="form-select"
+                      id="heroService"
+                      name="service"
                       required
                       style="
                         border-radius: 8px;
@@ -164,6 +172,8 @@
                   <div class="mb-3">
                     <textarea
                       class="form-control"
+                      id="heroMessage"
+                      name="message"
                       rows="2"
                       placeholder="Brief about your project (optional)"
                       style="
@@ -187,6 +197,7 @@
                   >
                     Submit Request
                   </button>
+                  <div id="heroFormResult" class="mt-2 d-none"></div>
                 </form>
               </div>
             </div>
@@ -1382,6 +1393,108 @@
           el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
           observer.observe(el);
         });
+    </script>
+
+    <!-- Quote Form Handler -->
+    <script>
+      // Function to submit quote form
+      function submitQuoteForm(formId, resultId) {
+        const form = document.getElementById(formId);
+        const formResult = document.getElementById(resultId);
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const formData = new FormData(this);
+
+          // Split name into firstName and lastName
+          const fullName = formData.get("name").trim().split(" ");
+          const firstName = fullName[0];
+          const lastName = fullName.slice(1).join(" ") || firstName;
+
+          // Prepare data for API
+          const data = {
+            firstName: firstName,
+            lastName: lastName,
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            service: formData.get("service"),
+            message:
+              formData.get("message") ||
+              "Quick quote request from IT services page",
+          };
+
+          // Show loading state
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+          submitBtn.disabled = true;
+
+          // Submit via AJAX
+          fetch("backend/submit-quote.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              // Reset button
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+
+              if (result.success) {
+                // Show success message
+                formResult.className = "mt-2 alert alert-success";
+                formResult.innerHTML =
+                  '<i class="fas fa-check-circle me-2"></i>' + result.message;
+                formResult.classList.remove("d-none");
+
+                // Reset form
+                form.reset();
+                form.classList.remove("was-validated");
+              } else {
+                // Show error message
+                formResult.className = "mt-2 alert alert-danger";
+                formResult.innerHTML =
+                  '<i class="fas fa-exclamation-circle me-2"></i>' +
+                  result.message;
+                formResult.classList.remove("d-none");
+              }
+
+              // Hide message after 5 seconds
+              setTimeout(() => {
+                formResult.classList.add("d-none");
+              }, 5000);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+
+              // Reset button
+              submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false;
+
+              // Show error message
+              formResult.className = "mt-2 alert alert-danger";
+              formResult.innerHTML =
+                '<i class="fas fa-exclamation-circle me-2"></i>An error occurred. Please try again later.';
+              formResult.classList.remove("d-none");
+
+              // Hide message after 5 seconds
+              setTimeout(() => {
+                formResult.classList.add("d-none");
+              }, 5000);
+            });
+        });
+      }
+
+      // Initialize form when DOM is loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        submitQuoteForm("heroQuoteForm", "heroFormResult");
+      });
     </script>
   </body>
 </html>
