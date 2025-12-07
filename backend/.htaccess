@@ -1,16 +1,29 @@
 RewriteEngine On
 
-# Do NOT rewrite static files
-RewriteCond %{REQUEST_URI} \.(css|js|jpg|jpeg|png|gif|svg|webp|ico|pdf)$ [NC]
+# -----------------------------
+# 1. Do NOT rewrite CSS/JS/Images
+# -----------------------------
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico|pdf)$ [NC]
 RewriteRule .* - [L]
 
-# Do NOT rewrite existing files
+# -----------------------------
+# 2. Do NOT rewrite /assets/
+# -----------------------------
+RewriteCond %{REQUEST_URI} ^/assets/ [NC]
+RewriteRule .* - [L]
+
+# -----------------------------
+# 3. If file or folder exists → NO rewrite
+# -----------------------------
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule .* - [L]
 
-# Do NOT rewrite existing folders
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule .* - [L]
 
-# ✅ Route all slugs to it-services.php
-RewriteRule ^it-services/([^/]+)/?$ /it-services.php?slug=$1 [L,QSA]
+# --------------------------------------------------
+# 4. Rewrite ONLY URLs starting with /it-services/
+# URL: /it-services/web-development
+# Opens: /it-services.php?slug=web-development
+# --------------------------------------------------
+RewriteRule ^it-services/([^/]+)/?$ it-services.php?slug=$1 [L,QSA]
