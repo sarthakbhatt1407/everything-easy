@@ -29,7 +29,7 @@ AddDefaultCharset UTF-8
 
 # Protect sensitive files
 
-<FilesMatch "^(config\.php|database\.sql)$">
+<FilesMatch "^(config\.html|database\.sql)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
