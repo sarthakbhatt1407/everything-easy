@@ -1,15 +1,41 @@
+# Enable RewriteEngine
+
 RewriteEngine On
-RewriteBase /everythingeasy.in/
 
-# --- Do NOT rewrite CSS/JS/Images ---
-RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico)$ [NC]
-RewriteRule .* - [L]
+# Prevent directory browsing
 
-# --- Do NOT rewrite assets folder ---
-RewriteCond %{REQUEST_URI} ^/everythingeasy.in/assets/ [NC]
-RewriteRule .* - [L]
+Options -Indexes
 
-# --- Pretty URL for it-services ---
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^it-services/([^/]+)/?$ /everythingeasy.in/it-services.php?slug=$1 [L,QSA]
+# Set default charset
+
+AddDefaultCharset UTF-8
+
+# Enable CORS for API endpoints
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# PHP settings
+
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+
+# Protect sensitive files
+
+<FilesMatch "^(config\.php|database\.sql)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# Block access to logs directory
+
+<IfModule mod_rewrite.c>
+    RewriteRule ^logs/ - [F,L]
+</IfModule>
