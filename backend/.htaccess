@@ -1,29 +1,15 @@
 RewriteEngine On
+RewriteBase /everythingeasy.in/
 
-# -----------------------------
-# 1. Do NOT rewrite CSS/JS/Images
-# -----------------------------
-RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico|pdf)$ [NC]
+# --- Do NOT rewrite CSS/JS/Images ---
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico)$ [NC]
 RewriteRule .* - [L]
 
-# -----------------------------
-# 2. Do NOT rewrite /assets/
-# -----------------------------
-RewriteCond %{REQUEST_URI} ^/assets/ [NC]
+# --- Do NOT rewrite assets folder ---
+RewriteCond %{REQUEST_URI} ^/everythingeasy.in/assets/ [NC]
 RewriteRule .* - [L]
 
-# -----------------------------
-# 3. If file or folder exists → NO rewrite
-# -----------------------------
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule .* - [L]
-
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule .* - [L]
-
-# --------------------------------------------------
-# 4. Rewrite ONLY URLs starting with /it-services/
-# URL: /it-services/web-development
-# Opens: /it-services.php?slug=web-development
-# --------------------------------------------------
-RewriteRule ^it-services/([^/]+)/?$ it-services.php?slug=$1 [L,QSA]
+# --- Pretty URL for it-services ---
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^it-services/([^/]+)/?$ /everythingeasy.in/it-services.php?slug=$1 [L,QSA]
