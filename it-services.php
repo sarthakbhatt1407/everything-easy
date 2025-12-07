@@ -1,3 +1,21 @@
+<?php include "backend/config.php"; 
+//get slug from url
+$slug = $_GET['slug'];
+$conn = getDBConnection();
+//fetch location details based on slug
+$sql = "SELECT * FROM locations WHERE slug = '$slug'";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+  $loc = mysqli_fetch_assoc($result);
+} else {
+  //redirect to services-locations.php if no location found
+  header("Location: /services-locations.php");
+  exit();
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +26,71 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="theme-color" content="#0066cc" />
-  <meta name="description"
-    content="Professional Website Development Services in Dehradun - EverythingEasy Technology offers custom web development, responsive design, e-commerce solutions, and digital transformation for businesses in Dehradun." />
-  <title>
-    Website Development Services in Dehradun - EverythingEasy Technology
-  </title>
+
+    <title>Website Development Services in <?php echo $loc['location_name']; ?> - EverythingEasy Technology</title>
+
+<meta name="description" content="EverythingEasy is a professional website development & SEO company in India. We build modern websites, eCommerce stores, apps, and offer premium digital marketing services.">
+<meta name="keywords" content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
+<meta name="author" content="EverythingEasy">
+
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://everythingeasy.in/">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="https://everythingeasy.in/assets/favicon.png">
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#0ea5e9">
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:title" content="EverythingEasy – Website Development & Digital Marketing Company">
+<meta property="og:description" content="We help businesses grow with modern websites, SEO, and digital marketing services. Fast delivery, premium quality.">
+<meta property="og:image" content="https://everythingeasy.in/assets/og-image.jpg">
+<meta property="og:url" content="https://everythingeasy.in/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EverythingEasy">
+
+<!-- Twitter Meta -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EverythingEasy – Website Development & SEO Company">
+<meta name="twitter:description" content="We create responsive websites, ecommerce platforms, and provide SEO + digital marketing services.">
+<meta name="twitter:image" content="https://everythingeasy.in/assets/og-image.jpg">
+<meta name="twitter:site" content="@everythingeasy">
+
+<!-- Mobile Meta -->
+<meta name="format-detection" content="telephone=no">
+<meta name="HandheldFriendly" content="true">
+<meta name="MobileOptimized" content="320">
+
+<!-- Language -->
+<meta name="language" content="English">
+<meta http-equiv="content-language" content="en">
+
+<!-- Schema Markup - Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EverythingEasy",
+  "url": "https://everythingeasy.in",
+  "logo": "https://everythingeasy.in/assets/logo.png",
+  "sameAs": [
+    "https://www.facebook.com/",
+    "https://www.instagram.com/",
+    "https://www.linkedin.com/"
+  ],
+  "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+91-8630840577",
+      "contactType": "customer service",
+      "areaServed": "IN"
+  }]
+}
+</script>
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
