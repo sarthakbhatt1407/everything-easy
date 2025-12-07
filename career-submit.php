@@ -10,6 +10,7 @@ $conn = getDBConnection();
 
 // Required fields
 $required = ['fullName', 'email', 'phone', 'position', 'experience', 'coverLetter'];
+ print_r($_POST);
 
 foreach ($required as $field) {
     if (empty($_POST[$field])) {
