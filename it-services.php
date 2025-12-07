@@ -27,9 +27,9 @@ if (mysqli_num_rows($result) > 0) {
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="theme-color" content="#0066cc" />
 
-    <title>Website Development Services in <?php echo $loc['location_name']; ?> - EverythingEasy Technology</title>
+    <title> <?php echo $loc['title']; ?> </title>
 
-<meta name="description" content="EverythingEasy is a professional website development & SEO company in India. We build modern websites, eCommerce stores, apps, and offer premium digital marketing services.">
+<meta name="description" content="<? echo $loc['meta_description']; ?>">
 <meta name="keywords" content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
 <meta name="author" content="EverythingEasy">
 
@@ -37,7 +37,7 @@ if (mysqli_num_rows($result) > 0) {
 <meta name="googlebot" content="index, follow">
 
 <!-- Canonical -->
-<link rel="canonical" href="https://everythingeasy.in/">
+<link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="https://everythingeasy.in/assets/favicon.png">
@@ -46,17 +46,17 @@ if (mysqli_num_rows($result) > 0) {
 <meta name="theme-color" content="#0ea5e9">
 
 <!-- Open Graph / Facebook / LinkedIn -->
-<meta property="og:title" content="EverythingEasy – Website Development & Digital Marketing Company">
-<meta property="og:description" content="We help businesses grow with modern websites, SEO, and digital marketing services. Fast delivery, premium quality.">
+<meta property="og:title" content="<?php echo $loc['title']; ?>">
+<meta property="og:description" content="<? echo $loc['meta_description']; ?>">
 <meta property="og:image" content="https://everythingeasy.in/assets/og-image.jpg">
-<meta property="og:url" content="https://everythingeasy.in/">
+<meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EverythingEasy">
 
 <!-- Twitter Meta -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EverythingEasy – Website Development & SEO Company">
-<meta name="twitter:description" content="We create responsive websites, ecommerce platforms, and provide SEO + digital marketing services.">
+<meta name="twitter:title" content="<?php echo $loc['title']; ?>">
+<meta name="twitter:description" content="<? echo $loc['meta_description']; ?>">
 <meta name="twitter:image" content="https://everythingeasy.in/assets/og-image.jpg">
 <meta name="twitter:site" content="@everythingeasy">
 
