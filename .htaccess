@@ -1,15 +1,20 @@
 RewriteEngine On
-RewriteBase /everythingeasy.in/
 
-# --- Do NOT rewrite CSS/JS/Images ---
+# --- Never rewrite CSS/JS/Images ---
 RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico)$ [NC]
 RewriteRule .* - [L]
 
-# --- Do NOT rewrite assets folder ---
-RewriteCond %{REQUEST_URI} ^/everythingeasy.in/assets/ [NC]
+# --- Never rewrite assets folder ---
+RewriteCond %{REQUEST_URI} ^/assets/ [NC]
 RewriteRule .* - [L]
 
-# --- Pretty URL for it-services ---
+# --- ONLY rewrite URLs starting with /it-services/ ---
+RewriteCond %{REQUEST_URI} ^/it-services/ [NC]
+
+# Do NOT rewrite the actual HTML file itself
+RewriteCond %{REQUEST_URI} !^/it-services\.php$ [NC]
+
+# Pretty URL → it-services.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^it-services/([^/]+)/?$ /everythingeasy.in/it-services.php?slug=$1 [L,QSA]
+RewriteRule ^it-services/([^/]+)/?$ /it-services.php?slug=$1 [L,QSA]
