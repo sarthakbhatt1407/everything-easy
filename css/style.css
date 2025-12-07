@@ -858,6 +858,50 @@ footer .container {
   left: 0;
 }
 
+/* Footer Links - Mobile Center Alignment */
+@media (max-width: 991px) {
+  .footer-about,
+  .footer-links,
+  .footer-contact {
+    text-align: center;
+  }
+  
+  .footer-about h5,
+  .footer-links h6,
+  .footer-contact h6 {
+    text-align: center;
+  }
+  
+  .footer-links h6::after,
+  .footer-contact h6::after {
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+  
+  .footer-links ul li a::before {
+    display: none;
+  }
+  
+  .footer-links ul li a:hover {
+    padding-left: 0;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .contact-item {
+    justify-content: center;
+    text-align: center;
+    display: inline-flex !important;
+  }
+  
+  .contact-item:hover {
+    transform: none;
+  }
+}
+}
+
 /* Footer Contact */
 .footer-contact h6 {
   color: #fff;
