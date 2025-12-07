@@ -4,14 +4,14 @@ RewriteEngine On
 RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico)$ [NC]
 RewriteRule .* - [L]
 
-# Never rewrite assets
+# Never rewrite assets folder
 RewriteCond %{REQUEST_URI} ^/assets/ [NC]
 RewriteRule .* - [L]
 
-# 💥 FIX: Do NOT rewrite if it's already the final HTML
-RewriteCond %{REQUEST_URI} !it-services\.html$ [NC]
+# Do NOT rewrite actual HTML file
+RewriteCond %{REQUEST_URI} !^/it-services\.html$ [NC]
 
-# Pretty URL Rule
+# Pretty URL → route to it-services.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^it-services/([^/]+)/?$ /it-services.html?slug=$1 [L,QSA]
