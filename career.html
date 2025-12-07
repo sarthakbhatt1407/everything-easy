@@ -611,33 +611,25 @@
     <script src="js/footer-loader.js"></script>
 
     <script>
-      // Career form submission
       document
         .getElementById("careerForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
-          // Get form data
-          const formData = {
-            fullName: document.getElementById("fullName").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            position: document.getElementById("position").value,
-            experience: document.getElementById("experience").value,
-            portfolio: document.getElementById("portfolio").value,
-            coverLetter: document.getElementById("coverLetter").value,
-          };
+          let formData = new FormData(this);
 
-          // Here you would normally send the data to your server
-          console.log("Application submitted:", formData);
-
-          // Show success message
-          alert(
-            "Thank you for your application! We will review it and get back to you soon."
-          );
-
-          // Reset form
-          this.reset();
+          fetch("career-submit.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              alert(data.message);
+              if (data.status === "success") {
+                document.getElementById("careerForm").reset();
+              }
+            })
+            .catch((err) => alert("Error: " + err));
         });
     </script>
   </body>
