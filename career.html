@@ -629,7 +629,11 @@
           e.preventDefault();
 
           let formData = new FormData(this);
-          console.log(formData);
+
+          // Debug: Log FormData contents
+          for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+          }
 
           fetch("career-submit.php", {
             method: "POST",
