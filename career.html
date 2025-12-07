@@ -472,6 +472,7 @@
                       type="text"
                       class="form-control"
                       id="fullName"
+                      name="fullName"
                       required
                     />
                   </div>
@@ -481,6 +482,7 @@
                       type="email"
                       class="form-control"
                       id="email"
+                      name="email"
                       required
                     />
                   </div>
@@ -492,6 +494,7 @@
                       type="tel"
                       class="form-control"
                       id="phone"
+                      name="phone"
                       required
                     />
                   </div>
@@ -499,7 +502,12 @@
                     <label for="position" class="form-label"
                       >Position Applied For *</label
                     >
-                    <select class="form-select" id="position" required>
+                    <select
+                      class="form-select"
+                      id="position"
+                      name="position"
+                      required
+                    >
                       <option value="">Select Position</option>
                       <option value="Full Stack Developer">
                         Full Stack Developer
@@ -523,6 +531,7 @@
                     type="number"
                     class="form-control"
                     id="experience"
+                    name="experience"
                     min="0"
                     required
                   />
@@ -535,6 +544,7 @@
                     type="file"
                     class="form-control"
                     id="resume"
+                    name="resume"
                     accept=".pdf"
                     required
                   />
@@ -547,6 +557,7 @@
                     type="url"
                     class="form-control"
                     id="portfolio"
+                    name="portfolio"
                     placeholder="https://"
                   />
                 </div>
@@ -557,6 +568,7 @@
                   <textarea
                     class="form-control"
                     id="coverLetter"
+                    name="coverLetter"
                     rows="5"
                     placeholder="Tell us why you'd be a great fit for this role..."
                     required
