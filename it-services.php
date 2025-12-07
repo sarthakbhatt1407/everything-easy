@@ -27,7 +27,7 @@ if (mysqli_num_rows($result) > 0) {
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="theme-color" content="#0066cc" />
 
-    <title> <?php echo $loc['title']; ?> </title>
+    <title> <?php echo $loc['meta_title']; ?> </title>
 
 <meta name="description" content="<? echo $loc['meta_description']; ?>">
 <meta name="keywords" content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
@@ -46,7 +46,7 @@ if (mysqli_num_rows($result) > 0) {
 <meta name="theme-color" content="#0ea5e9">
 
 <!-- Open Graph / Facebook / LinkedIn -->
-<meta property="og:title" content="<?php echo $loc['title']; ?>">
+<meta property="og:title" content="<?php echo $loc['meta_title']; ?>">
 <meta property="og:description" content="<? echo $loc['meta_description']; ?>">
 <meta property="og:image" content="https://everythingeasy.in/images/poster.jpeg">
 <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
@@ -55,7 +55,7 @@ if (mysqli_num_rows($result) > 0) {
 
 <!-- Twitter Meta -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<?php echo $loc['title']; ?>">
+<meta name="twitter:title" content="<?php echo $loc['meta_title']; ?>">
 <meta name="twitter:description" content="<? echo $loc['meta_description']; ?>">
 <meta name="twitter:image" content="https://everythingeasy.in/images/poster.jpeg">
 <meta name="twitter:site" content="@everythingeasy">
