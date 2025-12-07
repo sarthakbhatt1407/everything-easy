@@ -13,19 +13,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Navbar scroll effect
   function initNavbar() {
-    const navbar = document.querySelector(".navbar");
+    // Wait for navbar to be loaded (it's loaded asynchronously)
+    const checkNavbar = setInterval(() => {
+      const navbar = document.querySelector(".navbar");
 
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-        navbar.style.background = "rgba(255, 255, 255, 0.95)";
-        navbar.style.backdropFilter = "blur(10px)";
-      } else {
-        navbar.classList.remove("scrolled");
-        navbar.style.background = "rgba(255, 255, 255, 1)";
-        navbar.style.backdropFilter = "none";
+      if (navbar) {
+        clearInterval(checkNavbar);
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+            navbar.style.background = "rgba(255, 255, 255, 0.95)";
+            navbar.style.backdropFilter = "blur(10px)";
+          } else {
+            navbar.classList.remove("scrolled");
+            navbar.style.background = "rgba(255, 255, 255, 1)";
+            navbar.style.backdropFilter = "none";
+          }
+        });
       }
-    });
+    }, 50);
   }
 
   // Pricing toggle functionality
