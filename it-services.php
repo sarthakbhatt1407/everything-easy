@@ -27,75 +27,73 @@ if (mysqli_num_rows($result) > 0) {
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="theme-color" content="#0066cc" />
 
-    <title> <?php echo $loc['meta_title']; ?> </title>
+  <title><?php echo htmlspecialchars($loc['meta_title']); ?></title>
 
-<meta name="description" content="<? echo $loc['meta_description']; ?>">
-<meta name="keywords" content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
-<meta name="author" content="EverythingEasy">
+  <meta name="description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
+  <meta name="keywords" content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
+  <meta name="author" content="EverythingEasy">
 
-<meta name="robots" content="index, follow">
-<meta name="googlebot" content="index, follow">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
 
-<!-- Canonical -->
-<link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
+  <!-- Canonical -->
+  <link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="https://everythingeasy.in/image/poster.jpeg">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://everythingeasy.in/image/poster.jpeg">
 
-<!-- Theme Color -->
-<meta name="theme-color" content="#0ea5e9">
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
+  <meta property="og:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
+  <meta property="og:image" content="https://everythingeasy.in/image/poster.jpeg">
+  <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EverythingEasy">
 
-<!-- Open Graph / Facebook / LinkedIn -->
-<meta property="og:title" content="<?php echo $loc['meta_title']; ?>">
-<meta property="og:description" content="<? echo $loc['meta_description']; ?>">
-<meta property="og:image" content="https://everythingeasy.in/image/poster.jpeg">
-<meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="EverythingEasy">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
+  <meta name="twitter:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
+  <meta name="twitter:image" content="https://everythingeasy.in/image/poster.jpeg">
 
-<!-- Twitter Meta -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<?php echo $loc['meta_title']; ?>">
-<meta name="twitter:description" content="<? echo $loc['meta_description']; ?>">
-<meta name="twitter:image" content="https://everythingeasy.in/image/poster.jpeg">
-<meta name="twitter:site" content="@everythingeasy">
+  <!-- Mobile Meta -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="320">
 
-<!-- Mobile Meta -->
-<meta name="format-detection" content="telephone=no">
-<meta name="HandheldFriendly" content="true">
-<meta name="MobileOptimized" content="320">
+  <!-- Language -->
+  <meta name="language" content="English">
+  <meta http-equiv="content-language" content="en">
 
-<!-- Language -->
-<meta name="language" content="English">
-<meta http-equiv="content-language" content="en">
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "EverythingEasy",
+    "url": "https://everythingeasy.in",
+    "logo": "https://everythingeasy.in/assets/logo.png",
+    "sameAs": [
+      "https://www.facebook.com/",
+      "https://www.instagram.com/",
+      "https://www.linkedin.com/"
+    ],
+    "contactPoint": [{
+        "@type": "ContactPoint",
+        "telephone": "+91-8630840577",
+        "contactType": "customer service",
+        "areaServed": "IN"
+    }]
+  }
+  </script>
 
-<!-- Schema Markup - Organization -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "EverythingEasy",
-  "url": "https://everythingeasy.in ",
-  "logo": "https://everythingeasy.in/assets/logo.png",
-  "sameAs": [
-    "https://www.facebook.com/",
-    "https://www.instagram.com/",
-    "https://www.linkedin.com/"
-  ],
-  "contactPoint": [{
-      "@type": "ContactPoint",
-      "telephone": "+91-8630840577",
-      "contactType": "customer service",
-      "areaServed": "IN"
-  }]
-}
-</script>
-
+  <!-- CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link href="https://everythingeasy.in/css/style.css" rel="stylesheet" />
 </head>
+
 
 <body>
   <div id="navbar-container"></div>
