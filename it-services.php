@@ -40,7 +40,7 @@ if (mysqli_num_rows($result) > 0) {
 <link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="https://everythingeasy.in/assets/favicon.png">
+<link rel="icon" type="image/png" href="https://everythingeasy.in/images/poster.jpeg">
 
 <!-- Theme Color -->
 <meta name="theme-color" content="#0ea5e9">
@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) > 0) {
 <!-- Open Graph / Facebook / LinkedIn -->
 <meta property="og:title" content="<?php echo $loc['title']; ?>">
 <meta property="og:description" content="<? echo $loc['meta_description']; ?>">
-<meta property="og:image" content="https://everythingeasy.in/assets/og-image.jpg">
+<meta property="og:image" content="https://everythingeasy.in/images/poster.jpeg">
 <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EverythingEasy">
@@ -57,7 +57,7 @@ if (mysqli_num_rows($result) > 0) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?php echo $loc['title']; ?>">
 <meta name="twitter:description" content="<? echo $loc['meta_description']; ?>">
-<meta name="twitter:image" content="https://everythingeasy.in/assets/og-image.jpg">
+<meta name="twitter:image" content="https://everythingeasy.in/images/poster.jpeg">
 <meta name="twitter:site" content="@everythingeasy">
 
 <!-- Mobile Meta -->
@@ -75,7 +75,7 @@ if (mysqli_num_rows($result) > 0) {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "EverythingEasy",
-  "url": "https://everythingeasy.in",
+  "url": "https://everythingeasy.in ",
   "logo": "https://everythingeasy.in/assets/logo.png",
   "sameAs": [
     "https://www.facebook.com/",
