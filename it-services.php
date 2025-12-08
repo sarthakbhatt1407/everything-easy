@@ -13,7 +13,10 @@ if (mysqli_num_rows($result) > 0) {
   exit();
 }
 
-
+echo '';
+$address = $loc['location_name'];
+$city = $loc['city_name'];
+$state = $loc['state'];
 
 ?>
 <!DOCTYPE html>
@@ -88,6 +91,26 @@ if (mysqli_num_rows($result) > 0) {
         ]
       }
     </script>
+    <!-- Dynamic LocalBusiness Schema -->
+     
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "EverythingEasy Technology - <?php echo htmlspecialchars($loc['location_name']); ?>",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "<?= $address ?>",
+    "addressLocality": "<?= $city ?>",
+    "addressRegion": "<?= $state ?>",
+    "addressCountry": "IN"
+  },
+  "url": "https://everythingeasy.in/it-services/<?php echo htmlspecialchars($loc['slug']); ?>",
+  "telephone": "8630840577",
+  "sameAs": [],
+  "image": "https://everythingeasy.in/image/location.jpg"
+}
+</script>
 
   <!-- CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
@@ -98,6 +121,8 @@ if (mysqli_num_rows($result) > 0) {
 
 
 <body>
+  
+
   <div id="navbar-container"></div>
   <script src="js/navbar-loader.js"></script>
   <!-- Navigation Container -->
