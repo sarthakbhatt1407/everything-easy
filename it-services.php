@@ -40,12 +40,12 @@ if (mysqli_num_rows($result) > 0) {
   <link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://everythingeasy.in/image/poster.jpeg">
+  <link rel="icon" type="image/png" href="https://everythingeasy.in/image/elogo.png">
 
   <!-- Open Graph / Social -->
   <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
   <meta property="og:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
-  <meta property="og:image" content="https://everythingeasy.in/image/poster.jpeg">
+  <meta property="og:image" content="https://everythingeasy.in/image/elogo.png">
   <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EverythingEasy">
@@ -54,7 +54,7 @@ if (mysqli_num_rows($result) > 0) {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
   <meta name="twitter:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
-  <meta name="twitter:image" content="https://everythingeasy.in/image/poster.jpeg">
+  <meta name="twitter:image" content="https://everythingeasy.in/image/elogo.png">
 
   <!-- Mobile Meta -->
   <meta name="format-detection" content="telephone=no">
@@ -66,26 +66,28 @@ if (mysqli_num_rows($result) > 0) {
   <meta http-equiv="content-language" content="en">
 
   <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "EverythingEasy",
-    "url": "https://everythingeasy.in",
-    "logo": "https://everythingeasy.in/assets/logo.png",
-    "sameAs": [
-      "https://www.facebook.com/",
-      "https://www.instagram.com/",
-      "https://www.linkedin.com/"
-    ],
-    "contactPoint": [{
-        "@type": "ContactPoint",
-        "telephone": "+91-8630840577",
-        "contactType": "customer service",
-        "areaServed": "IN"
-    }]
-  }
-  </script>
+<script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "EverythingEasy",
+        "url": "https://everythingeasy.in",
+        "logo": "https://everythingeasy.in/image/elogo.png",
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61575148140871",
+          "https://www.instagram.com/everythingeasy0/",
+          "https://www.linkedin.com/company/106846342/admin/dashboard/"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91-8630840577",
+            "contactType": "customer service",
+            "areaServed": "IN"
+          }
+        ]
+      }
+    </script>
 
   <!-- CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
