@@ -2284,7 +2284,7 @@ html {
   /* Enhanced mobile background coverage */
   .project-card {
     position: relative;
-height: fit-content;
+    min-height: 220px !important;
     overflow: hidden;
   }
   
