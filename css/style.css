@@ -2327,8 +2327,7 @@ html {
   }
   
   .project-overlay {
-    padding: 1.8rem !important;
-    opacity: 0 !important;
+    padding: 1rem !important;
   }
   
   /* Enable hover effects on small screens */
@@ -2350,27 +2349,32 @@ html {
   }
   
   .project-title {
-    font-size: 1.3rem !important;
-    margin-bottom: 0.8rem !important;
-    -webkit-line-clamp: 3 !important;
-    line-height: 1.4 !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    -webkit-line-clamp: 2 !important;
+    line-height: 1.3 !important;
   }
   
   .featured-card .project-title {
-    font-size: 1.5rem !important;
+    font-size: 1.2rem !important;
   }
   
   .project-desc {
-    font-size: 0.95rem !important;
-    -webkit-line-clamp: 4 !important;
-    margin-bottom: 1.2rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.8rem !important;
+    -webkit-line-clamp: 3 !important;
+    margin-bottom: 0.8rem !important;
+    line-height: 1.4 !important;
   }
   
   .tech-tag {
-    font-size: 0.8rem !important;
-    padding: 6px 12px !important;
-    margin: 0 4px 6px 0 !important;
+    font-size: 0.65rem !important;
+    padding: 4px 8px !important;
+    margin: 0 3px 4px 0 !important;
+  }
+  
+  .project-category {
+    font-size: 0.7rem !important;
+    margin-bottom: 0.4rem !important;
   }
   
   .project-links .btn {
