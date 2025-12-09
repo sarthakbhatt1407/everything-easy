@@ -116,17 +116,27 @@ body {
 @media (max-width: 768px) {
   .hero-section {
     padding-top: 80px;
+    padding-bottom: 40px;
     text-align: center;
+    overflow-x: hidden;
+
   }
   
   .dynamic-height {
-    min-height: calc(100vh - 70px); /* Smaller navbar on mobile */
+height: fit-content;
+padding-bottom: 3rem;
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 576px) {
+  .hero-section {
+    overflow-x: hidden;
+  }
+  
   .dynamic-height {
-    min-height: calc(100vh - 65px); /* Extra small screens */
+    min-height: auto !important; /* Auto height on small screens */
+    align-items: flex-start;
   }
 
   .hero-section .display-4 {
@@ -258,6 +268,7 @@ body {
 
 .popular-badge {
   z-index: 10;
+  
 }
 
 .popular-badge .badge {
@@ -486,7 +497,7 @@ body {
 }
 
 .amount {
-  font-size: 2.8rem;
+  font-size: 2.3rem;
   font-weight: 700;
   line-height: 1;
   color: var(--primary-color);
