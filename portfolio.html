@@ -49,17 +49,17 @@
               </p>
               <div class="stats-row d-flex flex-wrap gap-4 mb-4">
                 <div class="stat-item">
-                  <h3 class="fw-bold text-primary mb-0">150+</h3>
+                  <h3 class="fw-bold text-primary mb-0">50+</h3>
                   <small class="text-muted">Projects</small>
                 </div>
                 <div class="stat-item">
-                  <h3 class="fw-bold text-success mb-0">98%</h3>
+                  <h3 class="fw-bold text-success mb-0">99%</h3>
                   <small class="text-muted">Success Rate</small>
                 </div>
-                <div class="stat-item">
-                  <h3 class="fw-bold text-warning mb-0">50+</h3>
+                <!-- <div class="stat-item">
+                  <h3 class="fw-bold text-warning mb-0">100%</h3>
                   <small class="text-muted">Happy Clients</small>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -205,15 +205,15 @@
               //   tech: ["Web Apps", "Mobile Apps", "E-commerce"],
               //   link: "https://easywebappsusa.com/"
               // },
-               {
-                img: "https://i.ibb.co/1t9fn816/Screenshot-2025-12-09-at-1-22-29-PM.png",
-                alt: "Future Properties Platform",
-                category: "Real Estate Platform",
-                title: "Future Properties - Find Your Dream Home",
-                desc: "Discover handpicked properties, trending listings, and expert agents in Dehradun. Evaluate, connect, and close deals easily with our user-friendly real estate platform.",
-                tech: ["Property Listings", "Agent Support", "Online Inquiry"],
-                link: "https://futureproperties.org/"
-              },
+              //  {
+              //   img: "https://i.ibb.co/1t9fn816/Screenshot-2025-12-09-at-1-22-29-PM.png",
+              //   alt: "Future Properties Platform",
+              //   category: "Real Estate Platform",
+              //   title: "Future Properties - Find Your Dream Home",
+              //   desc: "Discover handpicked properties, trending listings, and expert agents in Dehradun. Evaluate, connect, and close deals easily with our user-friendly real estate platform.",
+              //   tech: ["Property Listings", "Agent Support", "Online Inquiry"],
+              //   link: "https://futureproperties.org/"
+              // },
             ];
 
             const portfolioGrid = document.getElementById('portfolio-grid');
@@ -230,13 +230,13 @@
                         <div class="project-tech">
                           ${project.tech.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
                         </div>
-                   
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            `).join('');
+            `).join('') +
+            `<div class='col-12 text-center mt-4'><p class='lead text-muted'>We have delivered many more professional projects. Contact us to see our full portfolio.</p></div>`;
             </script>
                 role="status"
               ></span>
