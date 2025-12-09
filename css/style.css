@@ -2435,6 +2435,39 @@ html {
   .card-body {
     padding: 1rem !important;
   }
+  
+  /* Portfolio mobile optimizations */
+  .project-card {
+    min-height: 200px !important;
+  }
+  
+  .project-overlay {
+    padding: 0.8rem !important;
+  }
+  
+  .project-title {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.4rem !important;
+    -webkit-line-clamp: 2 !important;
+  }
+  
+  .project-desc {
+    font-size: 0.75rem !important;
+    -webkit-line-clamp: 2 !important;
+    margin-bottom: 0.6rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .tech-tag {
+    font-size: 0.6rem !important;
+    padding: 3px 6px !important;
+    margin: 0 2px 3px 0 !important;
+  }
+  
+  .project-category {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.3rem !important;
+  }
 
   /* About Page Small Mobile */
   .timeline-year {
