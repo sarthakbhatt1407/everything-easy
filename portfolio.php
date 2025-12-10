@@ -26,8 +26,7 @@
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="navbar-container"></div>
-    <script src="js/navbar-loader.js"></script>
+    <?php include 'navbar.php'; ?>
     <!-- Navigation Container -->
 
     <!-- Page Header -->
@@ -268,10 +267,10 @@
             </p>
             <div class="cta-buttons">
               <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 w-100">
-                <a href="index.html#contact" class="btn btn-warning btn-lg mx-sm-2">
+                <a href="index#contact" class="btn btn-warning btn-lg mx-sm-2">
                   <i class="fas fa-comments me-2"></i>Get in Touch
                 </a>
-                <a href="index.html#quote" class="btn btn-outline-light btn-lg mx-sm-2">
+                <a href="index#quote" class="btn btn-outline-light btn-lg mx-sm-2">
                   <i class="fas fa-calculator me-2"></i>Get Free Quote
                 </a>
               </div>
@@ -283,13 +282,11 @@
 
     <!-- Footer Container -->
     <div id="footer-container"></div>
+    <?php include 'footer.php'; ?>
+    
     <div id="whatsapp-container"></div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-
-    <script src="js/script.js"></script>
-    <script src="js/footer-loader.js"></script>
     <script src="js/whatsapp-loader.js"></script>
   </body>
 </html>
