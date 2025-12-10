@@ -26,8 +26,7 @@
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="navbar-container"></div>
-    <script src="js/navbar-loader.js"></script>
+    <?php include 'navbar.php'; ?>
     <!-- Navigation Container -->
 
     <!-- Page Header -->
@@ -46,7 +45,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb justify-content-center bg-transparent">
                 <li class="breadcrumb-item">
-                  <a href="index.html" class="text-warning">Home</a>
+                  <a href="index" class="text-warning">Home</a>
                 </li>
                 <li
                   class="breadcrumb-item active text-white"
@@ -508,7 +507,7 @@
             </p>
           </div>
           <div class="col-lg-4 text-lg-end">
-            <a href="index.html#contact" class="btn btn-warning btn-lg">
+            <a href="index#contact" class="btn btn-warning btn-lg">
               Get In Touch
             </a>
           </div>
@@ -516,15 +515,14 @@
       </div>
     </section>
 
-    <!-- Footer Container -->
-    <div id="footer-container"></div>
+    <?php include 'footer.php'; ?>
+    
     <div id="whatsapp-container"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/footer-loader.js"></script>
     <script src="js/whatsapp-loader.js"></script>
   </body>
 </html>
