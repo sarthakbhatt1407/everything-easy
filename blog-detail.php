@@ -89,7 +89,8 @@ function getCurrentUrl() {
 </head>
 
 <body>
-  <?php include 'navbar.php'; ?>
+  <div id="navbar-container"></div>
+  <script src="js/navbar-loader.js"></script>
   <!-- Navigation Container -->
 
   <!-- Blog Detail Section -->
@@ -212,11 +213,12 @@ function getCurrentUrl() {
     </div>
   </section>
 
-  <?php include 'footer.php'; ?>
+  <div id="footer-container"></div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/footer-loader.js"></script>
 </body>
 
 </html>

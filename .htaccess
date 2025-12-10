@@ -8,20 +8,6 @@ RewriteRule .* - [L]
 RewriteCond %{REQUEST_URI} ^/assets/ [NC]
 RewriteRule .* - [L]
 
-# --- Never rewrite admin and backend folders ---
-RewriteCond %{REQUEST_URI} ^/(admin|backend|uploads)/ [NC]
-RewriteRule .* - [L]
-
-# --- Remove .php extension from URLs ---
-# Redirect from /page.php to /page
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
-RewriteRule ^ %1 [R=301,L]
-
-# --- Add .php extension internally ---
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^/]+)/?$ $1.php [L]
-
 # --- ONLY rewrite URLs starting with /it-services/ ---
 RewriteCond %{REQUEST_URI} ^/it-services/ [NC]
 

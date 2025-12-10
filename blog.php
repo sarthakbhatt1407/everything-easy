@@ -46,7 +46,8 @@ function getImageUrl($imageUrl) {
 </head>
 
 <body>
-  <?php include 'navbar.php'; ?>
+  <div id="navbar-container"></div>
+  <script src="js/navbar-loader.js"></script>
   <!-- Navigation Container -->
 
   <!-- Blog Header -->
@@ -62,7 +63,7 @@ function getImageUrl($imageUrl) {
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center bg-transparent">
               <li class="breadcrumb-item">
-                <a href="index" class="text-warning">Home</a>
+                <a href="index.html" class="text-warning">Home</a>
               </li>
               <li class="breadcrumb-item active text-white" aria-current="page">
                 Blog
@@ -127,11 +128,12 @@ function getImageUrl($imageUrl) {
     </div>
   </section>
 
-  <?php include 'footer.php'; ?>
+  <div id="footer-container"></div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/footer-loader.js"></script>
 </body>
 
 </html>
