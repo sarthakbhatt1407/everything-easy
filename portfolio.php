@@ -268,10 +268,10 @@
             </p>
             <div class="cta-buttons">
               <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 w-100">
-                <a href="index.html#contact" class="btn btn-warning btn-lg mx-sm-2">
+                <a href="/#contact" class="btn btn-warning btn-lg mx-sm-2">
                   <i class="fas fa-comments me-2"></i>Get in Touch
                 </a>
-                <a href="index.html#quote" class="btn btn-outline-light btn-lg mx-sm-2">
+                <a href="/#quote" class="btn btn-outline-light btn-lg mx-sm-2">
                   <i class="fas fa-calculator me-2"></i>Get Free Quote
                 </a>
               </div>
