@@ -35,7 +35,7 @@
   </head>
   <body>
     <!-- Navigation Container -->
-    <div id="navbar-container"></div>
+    <?php require_once 'navbar.php'; ?>
 
     <!-- Page Header -->
     <section
@@ -132,12 +132,10 @@ $conn = getDBConnection();
     </section>
 
     <!-- Footer Container -->
-    <div id="footer-container"></div>
+    <?php require_once 'footer.php'; ?>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script src="js/navbar-loader.js"></script>
-    <script src="js/footer-loader.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

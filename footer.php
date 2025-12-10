@@ -51,15 +51,15 @@
         <div class="footer-links">
           <h6 class="fw-bold mb-3">Quick Links</h6>
           <ul class="list-unstyled">
-            <li><a href="/index.html" class="text-muted">Home</a></li>
-            <li><a href="/about.html" class="text-muted">About Us</a></li>
+            <li><a href="/" class="text-muted">Home</a></li>
+            <li><a href="/about" class="text-muted">About Us</a></li>
             <li>
-              <a href="/services.html" class="text-muted">Our Services</a>
+              <a href="/services" class="text-muted">Our Services</a>
             </li>
-            <li><a href="/portfolio.html" class="text-muted">Portfolio</a></li>
-            <li><a href="/blog.html" class="text-muted">Blog</a></li>
-            <li><a href="/contact.html" class="text-muted">Contact Us</a></li>
-            <li><a href="/career.html" class="text-muted">Careers</a></li>
+            <li><a href="/portfolio" class="text-muted">Portfolio</a></li>
+            <li><a href="/blog" class="text-muted">Blog</a></li>
+            <li><a href="/contact" class="text-muted">Contact Us</a></li>
+            <li><a href="/career" class="text-muted">Careers</a></li>
           </ul>
         </div>
       </div>
@@ -115,7 +115,7 @@
     <div class="row align-items-center">
       <div class="col-md-6">
         <p class="text-muted mb-0">
-          &copy; <span id="currentYear"></span> EverythingEasy Technology. All
+          &copy; <?php echo date('Y'); ?> EverythingEasy Technology. All
           Rights Reserved.
         </p>
       </div>
