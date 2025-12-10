@@ -91,7 +91,7 @@ padding-bottom: 3rem;
     align-items: flex-start;
   }
 }
-
+/* hell */
 @media (max-width: 576px) {
   .hero-section {
     overflow-x: hidden;
