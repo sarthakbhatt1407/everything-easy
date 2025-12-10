@@ -26,8 +26,8 @@
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="navbar-container"></div>
-    <script src="js/navbar-loader.js"></script>
+    <?php require_once 'navbar.php'; ?>
+    <!-- Navigation Container -->
     <!-- Navigation Container -->
 
     <!-- Page Header -->
@@ -742,14 +742,13 @@
     </section>
 
     <!-- Footer Container -->
-    <div id="footer-container"></div>
+    <?php require_once 'footer.php'; ?>
     <div id="whatsapp-container"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/footer-loader.js"></script>
     <script src="js/whatsapp-loader.js"></script>
   </body>
 </html>

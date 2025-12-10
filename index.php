@@ -193,8 +193,7 @@
   </head>
 
   <body>
-    <div id="navbar-container"></div>
-    <script src="js/navbar-loader.js"></script>
+    <?php require_once 'navbar.php'; ?>
 
     <section
       id="home"
@@ -1169,7 +1168,7 @@
                 "
               >
                 <img
-                  src="https://i.ibb.co/0VQMxMvk/Photoshop-Extension-Image.jpg"
+                  src="images/akhil.webp"
                   alt="Akhil Gusain"
                   style="width: 100%; height: 100%"
                 />
@@ -1204,7 +1203,7 @@
                 "
               >
                 <img
-                  src="https://i.ibb.co/G4S9d5Nz/1765262927745.png"
+                  src="images/sarthak.webp"
                   alt="Sarthak Bhatt"
                   style="width: 100%; height: 100%"
                 />
@@ -1239,7 +1238,7 @@
                 "
               >
                 <img
-                  src="https://i.ibb.co/20jJVGhR/IMG-1911.jpg"
+                  src="images/bheem.webp"
                   alt="Bheem Chand"
                   style="width: 100%; height: 100%"
                 />
@@ -1274,7 +1273,7 @@
                 "
               >
                 <img
-                  src="https://i.ibb.co/CKHydBqY/Mahaveerrawatt.png"
+                  src="images/mahaveer.webp"
                   alt="Mahaveer Rawatt"
                   style="width: 100%; height: 100%; object-fit: cover"
                 />
@@ -1575,14 +1574,13 @@
       </div>
     </section>
 
-    <div id="footer-container"></div>
+    <?php require_once 'footer.php'; ?>
     <div id="whatsapp-container"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/footer-loader.js"></script>
     <script src="js/whatsapp-loader.js"></script>
 
     <!-- Quote Forms Handler -->

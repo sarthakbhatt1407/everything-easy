@@ -123,8 +123,7 @@ $state = $loc['state'];
 <body>
   
 
-  <div id="navbar-container"></div>
-  <script src="js/navbar-loader.js"></script>
+  <?php require_once 'navbar.php'; ?>
   <!-- Navigation Container -->
 
   <!-- Hero Section -->
@@ -1128,51 +1127,13 @@ $state = $loc['state'];
   </section>
 
   <!-- Footer Container -->
-  <div id="footer-container"></div>
+  <?php require_once 'footer.php'; ?>
 
   <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Navbar Loader -->
-  <!-- <script src="https://everythingeasy.in/js/navbar-loader.js"></script> -->
-
-  <!-- Footer Loader -->
-  <!-- <script src="https://everythingeasy.in/js/footer-loader.js"></script> -->
-
   <!-- FAQ Toggle Script -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const navbar = document.getElementById("navbar-container");
-      if (!navbar) return;
-
-      fetch("https://everythingeasy.in/navbar.html")
-        .then((res) => {
-          if (!res.ok) throw new Error("Navbar not found");
-          return res.text();
-        })
-        .then((data) => {
-          navbar.innerHTML = data;
-          console.log("Navbar loaded successfully");
-        })
-        .catch((err) => console.error("Navbar Load Error:", err));
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const footer = document.getElementById("footer-container");
-      if (!footer) return;
-
-      fetch("https://everythingeasy.in/footer.html")
-        .then((res) => {
-          if (!res.ok) throw new Error("Footer not found");
-          return res.text();
-        })
-        .then((data) => {
-          footer.innerHTML = data;
-          console.log("Footer loaded successfully");
-        })
-        .catch((err) => console.error("Footer Load Error:", err));
-    });
-
     function toggleFaq(element) {
       element.classList.toggle("active");
     }

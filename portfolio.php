@@ -26,8 +26,8 @@
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="navbar-container"></div>
-    <script src="js/navbar-loader.js"></script>
+    <?php require_once 'navbar.php'; ?>
+    <!-- Navigation Container -->
     <!-- Navigation Container -->
 
     <!-- Page Header -->
@@ -152,7 +152,7 @@
             const projects = [
            
               {
-                img: "https://i.ibb.co/Zp25JnNs/Screenshot-2025-12-09-at-1-19-05-PM.png",
+                img: "images/ceu.webp",
                 alt: "CEUTrainers Logo",
                 category: "Online Learning",
                 title: "CEUTrainers Online Courses",
@@ -162,7 +162,7 @@
               },
              
               {
-                img: "https://i.ibb.co/nNW2LSM7/Screenshot-2025-12-09-at-1-42-46-PM.png",
+                img: "images/5.webp",
                 alt: "PowerStroke Drive Platform",
                 category: "Auto Parts Marketplace",
                 title: "PowerStroke Drive - Used Engines & Transmissions",
@@ -171,7 +171,7 @@
                 link: "https://powerstrokedrive.com/"
               },
               {
-                img: "https://i.ibb.co/Wvv53Ggb/Screenshot-2025-12-09-at-1-20-06-PM.png",
+                img: "images/6.webp",
                 alt: "Rivaaz Films",
                 category: "Music & Video Distribution",
                 title: "Rivaaz Films - Maximize Your Music's Reach",
@@ -180,7 +180,7 @@
                 link: "https://rivaazfilms.com/"
               },
                  {
-                img: "https://i.ibb.co/F4mgcDck/Screenshot-2025-12-09-at-4-02-42-PM.png",
+                img: "images/1.webp",
                 alt: "Clothing E-commerce Platform",
                 category: "E-commerce Platform",
                 title: "Ethnic Fashion Store",
@@ -189,7 +189,7 @@
              
               },
               {
-                img: "https://i.ibb.co/k6Sf71D3/Screenshot-2025-12-09-at-1-51-10-PM.png",
+                img: "images/4.webp",
                 alt: "Truetop Roofing Ltd",
                 category: "Roofing & Property Maintenance",
                 title: "Truetop Roofing Ltd",
@@ -198,7 +198,7 @@
                 link: "https://truetoproofingltd.com/"
               },
               {
-                img: "https://i.ibb.co/5h36KkwC/Screenshot-2025-12-09-at-1-54-24-PM.png",
+                img: "images/3.webp",
                 alt: "RealTimeVoice News Portal",
                 category: "News Portal",
                 title: "RealTimeVoice",
@@ -282,14 +282,13 @@
     </section>
 
     <!-- Footer Container -->
-    <div id="footer-container"></div>
+    <?php require_once 'footer.php'; ?>
     <div id="whatsapp-container"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/script.js"></script>
-    <script src="js/footer-loader.js"></script>
     <script src="js/whatsapp-loader.js"></script>
   </body>
 </html>
