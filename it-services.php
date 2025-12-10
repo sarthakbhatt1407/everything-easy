@@ -851,82 +851,82 @@ $state = $loc['state'];
       </div>
 
       <div class="service-grid">
-        <a href="services.html#web-development" class="service-card-item">
+        <a href="/services#web-development" class="service-card-item">
           <i class="fas fa-laptop-code"></i>
           <h6>Web Development Services</h6>
         </a>
 
-        <a href="services.html#mobile-apps" class="service-card-item">
+        <a href="/services#mobile-apps" class="service-card-item">
           <i class="fas fa-mobile-alt"></i>
           <h6>Mobile App Development</h6>
         </a>
 
-        <a href="services.html#cloud" class="service-card-item">
+        <a href="/services#cloud" class="service-card-item">
           <i class="fas fa-cloud"></i>
           <h6>Cloud Solutions</h6>
         </a>
 
-        <a href="services.html#ecommerce" class="service-card-item">
+        <a href="/services#ecommerce" class="service-card-item">
           <i class="fas fa-shopping-cart"></i>
           <h6>E-Commerce Development</h6>
         </a>
 
-        <a href="services.html#ai" class="service-card-item">
+        <a href="/services#ai" class="service-card-item">
           <i class="fas fa-brain"></i>
           <h6>AI & Machine Learning</h6>
         </a>
 
-        <a href="services.html#devops" class="service-card-item">
+        <a href="/services#devops" class="service-card-item">
           <i class="fas fa-server"></i>
           <h6>DevOps Services</h6>
         </a>
 
-        <a href="services.html#cybersecurity" class="service-card-item">
+        <a href="/services#cybersecurity" class="service-card-item">
           <i class="fas fa-shield-alt"></i>
           <h6>Cybersecurity Solutions</h6>
         </a>
 
-        <a href="services.html#ui-ux" class="service-card-item">
+        <a href="/services#ui-ux" class="service-card-item">
           <i class="fas fa-paint-brush"></i>
           <h6>UI/UX Design</h6>
         </a>
 
-        <a href="services.html#database" class="service-card-item">
+        <a href="/services#database" class="service-card-item">
           <i class="fas fa-database"></i>
           <h6>Database Management</h6>
         </a>
 
-        <a href="services.html#api" class="service-card-item">
+        <a href="/services#api" class="service-card-item">
           <i class="fas fa-plug"></i>
           <h6>API Development</h6>
         </a>
 
-        <a href="services.html#blockchain" class="service-card-item">
+        <a href="/services#blockchain" class="service-card-item">
           <i class="fas fa-link"></i>
           <h6>Blockchain Solutions</h6>
         </a>
 
-        <a href="services.html#iot" class="service-card-item">
+        <a href="/services#iot" class="service-card-item">
           <i class="fas fa-microchip"></i>
           <h6>IoT Development</h6>
         </a>
 
-        <a href="services.html#consulting" class="service-card-item">
+        <a href="/services#consulting" class="service-card-item">
           <i class="fas fa-comments"></i>
           <h6>IT Consulting</h6>
         </a>
 
-        <a href="services.html#qa" class="service-card-item">
+        <a href="/services#qa" class="service-card-item">
           <i class="fas fa-check-double"></i>
           <h6>QA & Testing Services</h6>
         </a>
 
-        <a href="services.html#maintenance" class="service-card-item">
+        <a href="/services#maintenance" class="service-card-item">
           <i class="fas fa-tools"></i>
           <h6>Maintenance & Support</h6>
         </a>
 
-        <a href="services.html#digital-transformation" class="service-card-item">
+        <a href="/services#digital-transformation" class="service-card-item">
           <i class="fas fa-chart-line"></i>
           <h6>Digital Transformation</h6>
         </a>

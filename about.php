@@ -45,7 +45,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb justify-content-center bg-transparent">
                 <li class="breadcrumb-item">
-                  <a href="index.html" class="text-warning">Home</a>
+                  <a href="/" class="text-warning">Home</a>
                 </li>
                 <li
                   class="breadcrumb-item active text-white"
@@ -507,7 +507,7 @@
             </p>
           </div>
           <div class="col-lg-4 text-lg-end">
-            <a href="index.html#contact" class="btn btn-warning btn-lg">
+            <a href="/#contact" class="btn btn-warning btn-lg">
               Get In Touch
             </a>
           </div>

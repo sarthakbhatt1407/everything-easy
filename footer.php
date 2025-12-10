@@ -16,7 +16,7 @@
             Leading IT solutions company providing innovative technology
             services to help businesses grow digitally.
           </p>
-          <div class="social-links">
+          <div class="social-links mb-5">
             <a
               href="https://www.facebook.com/profile.php?id=61575148140871"
               target="_blank"
@@ -41,9 +41,10 @@
               class="instagram"
               ><i class="fab fa-instagram fa-lg"></i
             ></a>
-            <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="693706f7f444175f88990f6c" data-style-height="52px" data-style-width="100%" data-token="448d2ef3-edd9-486d-8d48-04a5d3ac55b6">
-  <a href="https://www.trustpilot.com/review/everythingeasy.in" target="_blank" rel="noopener">Trustpilot</a>
-</div>
+          </div>
+          <!-- Trustpilot Widget -->
+          <div class="trustpilot-widget mt-3" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="693706f7f444175f88990f6c" data-style-height="52px" data-style-width="100%" data-token="448d2ef3-edd9-486d-8d48-04a5d3ac55b6">
+            <a href="https://www.trustpilot.com/review/everythingeasy.in" target="_blank" rel="noopener">Trustpilot</a>
           </div>
         </div>
       </div>
