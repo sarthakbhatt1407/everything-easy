@@ -198,7 +198,7 @@
     <section
       id="home"
       class="hero-section bg-gradient-primary text-white"
-      style="padding-top: 120px !important"
+      style="padding-top: 120px !important; height: 90vh"
     >
       <div class="container">
         <div class="row align-items-center dynamic-height">
@@ -360,39 +360,38 @@
         </div>
       </div>
       <!-- Stats Section -->
-      <div class="stats-section py-5 bg-white text-dark">
-        <div class="container">
-          <div class="row text-center">
-            <div class="col-md-3 col-6">
-              <div class="stat-item">
-                <h2 class="text-primary fw-bold counter" data-target="100">
-                  0
-                </h2>
-                <p class="text-muted">Happy Clients</p>
-              </div>
+    </section>
+
+    <div class="stats-section py-5 bg-white text-dark">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <h2 class="text-primary fw-bold counter" data-target="100">0</h2>
+              <p class="text-muted">Happy Clients</p>
             </div>
-            <div class="col-md-3 col-6">
-              <div class="stat-item">
-                <h2 class="text-primary fw-bold counter" data-target="60">0</h2>
-                <p class="text-muted">Projects Done</p>
-              </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <h2 class="text-primary fw-bold counter" data-target="60">0</h2>
+              <p class="text-muted">Projects Done</p>
             </div>
-            <div class="col-md-3 col-6">
-              <div class="stat-item">
-                <h2 class="text-primary fw-bold counter" data-target="8">0</h2>
-                <p class="text-muted">Businesses Transformed</p>
-              </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <h2 class="text-primary fw-bold counter" data-target="8">0</h2>
+              <p class="text-muted">Businesses Transformed</p>
             </div>
-            <div class="col-md-3 col-6">
-              <div class="stat-item">
-                <h2 class="text-primary fw-bold counter" data-target="4">0</h2>
-                <p class="text-muted">Years Experience</p>
-              </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <h2 class="text-primary fw-bold counter" data-target="4">0</h2>
+              <p class="text-muted">Years Experience</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- About Section -->
     <section id="about" class="py-5">

@@ -137,7 +137,7 @@ padding-bottom: 3rem;
 
 /* Stats Section */
 .stats-section {
-  margin-top: -50px;
+  /* margin-top: -50px; */
   position: relative;
   z-index: 3;
 }
