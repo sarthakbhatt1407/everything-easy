@@ -198,10 +198,19 @@
     <section
       id="home"
       class="hero-section bg-gradient-primary text-white"
-      style="padding-top: 120px !important; height: 95vh"
+      style="
+        padding-top: 120px !important;
+        height: 97vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
     >
       <div class="container">
-        <div class="row align-items-center dynamic-height">
+        <div
+          class="row align-items-center dynamic-height"
+          style="width: 100%; padding: 20px"
+        >
           <div class="col-lg-6">
             <div class="hero-content">
               <h5 class="text-warning mb-3">CREATIVE & INNOVATIVE</h5>
