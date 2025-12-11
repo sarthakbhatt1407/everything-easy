@@ -195,131 +195,73 @@
   <body>
     <?php require_once 'navbar.php'; ?>
 
-    <section
-      id="home"
-      class="hero-section bg-gradient-primary text-white"
-      style="
-        padding-top: 120px !important;
-        height: 97vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <div class="container">
-        <div
-          class="row align-items-center dynamic-height"
-          style="width: 100%; padding: 20px"
-        >
-          <div class="col-lg-6">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-container">
+        <div class="hero-wrapper">
+          <div class="hero-left">
             <div class="hero-content">
-              <h5 class="text-warning mb-3">CREATIVE & INNOVATIVE</h5>
-              <h1 class="display-4 fw-bold mb-4">
+              <h5 class="hero-subtitle">CREATIVE & INNOVATIVE</h5>
+              <h1 class="hero-title">
                 Creative & Innovative
-                <span class="text-warning">Digital Solutions</span>
+                <span class="hero-highlight">Digital Solutions</span>
               </h1>
-              <p class="lead mb-4">
+              <p class="hero-text">
                 We provide cutting-edge IT solutions to help your business grow
                 and succeed in the digital world. Our expert team delivers
                 innovative technology solutions tailored to your needs.
               </p>
-              <div
-                class="hero-buttons d-flex flex-column flex-sm-row gap-3 gap-sm-2 justify-content-center align-items-center"
-              >
-                <a href="#quote" class="btn btn-warning btn-lg flex-fill"
+              <div class="hero-buttons">
+                <a href="#quote" class="hero-btn hero-btn-primary"
                   >Get Free Quote</a
                 >
-                <a
-                  href="#contact"
-                  class="btn btn-outline-light btn-lg flex-fill"
+                <a href="#contact" class="hero-btn hero-btn-secondary"
                   >Contact Us</a
                 >
               </div>
             </div>
           </div>
-          <div class="col-lg-5 col-md-8 col-sm-10 mx-auto">
-            <div
-              class="card shadow-lg border-0"
-              style="
-                border-radius: 20px;
-                max-width: 450px;
-                margin-left: auto;
-                margin-right: auto;
-              "
-              id="hero-contact-form"
-            >
-              <div class="card-body p-3 p-md-4">
-                <h4
-                  class="fw-bold mb-3 text-center"
-                  style="color: #1e3c72; font-size: 1.25rem"
-                >
-                  Get a Free Quote
-                </h4>
+          <div class="hero-right">
+            <div class="hero-form-card" id="hero-contact-form">
+              <div class="hero-form-wrapper">
+                <h4 class="hero-form-title">Get a Free Quote</h4>
                 <form id="heroQuoteForm" class="hero-quote-form">
-                  <div class="mb-2">
+                  <div class="hero-form-group">
                     <input
                       type="text"
-                      class="form-control"
+                      class="hero-input"
                       id="heroName"
                       name="name"
                       placeholder="Your Name*"
                       required
-                      style="
-                        border-radius: 8px;
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 10px 14px;
-                        font-size: 14px;
-                      "
                     />
                   </div>
-                  <div class="mb-2">
+                  <div class="hero-form-group">
                     <input
                       type="email"
-                      class="form-control"
+                      class="hero-input"
                       id="heroEmail"
                       name="email"
                       placeholder="Your Email*"
                       required
-                      style="
-                        border-radius: 8px;
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 10px 14px;
-                        font-size: 14px;
-                      "
                     />
                   </div>
-                  <div class="mb-2">
+                  <div class="hero-form-group">
                     <input
                       type="tel"
-                      class="form-control"
+                      class="hero-input"
                       id="heroPhone"
                       name="phone"
                       placeholder="Phone Number*"
                       required
-                      style="
-                        border-radius: 8px;
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 10px 14px;
-                        font-size: 14px;
-                      "
                     />
                   </div>
-                  <div class="mb-2">
+                  <div class="hero-form-group">
                     <select
-                      class="form-select"
+                      class="hero-select"
                       id="heroService"
                       name="service"
                       required
-                      style="
-                        border-radius: 8px;
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 10px 14px;
-                        font-size: 14px;
-                      "
                     >
                       <option value="">Select Service*</option>
                       <option value="web-development">Web Development</option>
@@ -333,74 +275,50 @@
                       <option value="other">Other Services</option>
                     </select>
                   </div>
-                  <div class="mb-3">
+                  <div class="hero-form-group">
                     <textarea
-                      class="form-control"
+                      class="hero-textarea"
                       id="heroMessage"
                       name="message"
                       rows="2"
                       placeholder="Brief about your project (optional)"
-                      style="
-                        border-radius: 8px;
-                        width: 100%;
-                        box-sizing: border-box;
-                        padding: 10px 14px;
-                        font-size: 14px;
-                      "
                     ></textarea>
                   </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary w-100"
-                    style="
-                      border-radius: 8px;
-                      padding: 10px;
-                      font-size: 15px;
-                      font-weight: 600;
-                    "
-                  >
+                  <button type="submit" class="hero-submit-btn">
                     Submit Request
                   </button>
-                  <div id="heroFormResult" class="mt-2 d-none"></div>
+                  <div id="heroFormResult" class="hero-form-result"></div>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Stats Section -->
     </section>
 
-    <div class="stats-section py-5 bg-white text-dark">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <h2 class="text-primary fw-bold counter" data-target="100">0</h2>
-              <p class="text-muted">Happy Clients</p>
-            </div>
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stats-wrapper">
+          <div class="stat-item">
+            <h2 class="counter" data-target="100">0</h2>
+            <p class="stat-label">Happy Clients</p>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <h2 class="text-primary fw-bold counter" data-target="60">0</h2>
-              <p class="text-muted">Projects Done</p>
-            </div>
+          <div class="stat-item">
+            <h2 class="counter" data-target="60">0</h2>
+            <p class="stat-label">Projects Done</p>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <h2 class="text-primary fw-bold counter" data-target="8">0</h2>
-              <p class="text-muted">Businesses Transformed</p>
-            </div>
+          <div class="stat-item">
+            <h2 class="counter" data-target="8">0</h2>
+            <p class="stat-label">Businesses Transformed</p>
           </div>
-          <div class="col-md-3 col-6">
-            <div class="stat-item">
-              <h2 class="text-primary fw-bold counter" data-target="4">0</h2>
-              <p class="text-muted">Years Experience</p>
-            </div>
+          <div class="stat-item">
+            <h2 class="counter" data-target="4">0</h2>
+            <p class="stat-label">Years Experience</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- About Section -->
     <section id="about" class="py-5">
