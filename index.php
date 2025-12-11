@@ -198,7 +198,7 @@
     <section
       id="home"
       class="hero-section bg-gradient-primary text-white"
-      style="padding-top: 120px !important; height: 90vh"
+      style="padding-top: 120px !important; height: 95vh"
     >
       <div class="container">
         <div class="row align-items-center dynamic-height">
