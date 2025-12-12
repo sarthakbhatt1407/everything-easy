@@ -114,6 +114,9 @@ try {
     if ($stmt->execute()) {
         $quoteId = $stmt->insert_id;
         
+        // Send thank you email to customer
+        sendThankYouEmail($email, $firstName, $quoteId);
+        
         // Send success response
         sendJSONResponse(true, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours.', [
             'quoteId' => $quoteId
@@ -131,4 +134,91 @@ try {
     logError("Exception: " . $e->getMessage());
     sendJSONResponse(false, 'An error occurred. Please try again later.');
 }
+
+/**
+ * Send thank you email to customer
+ */
+function sendThankYouEmail($toEmail, $firstName, $quoteId) {
+    $subject = "Thank You for Your Quote Request - EverythingEasy Technology";
+    
+    // Email headers
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: EverythingEasy Technology <info@everythingeasy.in>" . "\r\n";
+    $headers .= "Reply-To: info@everythingeasy.in" . "\r\n";
+    
+    // Email body
+    $message = "
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #0066cc 0%, #004499 100%); color: white; padding: 30px; text-align: center; }
+            .content { background: #f8f9fa; padding: 30px; }
+            .footer { background: #212529; color: #fff; padding: 20px; text-align: center; font-size: 14px; }
+            .button { display: inline-block; padding: 12px 30px; background: #0066cc; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+            .info-box { background: white; padding: 20px; border-left: 4px solid #0066cc; margin: 20px 0; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h1>EverythingEasy Technology</h1>
+                <p>Your Trusted IT Solutions Partner</p>
+            </div>
+            
+            <div class='content'>
+                <h2>Hello " . htmlspecialchars($firstName) . ",</h2>
+                
+                <p>Thank you for requesting a quote from EverythingEasy Technology!</p>
+                
+                <div class='info-box'>
+                    <strong>Quote Request ID:</strong> #" . $quoteId . "<br>
+                    <strong>Status:</strong> Under Review
+                </div>
+                
+                <p>We have received your quote request and our team is already reviewing your requirements. We understand the importance of your project and are committed to providing you with the best solution.</p>
+                
+                <h3>What happens next?</h3>
+                <ul>
+                    <li>Our team will review your requirements carefully</li>
+                    <li>We will prepare a customized proposal for your project</li>
+                    <li>You will receive our detailed quote within 24 hours</li>
+                    <li>A project consultant will reach out to discuss your needs</li>
+                </ul>
+                
+                <p style='text-align: center;'>
+                    <a href='https://everythingeasy.in' class='button'>Visit Our Website</a>
+                </p>
+                
+                <p>If you have any immediate questions or need to add more information, please don't hesitate to contact us.</p>
+                
+                <p>Best regards,<br>
+                <strong>The EverythingEasy Team</strong></p>
+            </div>
+            
+            <div class='footer'>
+                <p><strong>Contact Us</strong></p>
+                <p>Email: info@everythingeasy.in | Phone: +91 86308 40577</p>
+                <p>EverythingEasy Technology, Balawala, Dehradun 248001, Uttarakhand, India</p>
+                <p style='margin-top: 15px; font-size: 12px;'>
+                    &copy; " . date('Y') . " EverythingEasy Technology. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+    
+    // Send email
+    try {
+        mail($toEmail, $subject, $message, $headers);
+    } catch (Exception $e) {
+        logError("Email failed: " . $e->getMessage());
+        // Don't fail the quote submission if email fails
+    }
+}
 ?>
+
