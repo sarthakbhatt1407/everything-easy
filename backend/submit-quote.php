@@ -141,6 +141,9 @@ try {
 function sendThankYouEmail($toEmail, $firstName, $quoteId) {
     $subject = "Thank You for Your Quote Request - EverythingEasy Technology";
     
+    // Log email attempt
+    logError("Attempting to send email to: $toEmail for Quote ID: $quoteId");
+    
     // Email headers
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -214,10 +217,19 @@ function sendThankYouEmail($toEmail, $firstName, $quoteId) {
     
     // Send email
     try {
-        mail($toEmail, $subject, $message, $headers);
+        $mailSent = @mail($toEmail, $subject, $message, $headers);
+        
+        if ($mailSent) {
+            logError("SUCCESS: Email sent successfully to $toEmail for Quote ID: $quoteId");
+        } else {
+            $error = error_get_last();
+            logError("FAILED: Email not sent to $toEmail for Quote ID: $quoteId. Error: " . ($error ? json_encode($error) : 'Unknown error'));
+        }
+        
+        return $mailSent;
     } catch (Exception $e) {
-        logError("Email failed: " . $e->getMessage());
-        // Don't fail the quote submission if email fails
+        logError("EXCEPTION: Email failed to $toEmail for Quote ID: $quoteId. Exception: " . $e->getMessage());
+        return false;
     }
 }
 ?>
