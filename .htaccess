@@ -25,16 +25,18 @@ RewriteRule ^it-services/([^/]+)/?$ /it-services.php?slug=$1 [L,QSA]
 
 # --- Remove .php extension from all PHP files ---
 # Redirect .php URLs to clean URLs (301 permanent redirect)
+RewriteCond %{REQUEST_URI} !^/(backend|admin|uploads)/ [NC]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
 RewriteRule ^ %1 [R=301,L]
 
 # Rewrite clean URLs to .php files
+RewriteCond %{REQUEST_URI} !^/(backend|admin|uploads)/ [NC]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
 
-# Handle index.php as root
-DirectoryIndex index.php
+# Handle index.php as root for main site
+DirectoryIndex index.php index.html
 
 <IfModule mod_headers.c>
 Header set Access-Control-Allow-Origin "*"
