@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand fw-bold text-primary" href="/">
       <img
-        src="https://i.ibb.co/qLtK2zRT/elogo.png"
+        src="/images/logo.webp"
         alt="Everything Easy Logo"
         class="navbar-logo"
       />
