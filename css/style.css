@@ -108,7 +108,7 @@ body {
 }
 
 .navbar-nav .nav-item {
-  margin: 0 5px;
+  margin: 0 2px;
 }
 
 .navbar-nav .nav-link {
@@ -128,20 +128,8 @@ body {
 }
 
 .navbar-nav .nav-link.active {
-  color: var(--primary-color) !important;
+  color: #000 !important;
   font-weight: 600;
-  background-color: rgba(0, 102, 204, 0.1);
-}
-
-.navbar-nav .nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: 5px;
-  left: 16px;
-  right: 16px;
-  height: 2px;
-  background-color: var(--primary-color);
-  border-radius: 2px;
 }
 
 .navbar-nav .btn-primary {
