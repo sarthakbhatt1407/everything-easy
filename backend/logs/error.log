@@ -1,0 +1,3 @@
+[2025-12-08 08:32:45] Exception: Table 'everythingeasydatabase.blogs' doesn't exist
+[2025-12-12 12:46:18] Attempting to send email to: bheemchand8126@gmail.com for Quote ID: 16
+[2025-12-12 12:46:20] FAILED: Email not sent to bheemchand8126@gmail.com for Quote ID: 16. Error: {"type":2,"message":"mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()","file":"C:\\xampp\\htdocs\\everything-easy\\backend\\submit-quote.php","line":220}
