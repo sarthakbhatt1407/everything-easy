@@ -83,7 +83,7 @@ body {
   align-items: center;
   gap: 3px;
   transition: all 0.3s ease;
-  margin-left: -10px;
+
 }
 
 .navbar-brand:hover {
@@ -98,7 +98,7 @@ body {
   display: inline-block !important;
   vertical-align: middle !important;
   transition: transform 0.3s ease;
-}
+  margin-right: -10px;
 
 .navbar-brand:hover .navbar-logo {
   transform: scale(1.05);
