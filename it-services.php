@@ -43,7 +43,7 @@ $state = $loc['state'];
   <link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://everythingeasy.in/image/logo.webp">
+  <link rel="icon" type="image/png" href="https://everythingeasy.in/images/logo.webp">
 
   <!-- Open Graph / Social -->
   <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
@@ -57,7 +57,7 @@ $state = $loc['state'];
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
   <meta name="twitter:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
-  <meta name="twitter:image" content="https://everythingeasy.in/image/logo.webp">
+  <meta name="twitter:image" content="https://everythingeasy.in/images/logo.webp">
 
   <!-- Mobile Meta -->
   <meta name="format-detection" content="telephone=no">
