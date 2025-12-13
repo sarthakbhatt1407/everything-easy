@@ -48,7 +48,7 @@ $state = $loc['state'];
   <!-- Open Graph / Social -->
   <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
   <meta property="og:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
-  <meta property="og:image" content="https://everythingeasy.in/image/elogo.png">
+  <meta property="og:image" content="https://everythingeasy.in/image/logo.webp">
   <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EverythingEasy">
