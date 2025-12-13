@@ -43,12 +43,12 @@ $state = $loc['state'];
   <link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://everythingeasy.in/images/logo.webp">
+  <link rel="icon" type="image/png" href="https://everythingeasy.in/images/logo.jpg">
 
   <!-- Open Graph / Social -->
 <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title'], ENT_QUOTES, 'UTF-8'); ?>">
 <meta property="og:description" content="<?php echo htmlspecialchars($loc['meta_description'], ENT_QUOTES, 'UTF-8'); ?>">
-<meta property="og:image" content="https://everythingeasy.in/image/logo.png">
+<meta property="og:image" content="https://everythingeasy.in/image/logo.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
