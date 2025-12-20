@@ -243,7 +243,7 @@ $state = $loc['state'];
       <div class="row">
         <div class="col-md-3 col-6">
           <div class="metric-box">
-            <h2>500+</h2>
+            <h2>60+</h2>
             <p>Projects Delivered</p>
           </div>
         </div>
@@ -255,13 +255,13 @@ $state = $loc['state'];
         </div>
         <div class="col-md-3 col-6">
           <div class="metric-box">
-            <h2>10+</h2>
+            <h2>4+</h2>
             <p>Years Experience</p>
           </div>
         </div>
         <div class="col-md-3 col-6">
           <div class="metric-box">
-            <h2>50+</h2>
+            <h2>10+</h2>
             <p>Expert Team</p>
           </div>
         </div>
