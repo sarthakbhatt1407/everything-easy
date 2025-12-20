@@ -43,12 +43,12 @@ $state = $loc['state'];
   <link rel="canonical" href="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://everythingeasy.in/images/logo.jpg">
+  <link rel="icon" type="image/png" href="https://everythingeasy.in/images/website_development.webp">
 
   <!-- Open Graph / Social -->
 <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title'], ENT_QUOTES, 'UTF-8'); ?>">
 <meta property="og:description" content="<?php echo htmlspecialchars($loc['meta_description'], ENT_QUOTES, 'UTF-8'); ?>">
-<meta property="og:image" content="https://everythingeasy.in/images/logo.jpg">
+<meta property="og:image" content="https://everythingeasy.in/images/website_development.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
@@ -61,7 +61,7 @@ $state = $loc['state'];
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?php echo htmlspecialchars($loc['meta_title']); ?>">
   <meta name="twitter:description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
-  <meta name="twitter:image" content="https://everythingeasy.in/images/logo.webp">
+  <meta name="twitter:image" content="https://everythingeasy.in/images/website_development.webp">
 
   <!-- Mobile Meta -->
   <meta name="format-detection" content="telephone=no">
@@ -112,7 +112,8 @@ $state = $loc['state'];
   "url": "https://everythingeasy.in/it-services/<?php echo htmlspecialchars($loc['slug']); ?>",
   "telephone": "8630840577",
   "sameAs": [],
-  "image": "https://everythingeasy.in/image/location.jpg"
+  "image": "https://everythingeasy.in/image/website_development.webp
+"
 }
 </script>
 
