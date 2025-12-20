@@ -39,6 +39,9 @@ RewriteRule ^(.*)$ $1.php [L]
 DirectoryIndex index.php index.html
 
 <IfModule mod_headers.c>
-Header set Access-Control-Allow-Origin "*"
-Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
+  <FilesMatch "\.(jpg|jpeg|png|gif|svg|css|js|webp)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
+  </FilesMatch>
 </IfModule>
+
