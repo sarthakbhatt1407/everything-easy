@@ -24,6 +24,28 @@
       rel="stylesheet"
     />
     <link href="css/style.css" rel="stylesheet" />
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "career",
+        "url": "https://everythingeasy.in/career",
+        "logo": "https://everythingeasy.in/assets/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61575148140871",
+          "https://www.instagram.com/everythingeasy0/",
+          "https://www.linkedin.com/company/106846342/admin/dashboard/"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91-8630840577",
+            "contactType": "customer service",
+            "areaServed": "IN
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <?php require_once 'navbar.php'; ?>
