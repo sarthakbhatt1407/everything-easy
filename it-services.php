@@ -78,7 +78,7 @@ $state = $loc['state'];
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "EverythingEasy",
-        "url": "https://everythingeasy.in",
+        "url": "https://everythingeasy.in/it-services/<?php echo htmlspecialchars($loc['slug']); ?>",
         "logo": "https://everythingeasy.in/image/elogo.png",
         "sameAs": [
           "https://www.facebook.com/profile.php?id=61575148140871",

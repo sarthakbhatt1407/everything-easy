@@ -43,6 +43,24 @@ function getImageUrl($imageUrl) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "EverythingEasy Blog",
+  "url": "https://everythingeasy.in/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "EverythingEasy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://everythingeasy.in/assets/logo.png"
+    }
+  }
+}
+</script>
+
+
 </head>
 
 <body>

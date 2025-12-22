@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "url": "https://everythingeasy.in/contact
+}
+</script>
+
     <meta charset="UTF-8" />
     <meta
       name="viewport"

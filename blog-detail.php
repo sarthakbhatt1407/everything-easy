@@ -86,6 +86,35 @@ function getCurrentUrl() {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<?php echo $post_url; ?>"
+  },
+  "headline": "<?php echo htmlspecialchars($blog['title']); ?>",
+  "description": "<?php echo htmlspecialchars($blog['excerpt'] ); ?>",
+  "image": "<?php echo $image_url; ?>",
+  "author": {
+    "@type": "Organization",
+    "name": "EverythingEasy"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EverythingEasy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://everythingeasy.in/assets/logo.png"
+    }
+  },
+  "datePublished": "<?php echo $created_date; ?>",
+  "dateModified": "<?php echo $created_date; ?>",
+  "url": "<?php echo $post_url; ?>"
+}
+</script>
+
 </head>
 
 <body>

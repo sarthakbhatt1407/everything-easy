@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Mobile App Development and Web Development Services",
+  "provider": {
+    "@type": "Organization",
+    "name": "EverythingEasy"
+  },
+  "areaServed": "IN",
+  "url": "https://everythingeasy.in/services"
+}
+</script>
+
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -24,6 +39,7 @@
       rel="stylesheet"
     />
     <link href="css/style.css" rel="stylesheet" />
+
   </head>
   <body>
     <?php require_once 'navbar.php'; ?>

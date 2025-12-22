@@ -11,6 +11,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="theme-color" content="#0066cc" />
     <title>About Us - EverythingEasy Technology</title>
+    <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="About EverythingEasy | Digital Solutions Company" />
+<meta name="twitter:description" content="Know more about EverythingEasy – experts in website, app & software development." />
+<meta name="twitter:image" content="https://everythingeasy.in/assets/logo.png" />
+<meta property="og:title" content="About EverythingEasy | Website & Software Development Company" />
+<meta property="og:description" content="EverythingEasy is a leading IT company in India offering website, mobile app & custom software development services." />
+<meta property="og:image" content="https://everythingeasy.in/assets/logo.png" />
+<meta property="og:url" content="https://everythingeasy.in/about-us" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="EverythingEasy" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
       rel="stylesheet"
