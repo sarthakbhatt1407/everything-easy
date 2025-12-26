@@ -118,7 +118,7 @@
       </div>
     </section>
 
-    <!-- Mission, Vision, Valuess wcwe-->
+    <!-- Mission, Vision, Value-->
     <section class="py-5 bg-light">
       <div class="container">
         <div class="row">
