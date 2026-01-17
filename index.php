@@ -72,20 +72,73 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "EverythingEasy",
+  "@type": "LocalBusiness",
+  "name": "EverythingEasy Technology",
   "url": "https://everythingeasy.in",
-  "logo": "https://everythingeasy.in/assets/logo.png",
+  "image": "https://everythingeasy.in/assets/logo.png",
+  "telephone": "+91-8630840577",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dehradun",
+    "addressRegion": "Uttarakhand",
+    "addressCountry": "IN"
+  },
+  "priceRange": "₹₹",
   "sameAs": [
     "https://www.facebook.com/profile.php?id=61575148140871",
     "https://www.instagram.com/everythingeasy0/",
     "https://www.linkedin.com/company/106846342/"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+91-8630840577",
-    "contactType": "customer service",
-    "areaServed": "IN"
+  ]
+}
+</script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "IT & Software Services",
+  "provider": {
+    "@type": "Organization",
+    "name": "EverythingEasy Technology"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Our Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Website Development"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Software Development"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Digital Marketing"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "ERP & Custom Solutions"
+        }
+      }
+    ]
   }
 }
 </script>
@@ -93,11 +146,50 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "EverythingEasy",
-  "url": "https://everythingeasy.in"
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What services does EverythingEasy provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EverythingEasy provides website development, software development, digital marketing, and ERP solutions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does EverythingEasy work with startups?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, EverythingEasy works with startups, small businesses, and enterprises across India."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact EverythingEasy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can contact EverythingEasy via phone or through the contact form on the website."
+      }
+    }
+  ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "EverythingEasy Technology",
+  "url": "https://everythingeasy.in/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://everythingeasy.in/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+
 
 
   <!--  -->
