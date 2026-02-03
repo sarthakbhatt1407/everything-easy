@@ -1,4 +1,4 @@
-<?php include "backend/config.php"; 
+<?php include "backend/config.php";
 //get slug from url
 $slug = $_GET['slug'];
 $conn = getDBConnection();
@@ -33,7 +33,8 @@ $state = $loc['state'];
   <title><?php echo htmlspecialchars($loc['meta_title']); ?></title>
 
   <meta name="description" content="<?php echo htmlspecialchars($loc['meta_description']); ?>">
-  <meta name="keywords" content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
+  <meta name="keywords"
+    content="EverythingEasy, website development company, web design, SEO company, digital marketing, ecommerce website, India web agency">
   <meta name="author" content="EverythingEasy">
 
   <meta name="robots" content="index, follow">
@@ -46,14 +47,15 @@ $state = $loc['state'];
   <link rel="icon" type="image/png" href="https://everythingeasy.in/images/website_development.webp">
 
   <!-- Open Graph / Social -->
-<meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title'], ENT_QUOTES, 'UTF-8'); ?>">
-<meta property="og:description" content="<?php echo htmlspecialchars($loc['meta_description'], ENT_QUOTES, 'UTF-8'); ?>">
-<meta property="og:image" content="https://everythingeasy.in/images/website_development.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="EverythingEasy">
+  <meta property="og:title" content="<?php echo htmlspecialchars($loc['meta_title'], ENT_QUOTES, 'UTF-8'); ?>">
+  <meta property="og:description"
+    content="<?php echo htmlspecialchars($loc['meta_description'], ENT_QUOTES, 'UTF-8'); ?>">
+  <meta property="og:image" content="https://everythingeasy.in/images/website_development.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://everythingeasy.in/it-services/<?php echo $loc['slug']; ?>">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EverythingEasy">
 
 
 
@@ -73,7 +75,7 @@ $state = $loc['state'];
   <meta http-equiv="content-language" content="en">
 
   <!-- Schema Markup -->
-<script type="application/ld+json">
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -95,9 +97,9 @@ $state = $loc['state'];
         ]
       }
     </script>
-    <!-- Dynamic LocalBusiness Schema -->
-     
-    <script type="application/ld+json">
+  <!-- Dynamic LocalBusiness Schema -->
+
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -122,11 +124,15 @@ $state = $loc['state'];
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link href="https://everythingeasy.in/css/style.css" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
 </head>
 
 
 <body>
-  
+
 
   <?php require_once 'navbar.php'; ?>
   <!-- Navigation Container -->
@@ -144,7 +150,11 @@ $state = $loc['state'];
               Website Development Services in <?php echo $loc['location_name']; ?>
             </h1>
             <p class="lead mb-4 text-white" style="font-size: 1.35rem;">
-             Unleash the power of professional website development and take your business to a higher level with the best web development services in <?php echo $loc['location_name']; ?>. Our service develops successful websites for results with more than 10+ years of experience. Our expert team focuses on boosting your online presence and helping you dominate search results in <?php echo $loc['location_name']; ?>, turning visitors into valuable customers.
+              Unleash the power of professional website development and take your business to a higher level with the
+              best web development services in <?php echo $loc['location_name']; ?>. Our service develops successful
+              websites for results with more than 10+ years of experience. Our expert team focuses on boosting your
+              online presence and helping you dominate search results in <?php echo $loc['location_name']; ?>, turning
+              visitors into valuable customers.
             </p>
           </div>
         </div>
@@ -951,14 +961,16 @@ $state = $loc['state'];
       <div class="mb-5">
         <p class="lead" style="line-height: 1.9; color: #6c757d">
           Web development plays an important role in enhancing one's visibility or online presence. In that case,
-          finding the most appropriate website development company in <?php echo $loc['location_name']; ?> can either make or break your business.
+          finding the most appropriate website development company in <?php echo $loc['location_name']; ?> can either
+          make or break your business.
           This is what we at EverythingEasy Technology proudly do: we dive into the intricacies of web development and
           how it avails the growth of your business.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
           Consequently, we intend to develop processes with specific characteristics of each client company as a
-          <strong> website development company in <?php echo $loc['location_name']; ?>.</strong> Our people have both the technical know-how and the
+          <strong> website development company in <?php echo $loc['location_name']; ?>.</strong> Our people have both
+          the technical know-how and the
           imagination required to make your site perform at the top of the search engine result pages. Driving organic
           traffic, enhancing visibility, and most especially turning the clicks into repeat customers, has been the core
           objective for many years of practice.
@@ -966,11 +978,17 @@ $state = $loc['state'];
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-          What makes us different, however, is how we approach this differently: we pursue transparency and strive to provide results that are quantifiable. EverythingEasy Technology applies the most recent analytics and technologies to offer screenshots of analysis and implementable roadmaps. Services are offered to all kinds of businesses: whether just coming up or fully functional, we provide services to different types of businesses.
+          What makes us different, however, is how we approach this differently: we pursue transparency and strive to
+          provide results that are quantifiable. EverythingEasy Technology applies the most recent analytics and
+          technologies to offer screenshots of analysis and implementable roadmaps. Services are offered to all kinds of
+          businesses: whether just coming up or fully functional, we provide services to different types of businesses.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-         Whether it's responsive design, e-commerce development, or custom web applications, we take a holistic approach towards each of these strategies to ensure long-term success for your brand. Try EverythingEasy Technology, a reliable <strong> website development company in <?php echo $loc['location_name']; ?> </strong>, and watch your business grow.
+          Whether it's responsive design, e-commerce development, or custom web applications, we take a holistic
+          approach towards each of these strategies to ensure long-term success for your brand. Try EverythingEasy
+          Technology, a reliable <strong> website development company in <?php echo $loc['location_name']; ?> </strong>,
+          and watch your business grow.
 
         </p>
       </div>
@@ -981,30 +999,46 @@ $state = $loc['state'];
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-          While looking towards <?php echo $loc['location_name']; ?> for any <strong>website development service provider </strong>, finding a specialist who is able to appreciate your business objectives is very important. EverythingEasy Technology acts as the perfect partner for making any online presence better.
+          While looking towards <?php echo $loc['location_name']; ?> for any <strong>website development service
+            provider </strong>, finding a specialist who is able to appreciate your business objectives is very
+          important. EverythingEasy Technology acts as the perfect partner for making any online presence better.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-          Be it a<strong> Website Development Service near me</strong> or custom solutions, we have everything one may need: from UI/UX design and responsive development to e-commerce solutions. Thanks to our local know-how in <?php echo $loc['location_name']; ?>, we make sure the targeting of your business covers <?php echo $loc['location_name']; ?> and its outskirts.
+          Be it a<strong> Website Development Service near me</strong> or custom solutions, we have everything one may
+          need: from UI/UX design and responsive development to e-commerce solutions. Thanks to our local know-how in
+          <?php echo $loc['location_name']; ?>, we make sure the targeting of your business covers
+          <?php echo $loc['location_name']; ?> and its outskirts.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-          We are here to ensure tested approaches, with quantifiable results, to see that your business attains set goals in the sphere of higher conversions and growth.
+          We are here to ensure tested approaches, with quantifiable results, to see that your business attains set
+          goals in the sphere of higher conversions and growth.
         </p>
       </div>
 
       <div class="mb-5">
         <h3 class="fw-bold mb-4">
-         Hire the Best  Web Developer in <?php echo $loc['location_name']; ?> for Your Business Growth
+          Hire the Best Web Developer in <?php echo $loc['location_name']; ?> for Your Business Growth
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-          In today's scenario, having an online presence isn't just more imperative but a necessity. Be it just starting as a small business or running an established one, the <strong>best web developer in <?php echo $loc['location_name']; ?></strong> best web developer in <?php echo $loc['location_name']; ?> will make all the difference between success and failure for your brand. Everything Easy has built excellence in this area by providing result-oriented <strong>website development services near me</strong> according to specific needs of the business.
+          In today's scenario, having an online presence isn't just more imperative but a necessity. Be it just starting
+          as a small business or running an established one, the <strong>best web developer in
+            <?php echo $loc['location_name']; ?></strong> best web developer in <?php echo $loc['location_name']; ?>
+          will make all the difference between success and failure for your brand. Everything Easy has built excellence
+          in this area by providing result-oriented <strong>website development services near me</strong> according to
+          specific needs of the business.
 
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-         A local web development expert will know how the <?php echo $loc['location_name']; ?> market is, how people search for services, and what the audience prefers for that particular area. At EverythingEasy Technology, the focus is also on establishing local businesses and ensuring your website performs at the top for searches related to services offered in <?php echo $loc['location_name']; ?>. It ranges from site speed and mobile responsiveness to SEO-friendly structure-just anything so that your business gets viewed by customers around you.
+          A local web development expert will know how the <?php echo $loc['location_name']; ?> market is, how people
+          search for services, and what the audience prefers for that particular area. At EverythingEasy Technology, the
+          focus is also on establishing local businesses and ensuring your website performs at the top for searches
+          related to services offered in <?php echo $loc['location_name']; ?>. It ranges from site speed and mobile
+          responsiveness to SEO-friendly structure-just anything so that your business gets viewed by customers around
+          you.
         </p>
       </div>
 
@@ -1014,15 +1048,22 @@ $state = $loc['state'];
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-          With years of experience, EverythingEasy Technology has emerged as a <strong>website development company in <?php echo $loc['location_name']; ?></strong> . Our primary focus is to enhance organic traffic and user engagement while creating conversion-driven designs which are structured for analysis and growth.
+          With years of experience, EverythingEasy Technology has emerged as a <strong>website development company in
+            <?php echo $loc['location_name']; ?></strong> . Our primary focus is to enhance organic traffic and user
+          engagement while creating conversion-driven designs which are structured for analysis and growth.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-          If you are searching for where I can find  <strong>website development service in <?php echo $loc['location_name']; ?></strong>, we provide clear functional solutions. This means a result-oriented approach with responsive design, modern frameworks, content management systems, and technical optimization. We are committed to helping your <?php echo $loc['location_name']; ?> business achieve higher return on investment than what it is getting currently.
+          If you are searching for where I can find <strong>website development service in
+            <?php echo $loc['location_name']; ?></strong>, we provide clear functional solutions. This means a
+          result-oriented approach with responsive design, modern frameworks, content management systems, and technical
+          optimization. We are committed to helping your <?php echo $loc['location_name']; ?> business achieve higher
+          return on investment than what it is getting currently.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-        Let EverythingEasy Technology help you enhance your business' website and win in the digital space. Call us now for success!
+          Let EverythingEasy Technology help you enhance your business' website and win in the digital space. Call us
+          now for success!
         </p>
       </div>
 
@@ -1032,7 +1073,10 @@ $state = $loc['state'];
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-          It's now very pertinent to choose an appropriate <strong>website development agency in <?php echo $loc['location_name']; ?></strong> for enhancing one's online existence. Among the agencies, EverythingEasy Technology proves to be one of the most trusted and efficient ones. Also, personalized and result-oriented strategies bring in business growth and better visibility on the web.
+          It's now very pertinent to choose an appropriate <strong>website development agency in
+            <?php echo $loc['location_name']; ?></strong> for enhancing one's online existence. Among the agencies,
+          EverythingEasy Technology proves to be one of the most trusted and efficient ones. Also, personalized and
+          result-oriented strategies bring in business growth and better visibility on the web.
         </p>
 
         <h5 class="fw-bold mt-4 mb-3" style="color: #1e3c72">
@@ -1040,7 +1084,11 @@ $state = $loc['state'];
         </h5>
 
         <p style="line-height: 1.9; color: #6c757d">
-         As the <strong>best website development company in <?php echo $loc['location_name']; ?></strong>  , we understand the requirements that businesses have while working within the city. We have customized web development services, starting from helping small businesses make a proper online presence to larger enterprises improving their digital infrastructure. Our web developer near me works on making the best use of design, functionality, and optimization so that your website's performance is enhanced.
+          As the <strong>best website development company in <?php echo $loc['location_name']; ?></strong> , we
+          understand the requirements that businesses have while working within the city. We have customized web
+          development services, starting from helping small businesses make a proper online presence to larger
+          enterprises improving their digital infrastructure. Our web developer near me works on making the best use of
+          design, functionality, and optimization so that your website's performance is enhanced.
 
         </p>
       </div>
@@ -1051,19 +1099,29 @@ $state = $loc['state'];
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-         Having a full-fledged online presence is a must for any <?php echo $loc['location_name']; ?>-based company in today's digitized economy. The whole concept of local website development actually denotes the creation of websites that are optimized for the local market of <?php echo $loc['location_name']; ?>, hence assuring better targeting and higher conversion rates from the local customers.
+          Having a full-fledged online presence is a must for any <?php echo $loc['location_name']; ?>-based company in
+          today's digitized economy. The whole concept of local website development actually denotes the creation of
+          websites that are optimized for the local market of <?php echo $loc['location_name']; ?>, hence assuring
+          better targeting and higher conversion rates from the local customers.
         </p>
 
         <h5 class="fw-bold mt-4 mb-3" style="color: #1e3c72">
-         Recognizing the Need for Professional Website Development in <?php echo $loc['location_name']; ?>
+          Recognizing the Need for Professional Website Development in <?php echo $loc['location_name']; ?>
         </h5>
 
         <p style="line-height: 1.9; color: #6c757d">
-         <strong> Professional website development in <?php echo $loc['location_name']; ?> </strong>refers to creating a site for representing your business effectively in the local market. Location-based optimization helps in making it easier for companies operating in <?php echo $loc['location_name']; ?> to appear in searches like 'best services in <?php echo $loc['location_name']; ?>' or '<?php echo $loc['location_name']; ?> businesses'. With a well-developed website, one is sure to have more footfall at their physical locations and better quality leads.
+          <strong> Professional website development in <?php echo $loc['location_name']; ?> </strong>refers to creating
+          a site for representing your business effectively in the local market. Location-based optimization helps in
+          making it easier for companies operating in <?php echo $loc['location_name']; ?> to appear in searches like
+          'best services in <?php echo $loc['location_name']; ?>' or '<?php echo $loc['location_name']; ?> businesses'.
+          With a well-developed website, one is sure to have more footfall at their physical locations and better
+          quality leads.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
-         This means that with modern web development strategies, your business is going to be better placed in local searches and found much more quickly by customers. Emphasizing responsive design, fast loading speeds, mobile optimization, and user-friendly interfaces will definitely leave a mark on the local audience.
+          This means that with modern web development strategies, your business is going to be better placed in local
+          searches and found much more quickly by customers. Emphasizing responsive design, fast loading speeds, mobile
+          optimization, and user-friendly interfaces will definitely leave a mark on the local audience.
         </p>
       </div>
 
@@ -1073,13 +1131,21 @@ $state = $loc['state'];
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-         During recent years, more businesses in <?php echo $loc['location_name']; ?> have come to understand the importance of having professional website development. Primary services include custom website design, e-commerce development, content management systems, and mobile app integrations. Rich in content, modern in design, and technically optimized to provide a better user experience.
-    By emphasizing these aspects, you will ensure that your business ranks at the top of the search results, which would further be helpful in increasing customer engagement, online sales, and brand recognition in <?php echo $loc['location_name']; ?>.
+          During recent years, more businesses in <?php echo $loc['location_name']; ?> have come to understand the
+          importance of having professional website development. Primary services include custom website design,
+          e-commerce development, content management systems, and mobile app integrations. Rich in content, modern in
+          design, and technically optimized to provide a better user experience.
+          By emphasizing these aspects, you will ensure that your business ranks at the top of the search results, which
+          would further be helpful in increasing customer engagement, online sales, and brand recognition in
+          <?php echo $loc['location_name']; ?>.
         </p>
 
         <p style="line-height: 1.9; color: #6c757d">
           Website Development Companies in <?php echo $loc['location_name']; ?>: What Sets Us Apart
-      There are numerous website development firms around me, but Everything Easy stands out due to the fact that we don't just build a website; we craft digital experiences. We aim to create long-term strategies that achieve success. Our professionals work from planning and design through development and optimization to make sure that your website delivers results.
+          There are numerous website development firms around me, but Everything Easy stands out due to the fact that we
+          don't just build a website; we craft digital experiences. We aim to create long-term strategies that achieve
+          success. Our professionals work from planning and design through development and optimization to make sure
+          that your website delivers results.
         </p>
       </div>
 
@@ -1089,7 +1155,10 @@ $state = $loc['state'];
         </h3>
 
         <p style="line-height: 1.9; color: #6c757d">
-        While choosing the <strong> best website development company in <?php echo $loc['location_name']; ?> </strong>, one needs to look out for a company having experience in contemporary web technologies and with deep insights into your business. It will help small business entrepreneurs and large enterprises alike to increase their presence, drive traffic, and generate leads.
+          While choosing the <strong> best website development company in <?php echo $loc['location_name']; ?>
+          </strong>, one needs to look out for a company having experience in contemporary web technologies and with
+          deep insights into your business. It will help small business entrepreneurs and large enterprises alike to
+          increase their presence, drive traffic, and generate leads.
         </p>
       </div>
 
@@ -1098,10 +1167,37 @@ $state = $loc['state'];
           Finding Website Development Services Near Me
         </h3>
 
-       
+
 
         <p style="line-height: 1.9; color: #6c757d">
-          Professional web development ensures that the results will be noticeable and effective, impacting your business's success. A good website can ensure the growth of your <?php echo $loc['location_name']; ?> business in competitive markets by focusing on improving online visibility and providing seamless user experiences. How to Choose the Right Web Development Consultant for Your Business in <?php echo $loc['location_name']; ?> In this digital age, when everything has reached a tipping point, the need to approach the best web development consultant in <?php echo $loc['location_name']; ?> becomes apparent for any firm in <?php echo $loc['location_name']; ?> desiring increased visibility. A web development consultant will guarantee to give your website the much-required skills and techniques to edge it ahead of your competitors, increase its visitor numbers, and achieve more sales due to increased conversions. Even small businesses operating out of <?php echo $loc['location_name']; ?> or around it have plenty of reasons to hire the services of a web development consultant for professional services in their organization. They will study the market along with your audience and competitors to ensure your website not only looks great but performs exceptionally well. Best Website Development Services in <?php echo $loc['location_name']; ?>: What to Look For When it concerns the best website development services near me, one should ensure that the selected consultant or agency is knowledgeable about modern web technologies and chalks out strategies to achieve long-term results. Factors that need to be considered include: Portfolio and experience are the things that any reliable web development consultant should have in store while delivering websites to other companies. Customized Solutions: No two businesses are similar. Better services provide strategies designed to meet your specific business niche. Transparency: The contractor shall practice open communication and shall apprise the updates regarding the project progress. Modern Technology Stack: Ensure they use current frameworks, responsive design, and follow best practices. Post-launch support: The reason behind long-term success is ongoing maintenance and support. Conclusion Working with EverythingEasy Technology, a professional website development company in <?php echo $loc['location_name']; ?>, can facilitate positive results for your business. Be it custom web development, e-commerce solutions, or website redesign services in <?php echo $loc['location_name']; ?>; partnering with qualified professionals will help strategize aptly to improve your online presence, attract quality traffic, and expand your business. A web development consultant for your <?php echo $loc['location_name']; ?> business aspires to success by building a plan based on market characteristics, optimizing for local searches, and practicing clear communication.
+          Professional web development ensures that the results will be noticeable and effective, impacting your
+          business's success. A good website can ensure the growth of your <?php echo $loc['location_name']; ?> business
+          in competitive markets by focusing on improving online visibility and providing seamless user experiences. How
+          to Choose the Right Web Development Consultant for Your Business in <?php echo $loc['location_name']; ?> In
+          this digital age, when everything has reached a tipping point, the need to approach the best web development
+          consultant in <?php echo $loc['location_name']; ?> becomes apparent for any firm in
+          <?php echo $loc['location_name']; ?> desiring increased visibility. A web development consultant will
+          guarantee to give your website the much-required skills and techniques to edge it ahead of your competitors,
+          increase its visitor numbers, and achieve more sales due to increased conversions. Even small businesses
+          operating out of <?php echo $loc['location_name']; ?> or around it have plenty of reasons to hire the services
+          of a web development consultant for professional services in their organization. They will study the market
+          along with your audience and competitors to ensure your website not only looks great but performs
+          exceptionally well. Best Website Development Services in <?php echo $loc['location_name']; ?>: What to Look
+          For When it concerns the best website development services near me, one should ensure that the selected
+          consultant or agency is knowledgeable about modern web technologies and chalks out strategies to achieve
+          long-term results. Factors that need to be considered include: Portfolio and experience are the things that
+          any reliable web development consultant should have in store while delivering websites to other companies.
+          Customized Solutions: No two businesses are similar. Better services provide strategies designed to meet your
+          specific business niche. Transparency: The contractor shall practice open communication and shall apprise the
+          updates regarding the project progress. Modern Technology Stack: Ensure they use current frameworks,
+          responsive design, and follow best practices. Post-launch support: The reason behind long-term success is
+          ongoing maintenance and support. Conclusion Working with EverythingEasy Technology, a professional website
+          development company in <?php echo $loc['location_name']; ?>, can facilitate positive results for your
+          business. Be it custom web development, e-commerce solutions, or website redesign services in
+          <?php echo $loc['location_name']; ?>; partnering with qualified professionals will help strategize aptly to
+          improve your online presence, attract quality traffic, and expand your business. A web development consultant
+          for your <?php echo $loc['location_name']; ?> business aspires to success by building a plan based on market
+          characteristics, optimizing for local searches, and practicing clear communication.
         </p>
       </div>
 

@@ -38,6 +38,10 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://everythingeasy.in/assets/logo.jpg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#0ea5e9" />
@@ -69,7 +73,7 @@
   <meta http-equiv="content-language" content="en" />
 
   <!-- Schema Markup - Organization -->
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -93,7 +97,7 @@
 </script>
 
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -143,7 +147,7 @@
 }
 </script>
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -175,7 +179,7 @@
   ]
 }
 </script>
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",

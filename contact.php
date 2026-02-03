@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script type="application/ld+json">
+
+<head>
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ContactPage",
@@ -9,714 +10,564 @@
 }
 </script>
 
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-    />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="theme-color" content="#0066cc" />
-    <title>Contact Us - EverythingEasy Technology</title>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="css/style.css" rel="stylesheet" />
-  </head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#0066cc" />
+  <title>Contact Us - EverythingEasy Technology</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+</head>
 
-  <body>
-    <?php require_once 'navbar.php'; ?>
-    <!-- Navigation Container -->
-    <!-- Navigation Container -->
+<body>
+  <?php require_once 'navbar.php'; ?>
+  <!-- Navigation Container -->
+  <!-- Navigation Container -->
 
-    <!-- Hero Section -->
-    <section
-      class="hero-section bg-primary text-white py-5"
-      style="padding-top: 120px !important"
-    >
-      <div class="container">
-        <div class="row align-items-center min-vh-50">
-          <div class="col-12 text-center">
-            <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
-            <p class="lead mb-4">
-              Ready to start your next project? We'd love to hear from you.
-            </p>
-            <div class="hero-stats">
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <div class="stat-item">
-                    <i class="fas fa-phone fa-2x mb-2"></i>
-                    <h5>24/7 Support</h5>
-                  </div>
+  <!-- Hero Section -->
+  <section class="hero-section bg-primary text-white py-5" style="padding-top: 120px !important">
+    <div class="container">
+      <div class="row align-items-center min-vh-50">
+        <div class="col-12 text-center">
+          <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
+          <p class="lead mb-4">
+            Ready to start your next project? We'd love to hear from you.
+          </p>
+          <div class="hero-stats">
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <div class="stat-item">
+                  <i class="fas fa-phone fa-2x mb-2"></i>
+                  <h5>24/7 Support</h5>
                 </div>
-                <div class="col-md-4 mb-3">
-                  <div class="stat-item">
-                    <i class="fas fa-clock fa-2x mb-2"></i>
-                    <h5>Quick Response</h5>
-                  </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="stat-item">
+                  <i class="fas fa-clock fa-2x mb-2"></i>
+                  <h5>Quick Response</h5>
                 </div>
-                <div class="col-md-4 mb-3">
-                  <div class="stat-item">
-                    <i class="fas fa-handshake fa-2x mb-2"></i>
-                    <h5>Personal Touch</h5>
-                  </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <div class="stat-item">
+                  <i class="fas fa-handshake fa-2x mb-2"></i>
+                  <h5>Personal Touch</h5>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact Information Section -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center mb-5">
-            <h5 class="text-primary mb-3">CONTACT INFORMATION</h5>
-            <h2 class="fw-bold mb-4">How Can We Help You?</h2>
-            <p class="text-muted">
-              Choose your preferred way to get in touch with our team.
+  <!-- Contact Information Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center mb-5">
+          <h5 class="text-primary mb-3">CONTACT INFORMATION</h5>
+          <h2 class="fw-bold mb-4">How Can We Help You?</h2>
+          <p class="text-muted">
+            Choose your preferred way to get in touch with our team.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="contact-info-card h-100 p-4 bg-white rounded shadow-sm text-center">
+            <div class="contact-icon mb-3">
+              <i class="fas fa-map-marker-alt fa-3x text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-3">Office Address</h5>
+            <p class="text-muted mb-0">
+              EverythingEasy Technology Balawala, <br />
+              Dehradun 248001 <br />
+              Uttarakhand
             </p>
+            <a href="https://maps.google.com" target="_blank" class="btn btn-outline-primary btn-sm mt-3">
+              <i class="fas fa-directions me-1"></i>Get Directions
+            </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div
-              class="contact-info-card h-100 p-4 bg-white rounded shadow-sm text-center"
-            >
-              <div class="contact-icon mb-3">
-                <i class="fas fa-map-marker-alt fa-3x text-primary"></i>
-              </div>
-              <h5 class="fw-bold mb-3">Office Address</h5>
-              <p class="text-muted mb-0">
-                EverythingEasy Technology Balawala, <br />
-                Dehradun 248001 <br />
-                Uttarakhand
-              </p>
-              <a
-                href="https://maps.google.com"
-                target="_blank"
-                class="btn btn-outline-primary btn-sm mt-3"
-              >
-                <i class="fas fa-directions me-1"></i>Get Directions
-              </a>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="contact-info-card h-100 p-4 bg-white rounded shadow-sm text-center">
+            <div class="contact-icon mb-3">
+              <i class="fas fa-phone fa-3x text-primary"></i>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div
-              class="contact-info-card h-100 p-4 bg-white rounded shadow-sm text-center"
-            >
-              <div class="contact-icon mb-3">
-                <i class="fas fa-phone fa-3x text-primary"></i>
-              </div>
-              <h5 class="fw-bold mb-3">Phone Numbers</h5>
-              <p class="text-muted mb-2">
-                <strong>Main Office:</strong><br />
-                <a href="tel:+918630840577" class="text-decoration-none"
-                  >+918630840577</a
-                >
-              </p>
-              <!-- <p class="text-muted mb-0">
+            <h5 class="fw-bold mb-3">Phone Numbers</h5>
+            <p class="text-muted mb-2">
+              <strong>Main Office:</strong><br />
+              <a href="tel:+918630840577" class="text-decoration-none">+918630840577</a>
+            </p>
+            <!-- <p class="text-muted mb-0">
               <strong>Support Line:</strong><br />
               <a href="tel:+918630840577" class="text-decoration-none">+918630840577</a>
             </p> -->
-              <button
-                class="btn btn-outline-primary btn-sm mt-3"
-                onclick="window.open('tel:+918630840577')"
-              >
-                <i class="fas fa-phone me-1"></i>Call Now
-              </button>
-            </div>
+            <button class="btn btn-outline-primary btn-sm mt-3" onclick="window.open('tel:+918630840577')">
+              <i class="fas fa-phone me-1"></i>Call Now
+            </button>
           </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div
-              class="contact-info-card h-100 p-4 bg-white rounded shadow-sm text-center"
-            >
-              <div class="contact-icon mb-3">
-                <i class="fas fa-envelope fa-3x text-primary"></i>
-              </div>
-              <h5 class="fw-bold mb-3">Email Addresses</h5>
-              <p class="text-muted mb-2">
-                <strong>General Inquiries:</strong><br />
-                <a
-                  href="mailto:info@everythingeasy.com"
-                  class="text-decoration-none"
-                  >info@everythingeasy.com</a
-                >
-              </p>
-              <!-- <p class="text-muted mb-0">
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="contact-info-card h-100 p-4 bg-white rounded shadow-sm text-center">
+            <div class="contact-icon mb-3">
+              <i class="fas fa-envelope fa-3x text-primary"></i>
+            </div>
+            <h5 class="fw-bold mb-3">Email Addresses</h5>
+            <p class="text-muted mb-2">
+              <strong>General Inquiries:</strong><br />
+              <a href="mailto:info@everythingeasy.com" class="text-decoration-none">info@everythingeasy.com</a>
+            </p>
+            <!-- <p class="text-muted mb-0">
               <strong>Support:</strong><br />
               <a href="mailto:support@everythingeasy.com" class="text-decoration-none">support@everythingeasy.com</a>
             </p> -->
-              <button
-                class="btn btn-outline-primary btn-sm mt-3"
-                onclick="window.open('mailto:info@everythingeasy.com')"
-              >
-                <i class="fas fa-envelope me-1"></i>Send Email
-              </button>
-            </div>
+            <button class="btn btn-outline-primary btn-sm mt-3" onclick="window.open('mailto:info@everythingeasy.com')">
+              <i class="fas fa-envelope me-1"></i>Send Email
+            </button>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact Form Section -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="bg-white p-5 rounded shadow">
-              <div class="text-center mb-4">
-                <h5 class="text-primary mb-3">SEND US A MESSAGE</h5>
-                <h2 class="fw-bold mb-4">Tell Us About Your Project</h2>
-                <p class="text-muted">
-                  Fill out the form below and we'll get back to you within 24
-                  hours.
+  <!-- Contact Form Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="bg-white p-5 rounded shadow">
+            <div class="text-center mb-4">
+              <h5 class="text-primary mb-3">SEND US A MESSAGE</h5>
+              <h2 class="fw-bold mb-4">Tell Us About Your Project</h2>
+              <p class="text-muted">
+                Fill out the form below and we'll get back to you within 24
+                hours.
+              </p>
+            </div>
+
+            <form id="contactForm" class="contact-form">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName" class="form-label">First Name *</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" required
+                    placeholder="Enter your first name" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName" class="form-label">Last Name *</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" required
+                    placeholder="Enter your last name" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">Email Address *</label>
+                  <input type="email" class="form-control" id="email" name="email" required
+                    placeholder="your.email@example.com" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1 (555) 123-4567" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="company" class="form-label">Company Name</label>
+                  <input type="text" class="form-control" id="company" name="company" placeholder="Your Company Name" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="service" class="form-label">Service Interested In *</label>
+                  <select class="form-select" id="service" name="service" required>
+                    <option value="">Select a service</option>
+                    <option value="web-development">Web Development</option>
+                    <option value="app-development">
+                      Mobile App Development
+                    </option>
+                    <option value="cyber-security">Cyber Security</option>
+                    <option value="data-analytics">Data Analytics</option>
+                    <option value="cloud-solutions">Cloud Solutions</option>
+                    <option value="seo">SEO Optimization</option>
+                    <option value="consultation">General Consultation</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="budget" class="form-label">Project Budget</label>
+                <select class="form-select" id="budget" name="budget">
+                  <option value="">Select budget range</option>
+                  <option value="under-5k">Under $5,000</option>
+                  <option value="5k-10k">$5,000 - $10,000</option>
+                  <option value="10k-25k">$10,000 - $25,000</option>
+                  <option value="25k-50k">$25,000 - $50,000</option>
+                  <option value="over-50k">Over $50,000</option>
+                  <option value="discuss">Let's Discuss</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="timeline" class="form-label">Project Timeline</label>
+                <select class="form-select" id="timeline" name="timeline">
+                  <option value="">Select timeline</option>
+                  <option value="urgent">ASAP (Rush Job)</option>
+                  <option value="1-month">Within 1 Month</option>
+                  <option value="2-3-months">2-3 Months</option>
+                  <option value="3-6-months">3-6 Months</option>
+                  <option value="6-months-plus">6+ Months</option>
+                  <option value="flexible">Flexible</option>
+                </select>
+              </div>
+
+              <div class="mb-4">
+                <label for="message" class="form-label">Project Details *</label>
+                <textarea class="form-control" id="message" name="message" rows="6" required
+                  placeholder="Tell us about your project, goals, requirements, and any specific features you need..."></textarea>
+              </div>
+
+              <div class="mb-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter" />
+                  <label class="form-check-label" for="newsletter">
+                    Subscribe to our newsletter for tech updates and special
+                    offers
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required />
+                  <label class="form-check-label" for="privacy">
+                    I agree to the
+                    <a href="#" class="text-primary">Privacy Policy</a> and
+                    <a href="#" class="text-primary">Terms of Service</a> *
+                  </label>
+                </div>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </div>
+            </form>
+
+            <div id="formResult" class="mt-3 d-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Contact Section -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h3 class="fw-bold mb-2">Need Immediate Assistance?</h3>
+          <p class="mb-0">
+            Our support team is available 24/7 to help you with urgent
+            matters.
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <a href="tel:+918630840577" class="btn btn-light btn-lg me-2 mb-2">
+            <i class="fas fa-phone me-2"></i>Call Support
+          </a>
+          <a href="mailto:info@everythingeasy.com" class="btn btn-outline-light btn-lg mb-2">
+            <i class="fas fa-envelope me-2"></i>Email Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Hours Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <h4 class="fw-bold mb-4">Business Hours</h4>
+          <div class="hours-list">
+            <div class="d-flex justify-content-between border-bottom py-2">
+              <span>Monday - Friday</span>
+              <span class="fw-bold">9:00 AM - 6:00 PM</span>
+            </div>
+            <div class="d-flex justify-content-between border-bottom py-2">
+              <span>Saturday</span>
+              <span class="fw-bold">10:00 AM - 4:00 PM</span>
+            </div>
+            <div class="d-flex justify-content-between border-bottom py-2">
+              <span>Sunday</span>
+              <span class="fw-bold">Closed</span>
+            </div>
+            <div class="d-flex justify-content-between pt-2">
+              <span>Emergency Support</span>
+              <span class="fw-bold text-primary">24/7 Available</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h4 class="fw-bold mb-4">Follow Us</h4>
+          <p class="text-muted mb-4">
+            Stay connected with us on social media for the latest updates,
+            tech tips, and industry insights.
+          </p>
+          <div class="social-links-large">
+            <a href="https://www.facebook.com/profile.php?id=61575148140871" class="btn btn-outline-primary me-3 mb-2">
+              <i class="fab fa-facebook fa-lg me-2"></i>Facebook
+            </a>
+            <a href="https://x.com/Everythingeasy0" class="btn btn-outline-primary me-3 mb-2">
+              <i class="fab fa-twitter fa-lg me-2"></i>Twitter
+            </a>
+            <a href="https://www.linkedin.com/company/106846342/" class="btn btn-outline-primary me-3 mb-2">
+              <i class="fab fa-linkedin fa-lg me-2"></i>LinkedIn
+            </a>
+            <a href="https://www.instagram.com/everythingeasy0/" class="btn btn-outline-primary mb-2">
+              <i class="fab fa-instagram fa-lg me-2"></i>Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="fw-bold mb-4 text-center">Find Our Location</h4>
+          <div class="map-container bg-light rounded shadow" style="height: 400px; position: relative">
+            <div class="d-flex align-items-center justify-content-center h-100 text-center">
+              <div>
+                <i class="fas fa-map-marked-alt fa-4x text-primary mb-3"></i>
+                <h5>Interactive Map</h5>
+                <p class="text-muted mb-4">
+                  EverythingEasy Technology Balawala, Dehradun
                 </p>
+                <a href="https://www.google.com/maps/dir//Bhagwandas+chowk,+Bisht+colony,+ghoda+factory+road,+Balawala,+Dehradun,+Uttarakhand+248019/@30.2657584,78.1273607,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3909256beff80bed:0x5b9bdb3eed18518d!2m2!1d78.1228234!2d30.2612601?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank" class="btn btn-primary">
+                  <i class="fas fa-external-link-alt me-2"></i>Open in Google
+                  Maps
+                </a>
               </div>
-
-              <form id="contactForm" class="contact-form">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label"
-                      >First Name *</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="firstName"
-                      name="firstName"
-                      required
-                      placeholder="Enter your first name"
-                    />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="lastName" class="form-label">Last Name *</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="lastName"
-                      name="lastName"
-                      required
-                      placeholder="Enter your last name"
-                    />
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="email" class="form-label"
-                      >Email Address *</label
-                    >
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      name="email"
-                      required
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input
-                      type="tel"
-                      class="form-control"
-                      id="phone"
-                      name="phone"
-                      placeholder="+1 (555) 123-4567"
-                    />
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="company" class="form-label">Company Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="company"
-                      name="company"
-                      placeholder="Your Company Name"
-                    />
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="service" class="form-label"
-                      >Service Interested In *</label
-                    >
-                    <select
-                      class="form-select"
-                      id="service"
-                      name="service"
-                      required
-                    >
-                      <option value="">Select a service</option>
-                      <option value="web-development">Web Development</option>
-                      <option value="app-development">
-                        Mobile App Development
-                      </option>
-                      <option value="cyber-security">Cyber Security</option>
-                      <option value="data-analytics">Data Analytics</option>
-                      <option value="cloud-solutions">Cloud Solutions</option>
-                      <option value="seo">SEO Optimization</option>
-                      <option value="consultation">General Consultation</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="mb-3">
-                  <label for="budget" class="form-label">Project Budget</label>
-                  <select class="form-select" id="budget" name="budget">
-                    <option value="">Select budget range</option>
-                    <option value="under-5k">Under $5,000</option>
-                    <option value="5k-10k">$5,000 - $10,000</option>
-                    <option value="10k-25k">$10,000 - $25,000</option>
-                    <option value="25k-50k">$25,000 - $50,000</option>
-                    <option value="over-50k">Over $50,000</option>
-                    <option value="discuss">Let's Discuss</option>
-                  </select>
-                </div>
-
-                <div class="mb-3">
-                  <label for="timeline" class="form-label"
-                    >Project Timeline</label
-                  >
-                  <select class="form-select" id="timeline" name="timeline">
-                    <option value="">Select timeline</option>
-                    <option value="urgent">ASAP (Rush Job)</option>
-                    <option value="1-month">Within 1 Month</option>
-                    <option value="2-3-months">2-3 Months</option>
-                    <option value="3-6-months">3-6 Months</option>
-                    <option value="6-months-plus">6+ Months</option>
-                    <option value="flexible">Flexible</option>
-                  </select>
-                </div>
-
-                <div class="mb-4">
-                  <label for="message" class="form-label"
-                    >Project Details *</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="message"
-                    name="message"
-                    rows="6"
-                    required
-                    placeholder="Tell us about your project, goals, requirements, and any specific features you need..."
-                  ></textarea>
-                </div>
-
-                <div class="mb-4">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="newsletter"
-                      name="newsletter"
-                    />
-                    <label class="form-check-label" for="newsletter">
-                      Subscribe to our newsletter for tech updates and special
-                      offers
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="privacy"
-                      name="privacy"
-                      required
-                    />
-                    <label class="form-check-label" for="privacy">
-                      I agree to the
-                      <a href="#" class="text-primary">Privacy Policy</a> and
-                      <a href="#" class="text-primary">Terms of Service</a> *
-                    </label>
-                  </div>
-                </div>
-
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="fas fa-paper-plane me-2"></i>Send Message
-                  </button>
-                </div>
-              </form>
-
-              <div id="formResult" class="mt-3 d-none"></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Quick Contact Section -->
-    <section class="py-5 bg-primary text-white">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
-            <h3 class="fw-bold mb-2">Need Immediate Assistance?</h3>
-            <p class="mb-0">
-              Our support team is available 24/7 to help you with urgent
-              matters.
-            </p>
+  <!-- FAQ Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="text-center mb-5">
+            <h5 class="text-primary mb-3">FREQUENTLY ASKED QUESTIONS</h5>
+            <h2 class="fw-bold mb-4">Common Questions</h2>
           </div>
-          <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-            <a href="tel:+918630840577" class="btn btn-light btn-lg me-2 mb-2">
-              <i class="fas fa-phone me-2"></i>Call Support
-            </a>
-            <a
-              href="mailto:info@everythingeasy.com"
-              class="btn btn-outline-light btn-lg mb-2"
-            >
-              <i class="fas fa-envelope me-2"></i>Email Us
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Business Hours Section -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 mb-4">
-            <h4 class="fw-bold mb-4">Business Hours</h4>
-            <div class="hours-list">
-              <div class="d-flex justify-content-between border-bottom py-2">
-                <span>Monday - Friday</span>
-                <span class="fw-bold">9:00 AM - 6:00 PM</span>
-              </div>
-              <div class="d-flex justify-content-between border-bottom py-2">
-                <span>Saturday</span>
-                <span class="fw-bold">10:00 AM - 4:00 PM</span>
-              </div>
-              <div class="d-flex justify-content-between border-bottom py-2">
-                <span>Sunday</span>
-                <span class="fw-bold">Closed</span>
-              </div>
-              <div class="d-flex justify-content-between pt-2">
-                <span>Emergency Support</span>
-                <span class="fw-bold text-primary">24/7 Available</span>
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                  How quickly can you start my project?
+                </button>
+              </h2>
+              <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  We typically begin new projects within 1-2 weeks of contract
+                  signing. For urgent projects, we offer expedited start
+                  options with potential rush fees.
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6">
-            <h4 class="fw-bold mb-4">Follow Us</h4>
-            <p class="text-muted mb-4">
-              Stay connected with us on social media for the latest updates,
-              tech tips, and industry insights.
-            </p>
-            <div class="social-links-large">
-              <a
-                href="https://www.facebook.com/profile.php?id=61575148140871"
-                class="btn btn-outline-primary me-3 mb-2"
-              >
-                <i class="fab fa-facebook fa-lg me-2"></i>Facebook
-              </a>
-              <a
-                href="https://x.com/Everythingeasy0"
-                class="btn btn-outline-primary me-3 mb-2"
-              >
-                <i class="fab fa-twitter fa-lg me-2"></i>Twitter
-              </a>
-              <a
-                href="https://www.linkedin.com/company/106846342/"
-                class="btn btn-outline-primary me-3 mb-2"
-              >
-                <i class="fab fa-linkedin fa-lg me-2"></i>LinkedIn
-              </a>
-              <a
-                href="https://www.instagram.com/everythingeasy0/"
-                class="btn btn-outline-primary mb-2"
-              >
-                <i class="fab fa-instagram fa-lg me-2"></i>Instagram
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Map Section -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h4 class="fw-bold mb-4 text-center">Find Our Location</h4>
-            <div
-              class="map-container bg-light rounded shadow"
-              style="height: 400px; position: relative"
-            >
-              <div
-                class="d-flex align-items-center justify-content-center h-100 text-center"
-              >
-                <div>
-                  <i class="fas fa-map-marked-alt fa-4x text-primary mb-3"></i>
-                  <h5>Interactive Map</h5>
-                  <p class="text-muted mb-4">
-                    EverythingEasy Technology Balawala, Dehradun
-                  </p>
-                  <a
-                    href="https://www.google.com/maps/dir//Bhagwandas+chowk,+Bisht+colony,+ghoda+factory+road,+Balawala,+Dehradun,+Uttarakhand+248019/@30.2657584,78.1273607,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3909256beff80bed:0x5b9bdb3eed18518d!2m2!1d78.1228234!2d30.2612601?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                    class="btn btn-primary"
-                  >
-                    <i class="fas fa-external-link-alt me-2"></i>Open in Google
-                    Maps
-                  </a>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse2">
+                  What is your typical project timeline?
+                </button>
+              </h2>
+              <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Project timelines vary based on complexity. Simple websites
+                  take 2-4 weeks, complex web applications 8-16 weeks, and
+                  enterprise solutions 3-6 months.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse3">
+                  Do you provide ongoing support?
+                </button>
+              </h2>
+              <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes! We offer comprehensive maintenance packages including
+                  security updates, performance monitoring, content updates,
+                  and 24/7 technical support.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse4">
+                  What are your payment terms?
+                </button>
+              </h2>
+              <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  We typically work with 50% upfront payment and 50% upon
+                  completion. For larger projects, we can arrange
+                  milestone-based payments to better manage cash flow.
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FAQ Section -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="text-center mb-5">
-              <h5 class="text-primary mb-3">FREQUENTLY ASKED QUESTIONS</h5>
-              <h2 class="fw-bold mb-4">Common Questions</h2>
-            </div>
+  <!-- Footer Container -->
+  <?php require_once 'footer.php'; ?>
 
-            <div class="accordion" id="faqAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq1">
-                  <button
-                    class="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse1"
-                  >
-                    How quickly can you start my project?
-                  </button>
-                </h2>
-                <div
-                  id="collapse1"
-                  class="accordion-collapse collapse show"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    We typically begin new projects within 1-2 weeks of contract
-                    signing. For urgent projects, we offer expedited start
-                    options with potential rush fees.
-                  </div>
-                </div>
-              </div>
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq2">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse2"
-                  >
-                    What is your typical project timeline?
-                  </button>
-                </h2>
-                <div
-                  id="collapse2"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Project timelines vary based on complexity. Simple websites
-                    take 2-4 weeks, complex web applications 8-16 weeks, and
-                    enterprise solutions 3-6 months.
-                  </div>
-                </div>
-              </div>
+  <script src="js/script.js"></script>
 
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq3">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse3"
-                  >
-                    Do you provide ongoing support?
-                  </button>
-                </h2>
-                <div
-                  id="collapse3"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Yes! We offer comprehensive maintenance packages including
-                    security updates, performance monitoring, content updates,
-                    and 24/7 technical support.
-                  </div>
-                </div>
-              </div>
+  <!-- Contact Form Script -->
+  <script>
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
 
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq4">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse4"
-                  >
-                    What are your payment terms?
-                  </button>
-                </h2>
-                <div
-                  id="collapse4"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    We typically work with 50% upfront payment and 50% upon
-                    completion. For larger projects, we can arrange
-                    milestone-based payments to better manage cash flow.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        // Get form data
+        const formData = new FormData(this);
+        const formResult = document.getElementById("formResult");
 
-    <!-- Footer Container -->
-    <?php require_once 'footer.php'; ?>
+        // Convert FormData to JSON
+        const data = {};
+        formData.forEach((value, key) => {
+          if (key === "newsletter" || key === "privacy") {
+            data[key] = formData.get(key) ? true : false;
+          } else {
+            data[key] = value;
+          }
+        });
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+        submitBtn.disabled = true;
 
-    <script src="js/script.js"></script>
+        // Submit form via AJAX
+        fetch("backend/submit-quote.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
 
-    <!-- Contact Form Script -->
-    <script>
-      document
-        .getElementById("contactForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+            if (result.success) {
+              // Show success message
+              formResult.className = "mt-3 alert alert-success";
+              formResult.innerHTML =
+                '<i class="fas fa-check-circle me-2"></i>' + result.message;
+              formResult.classList.remove("d-none");
 
-          // Get form data
-          const formData = new FormData(this);
-          const formResult = document.getElementById("formResult");
-
-          // Convert FormData to JSON
-          const data = {};
-          formData.forEach((value, key) => {
-            if (key === "newsletter" || key === "privacy") {
-              data[key] = formData.get(key) ? true : false;
+              // Reset form
+              this.reset();
+              this.classList.remove("was-validated");
             } else {
-              data[key] = value;
-            }
-          });
-
-          // Show loading state
-          const submitBtn = this.querySelector('button[type="submit"]');
-          const originalText = submitBtn.innerHTML;
-          submitBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
-          submitBtn.disabled = true;
-
-          // Submit form via AJAX
-          fetch("backend/submit-quote.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => response.json())
-            .then((result) => {
-              // Reset button
-              submitBtn.innerHTML = originalText;
-              submitBtn.disabled = false;
-
-              if (result.success) {
-                // Show success message
-                formResult.className = "mt-3 alert alert-success";
-                formResult.innerHTML =
-                  '<i class="fas fa-check-circle me-2"></i>' + result.message;
-                formResult.classList.remove("d-none");
-
-                // Reset form
-                this.reset();
-                this.classList.remove("was-validated");
-              } else {
-                // Show error message
-                formResult.className = "mt-3 alert alert-danger";
-                formResult.innerHTML =
-                  '<i class="fas fa-exclamation-circle me-2"></i>' +
-                  result.message;
-                formResult.classList.remove("d-none");
-              }
-
-              // Hide message after 5 seconds
-              setTimeout(() => {
-                formResult.classList.add("d-none");
-              }, 5000);
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-
-              // Reset button
-              submitBtn.innerHTML = originalText;
-              submitBtn.disabled = false;
-
               // Show error message
               formResult.className = "mt-3 alert alert-danger";
               formResult.innerHTML =
-                '<i class="fas fa-exclamation-circle me-2"></i>An error occurred. Please try again later.';
+                '<i class="fas fa-exclamation-circle me-2"></i>' +
+                result.message;
               formResult.classList.remove("d-none");
+            }
 
-              // Hide message after 5 seconds
-              setTimeout(() => {
-                formResult.classList.add("d-none");
-              }, 5000);
-            });
-        });
+            // Hide message after 5 seconds
+            setTimeout(() => {
+              formResult.classList.add("d-none");
+            }, 5000);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
 
-      // Form validation enhancement
-      (function () {
-        "use strict";
-        window.addEventListener(
-          "load",
-          function () {
-            var forms = document.getElementsByClassName("contact-form");
-            var validation = Array.prototype.filter.call(
-              forms,
-              function (form) {
-                form.addEventListener(
-                  "submit",
-                  function (event) {
-                    if (form.checkValidity() === false) {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }
-                    form.classList.add("was-validated");
-                  },
-                  false
-                );
-              }
-            );
-          },
-          false
-        );
-      })();
-    </script>
-  </body>
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+
+            // Show error message
+            formResult.className = "mt-3 alert alert-danger";
+            formResult.innerHTML =
+              '<i class="fas fa-exclamation-circle me-2"></i>An error occurred. Please try again later.';
+            formResult.classList.remove("d-none");
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+              formResult.classList.add("d-none");
+            }, 5000);
+          });
+      });
+
+    // Form validation enhancement
+    (function () {
+      "use strict";
+      window.addEventListener(
+        "load",
+        function () {
+          var forms = document.getElementsByClassName("contact-form");
+          var validation = Array.prototype.filter.call(
+            forms,
+            function (form) {
+              form.addEventListener(
+                "submit",
+                function (event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add("was-validated");
+                },
+                false
+              );
+            }
+          );
+        },
+        false
+      );
+    })();
+  </script>
+</body>
+
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
+
+<head>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -16,755 +17,651 @@
 }
 </script>
 
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-    />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="theme-color" content="#0066cc" />
-    <title>Our Services - Everything Easy</title>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="css/style.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#0066cc" />
+  <title>Our Services - Everything Easy</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
 
-  </head>
-  <body>
-    <?php require_once 'navbar.php'; ?>
-    <!-- Navigation Container -->
-    <!-- Navigation Container -->
+</head>
 
-    <!-- Page Header -->
-    <section
-      class="py-5 bg-gradient-primary text-white"
-      style="padding-top: 120px !important"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-12 text-center">
-            <h1 class="display-4 fw-bold mb-3">Our Services</h1>
-            <p class="lead mb-4">
-              Comprehensive IT solutions tailored to drive your business forward
+<body>
+  <?php require_once 'navbar.php'; ?>
+  <!-- Navigation Container -->
+  <!-- Navigation Container -->
+
+  <!-- Page Header -->
+  <section class="py-5 bg-gradient-primary text-white" style="padding-top: 120px !important">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="display-4 fw-bold mb-3">Our Services</h1>
+          <p class="lead mb-4">
+            Comprehensive IT solutions tailored to drive your business forward
+          </p>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center bg-transparent">
+              <li class="breadcrumb-item">
+                <a href="/" class="text-warning">Home</a>
+              </li>
+              <li class="breadcrumb-item active text-white" aria-current="page">
+                Services
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto text-center mb-5">
+          <h5 class="text-primary mb-3">💼 WHAT WE OFFER</h5>
+          <h2 class="fw-bold mb-4 display-5">
+            Complete Technology Solutions
+          </h2>
+          <p class="text-muted lead">
+            From Custom Software to Digital Marketing, we provide end-to-end
+            technology services designed to accelerate your business growth
+            and digital transformation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="row text-center">
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-card bg-white rounded shadow p-3">
+            <h3 class="text-primary fw-bold mb-1">7+</h3>
+            <small class="text-muted">Core Services</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-card bg-white rounded shadow p-3">
+            <h3 class="text-primary fw-bold mb-1">15+</h3>
+            <small class="text-muted">Technologies</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-card bg-white rounded shadow p-3">
+            <h3 class="text-primary fw-bold mb-1">24/7</h3>
+            <small class="text-muted">Support</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stat-card bg-white rounded shadow p-3">
+            <h3 class="text-primary fw-bold mb-1">100%</h3>
+            <small class="text-muted">Satisfaction</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Services -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mb-5 text-center">
+          <h5 class="text-primary mb-3">🚀 CORE SERVICES</h5>
+          <h3 class="fw-bold mb-4">Our Primary Expertise</h3>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <!-- Web Development -->
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="service-detail-card bg-white rounded-3 shadow-lg p-3 p-md-5 h-100 border-0">
+            <div class="d-flex flex-column flex-md-row align-items-start">
+              <div class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start">
+                <div
+                  class="icon-circle bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center">
+                  <i class="fas fa-globe fa-2x text-primary"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start">
+                <h4 class="fw-bold mb-3 text-dark">Web Development</h4>
+                <p class="text-muted mb-4">
+                  Create stunning, responsive websites and web applications
+                  that engage users and drive conversions.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Custom Website Design
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>E-commerce Solutions
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Content Management Systems
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Progressive Web Apps
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>API
+                    Development
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile App Development -->
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100">
+            <div class="d-flex flex-column flex-md-row align-items-start">
+              <div class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start">
+                <div
+                  class="icon-circle bg-success bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center">
+                  <i class="fas fa-mobile-alt fa-2x text-success"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start">
+                <h4 class="fw-bold mb-3">Mobile App Development</h4>
+                <p class="text-muted mb-3">
+                  Build powerful mobile applications for iOS and Android
+                  platforms that enhance user experience.
+                </p>
+                <ul class="list-unstyled">
+                  <li>
+                    <i class="fas fa-check text-primary me-2"></i>iOS App
+                    Development
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-primary me-2"></i>Android App
+                    Development
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-primary me-2"></i>Cross-Platform Solutions
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-primary me-2"></i>App Store
+                    Optimization
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-primary me-2"></i>Maintenance
+                    & Support
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Software -->
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100">
+            <div class="d-flex flex-column flex-md-row align-items-start">
+              <div class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start">
+                <div
+                  class="icon-circle bg-warning bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center">
+                  <i class="fas fa-shield-alt fa-2x text-warning"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start">
+                <h4 class="fw-bold mb-3">Custom Software</h4>
+                <p class="text-muted mb-3">
+                  Tailored software solutions designed specifically for your
+                  business needs and workflow requirements.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Business Process Automation
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Enterprise Software Development
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>CRM &
+                    ERP Solutions
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Custom Integrations
+                  </li>
+                  <li class="mb-0">
+                    <i class="fas fa-check-circle text-success me-2"></i>Software Maintenance & Support
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Digital Marketing -->
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100">
+            <div class="d-flex flex-column flex-md-row align-items-start">
+              <div class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start">
+                <div
+                  class="icon-circle bg-info bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center">
+                  <i class="fas fa-cloud fa-2x text-info"></i>
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start">
+                <h4 class="fw-bold mb-3">Digital Marketing</h4>
+                <p class="text-muted mb-3">
+                  Boost your online presence and reach your target audience
+                  with data-driven digital marketing strategies.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>SEO &
+                    Content Marketing
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Social Media Marketing
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>PPC
+                    Advertising
+                  </li>
+                  <li class="mb-2">
+                    <i class="fas fa-check-circle text-success me-2"></i>Email
+                    Marketing Campaigns
+                  </li>
+                  <li class="mb-0">
+                    <i class="fas fa-check-circle text-success me-2"></i>Analytics & Performance Tracking
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialized Services -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mb-5">
+          <h3 class="fw-bold text-center mb-4">Specialized Services</h3>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <!-- Data Analytics -->
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
+          <div class="service-card bg-white rounded shadow p-3 p-md-4 text-center h-100">
+            <div class="service-icon mb-3">
+              <div
+                class="icon-circle bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto">
+                <i class="fas fa-chart-line fa-2x text-primary"></i>
+              </div>
+            </div>
+            <h5 class="fw-bold mb-3">Website Development</h5>
+            <p class="text-muted mb-3 small">
+              Create professional, responsive websites that deliver
+              exceptional user experiences and drive results.
             </p>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb justify-content-center bg-transparent">
-                <li class="breadcrumb-item">
-                  <a href="/" class="text-warning">Home</a>
-                </li>
-                <li
-                  class="breadcrumb-item active text-white"
-                  aria-current="page"
-                >
-                  Services
-                </li>
-              </ol>
-            </nav>
+            <ul class="list-unstyled text-start">
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-primary me-2"></i>Responsive Design</small>
+              </li>
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-primary me-2"></i>E-commerce Websites</small>
+              </li>
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-primary me-2"></i>Corporate Websites</small>
+              </li>
+              <li class="mb-0">
+                <small><i class="fas fa-dot-circle text-primary me-2"></i>Landing
+                  Pages</small>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Services Overview -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-10 mx-auto text-center mb-5">
-            <h5 class="text-primary mb-3">💼 WHAT WE OFFER</h5>
-            <h2 class="fw-bold mb-4 display-5">
-              Complete Technology Solutions
-            </h2>
-            <p class="text-muted lead">
-              From Custom Software to Digital Marketing, we provide end-to-end
-              technology services designed to accelerate your business growth
-              and digital transformation.
+        <!-- SEO Optimization -->
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
+          <div class="service-card bg-white rounded shadow p-3 p-md-4 text-center h-100">
+            <div class="service-icon mb-3">
+              <div
+                class="icon-circle bg-success bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto">
+                <i class="fas fa-search fa-2x text-success"></i>
+              </div>
+            </div>
+            <h5 class="fw-bold mb-3">SEO Optimization</h5>
+            <p class="text-muted mb-3 small">
+              Boost online visibility and drive organic traffic with proven
+              SEO strategies.
             </p>
+            <ul class="list-unstyled text-start">
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-success me-2"></i>Keyword
+                  Research</small>
+              </li>
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-success me-2"></i>On-page
+                  Optimization</small>
+              </li>
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-success me-2"></i>Link
+                  Building</small>
+              </li>
+              <li class="mb-0">
+                <small><i class="fas fa-dot-circle text-success me-2"></i>Local
+                  SEO</small>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="row text-center">
-          <div class="col-md-3 col-6 mb-4">
-            <div class="stat-card bg-white rounded shadow p-3">
-              <h3 class="text-primary fw-bold mb-1">7+</h3>
-              <small class="text-muted">Core Services</small>
-            </div>
-          </div>
-          <div class="col-md-3 col-6 mb-4">
-            <div class="stat-card bg-white rounded shadow p-3">
-              <h3 class="text-primary fw-bold mb-1">15+</h3>
-              <small class="text-muted">Technologies</small>
-            </div>
-          </div>
-          <div class="col-md-3 col-6 mb-4">
-            <div class="stat-card bg-white rounded shadow p-3">
-              <h3 class="text-primary fw-bold mb-1">24/7</h3>
-              <small class="text-muted">Support</small>
-            </div>
-          </div>
-          <div class="col-md-3 col-6 mb-4">
-            <div class="stat-card bg-white rounded shadow p-3">
-              <h3 class="text-primary fw-bold mb-1">100%</h3>
-              <small class="text-muted">Satisfaction</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Core Services -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 mb-5 text-center">
-            <h5 class="text-primary mb-3">🚀 CORE SERVICES</h5>
-            <h3 class="fw-bold mb-4">Our Primary Expertise</h3>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <!-- Web Development -->
-          <div class="col-12 col-lg-6 mb-4">
-            <div
-              class="service-detail-card bg-white rounded-3 shadow-lg p-3 p-md-5 h-100 border-0"
-            >
-              <div class="d-flex flex-column flex-md-row align-items-start">
-                <div
-                  class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start"
-                >
-                  <div
-                    class="icon-circle bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-globe fa-2x text-primary"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 text-center text-md-start">
-                  <h4 class="fw-bold mb-3 text-dark">Web Development</h4>
-                  <p class="text-muted mb-4">
-                    Create stunning, responsive websites and web applications
-                    that engage users and drive conversions.
-                  </p>
-                  <ul class="list-unstyled">
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Custom Website Design
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >E-commerce Solutions
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Content Management Systems
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Progressive Web Apps
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i>API
-                      Development
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mobile App Development -->
-          <div class="col-12 col-lg-6 mb-4">
-            <div
-              class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100"
-            >
-              <div class="d-flex flex-column flex-md-row align-items-start">
-                <div
-                  class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start"
-                >
-                  <div
-                    class="icon-circle bg-success bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-mobile-alt fa-2x text-success"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 text-center text-md-start">
-                  <h4 class="fw-bold mb-3">Mobile App Development</h4>
-                  <p class="text-muted mb-3">
-                    Build powerful mobile applications for iOS and Android
-                    platforms that enhance user experience.
-                  </p>
-                  <ul class="list-unstyled">
-                    <li>
-                      <i class="fas fa-check text-primary me-2"></i>iOS App
-                      Development
-                    </li>
-                    <li>
-                      <i class="fas fa-check text-primary me-2"></i>Android App
-                      Development
-                    </li>
-                    <li>
-                      <i class="fas fa-check text-primary me-2"></i
-                      >Cross-Platform Solutions
-                    </li>
-                    <li>
-                      <i class="fas fa-check text-primary me-2"></i>App Store
-                      Optimization
-                    </li>
-                    <li>
-                      <i class="fas fa-check text-primary me-2"></i>Maintenance
-                      & Support
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Custom Software -->
-          <div class="col-12 col-lg-6 mb-4">
-            <div
-              class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100"
-            >
-              <div class="d-flex flex-column flex-md-row align-items-start">
-                <div
-                  class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start"
-                >
-                  <div
-                    class="icon-circle bg-warning bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-shield-alt fa-2x text-warning"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 text-center text-md-start">
-                  <h4 class="fw-bold mb-3">Custom Software</h4>
-                  <p class="text-muted mb-3">
-                    Tailored software solutions designed specifically for your
-                    business needs and workflow requirements.
-                  </p>
-                  <ul class="list-unstyled">
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Business Process Automation
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Enterprise Software Development
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i>CRM &
-                      ERP Solutions
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Custom Integrations
-                    </li>
-                    <li class="mb-0">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Software Maintenance & Support
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Digital Marketing -->
-          <div class="col-12 col-lg-6 mb-4">
-            <div
-              class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100"
-            >
-              <div class="d-flex flex-column flex-md-row align-items-start">
-                <div
-                  class="service-icon-large mb-3 mb-md-0 me-md-4 align-self-center align-self-md-start"
-                >
-                  <div
-                    class="icon-circle bg-info bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center"
-                  >
-                    <i class="fas fa-cloud fa-2x text-info"></i>
-                  </div>
-                </div>
-                <div class="flex-grow-1 text-center text-md-start">
-                  <h4 class="fw-bold mb-3">Digital Marketing</h4>
-                  <p class="text-muted mb-3">
-                    Boost your online presence and reach your target audience
-                    with data-driven digital marketing strategies.
-                  </p>
-                  <ul class="list-unstyled">
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i>SEO &
-                      Content Marketing
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Social Media Marketing
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i>PPC
-                      Advertising
-                    </li>
-                    <li class="mb-2">
-                      <i class="fas fa-check-circle text-success me-2"></i>Email
-                      Marketing Campaigns
-                    </li>
-                    <li class="mb-0">
-                      <i class="fas fa-check-circle text-success me-2"></i
-                      >Analytics & Performance Tracking
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Specialized Services -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 mb-5">
-            <h3 class="fw-bold text-center mb-4">Specialized Services</h3>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <!-- Data Analytics -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div
-              class="service-card bg-white rounded shadow p-3 p-md-4 text-center h-100"
-            >
-              <div class="service-icon mb-3">
-                <div
-                  class="icon-circle bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                >
-                  <i class="fas fa-chart-line fa-2x text-primary"></i>
-                </div>
-              </div>
-              <h5 class="fw-bold mb-3">Website Development</h5>
-              <p class="text-muted mb-3 small">
-                Create professional, responsive websites that deliver
-                exceptional user experiences and drive results.
-              </p>
-              <ul class="list-unstyled text-start">
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-primary me-2"></i
-                    >Responsive Design</small
-                  >
-                </li>
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-primary me-2"></i
-                    >E-commerce Websites</small
-                  >
-                </li>
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-primary me-2"></i
-                    >Corporate Websites</small
-                  >
-                </li>
-                <li class="mb-0">
-                  <small
-                    ><i class="fas fa-dot-circle text-primary me-2"></i>Landing
-                    Pages</small
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- SEO Optimization -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div
-              class="service-card bg-white rounded shadow p-3 p-md-4 text-center h-100"
-            >
-              <div class="service-icon mb-3">
-                <div
-                  class="icon-circle bg-success bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                >
-                  <i class="fas fa-search fa-2x text-success"></i>
-                </div>
-              </div>
-              <h5 class="fw-bold mb-3">SEO Optimization</h5>
-              <p class="text-muted mb-3 small">
-                Boost online visibility and drive organic traffic with proven
-                SEO strategies.
-              </p>
-              <ul class="list-unstyled text-start">
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-success me-2"></i>Keyword
-                    Research</small
-                  >
-                </li>
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-success me-2"></i>On-page
-                    Optimization</small
-                  >
-                </li>
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-success me-2"></i>Link
-                    Building</small
-                  >
-                </li>
-                <li class="mb-0">
-                  <small
-                    ><i class="fas fa-dot-circle text-success me-2"></i>Local
-                    SEO</small
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- AI & Machine Learning -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div
-              class="service-card bg-white rounded shadow p-3 p-md-4 text-center h-100"
-            >
-              <div class="service-icon mb-3">
-                <div
-                  class="icon-circle bg-warning bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                >
-                  <i class="fas fa-robot fa-2x text-warning"></i>
-                </div>
-              </div>
-              <h5 class="fw-bold mb-3">CRM</h5>
-              <p class="text-muted mb-3 small">
-                Manage customer relationships effectively with powerful CRM
-                solutions that streamline your sales and service.
-              </p>
-              <ul class="list-unstyled text-start">
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-warning me-2"></i>Customer
-                    Management</small
-                  >
-                </li>
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-warning me-2"></i>Sales
-                    Pipeline Tracking</small
-                  >
-                </li>
-                <li class="mb-2">
-                  <small
-                    ><i class="fas fa-dot-circle text-warning me-2"></i>Lead
-                    Management</small
-                  >
-                </li>
-                <li class="mb-0">
-                  <small
-                    ><i class="fas fa-dot-circle text-warning me-2"></i
-                    >Automation & Reporting</small
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Service Process -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center mb-5">
-            <h5 class="text-primary mb-3">OUR PROCESS</h5>
-            <h2 class="fw-bold mb-4">How We Deliver Excellence</h2>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="process-step text-center p-3">
+        <!-- AI & Machine Learning -->
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
+          <div class="service-card bg-white rounded shadow p-3 p-md-4 text-center h-100">
+            <div class="service-icon mb-3">
               <div
-                class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                style="width: 50px; height: 50px"
-              >
-                <span class="fw-bold small">01</span>
+                class="icon-circle bg-warning bg-opacity-10 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto">
+                <i class="fas fa-robot fa-2x text-warning"></i>
               </div>
-              <h5 class="fw-bold mb-3">Discovery</h5>
-              <p class="text-muted small">
-                We analyze your business requirements and technical needs to
-                understand your goals.
-              </p>
             </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="process-step text-center p-3">
-              <div
-                class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                style="width: 50px; height: 50px"
-              >
-                <span class="fw-bold small">02</span>
-              </div>
-              <h5 class="fw-bold mb-3">Strategy</h5>
-              <p class="text-muted small">
-                We create a detailed strategy and roadmap tailored to your
-                specific objectives.
-              </p>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="process-step text-center p-3">
-              <div
-                class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                style="width: 50px; height: 50px"
-              >
-                <span class="fw-bold small">03</span>
-              </div>
-              <h5 class="fw-bold mb-3">Implementation</h5>
-              <p class="text-muted small">
-                Our expert team implements the solution using best practices and
-                latest technologies.
-              </p>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="process-step text-center p-3">
-              <div
-                class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                style="width: 50px; height: 50px"
-              >
-                <span class="fw-bold small">04</span>
-              </div>
-              <h5 class="fw-bold mb-3">Support</h5>
-              <p class="text-muted small">
-                We provide ongoing support and maintenance to ensure optimal
-                performance.
-              </p>
-            </div>
+            <h5 class="fw-bold mb-3">CRM</h5>
+            <p class="text-muted mb-3 small">
+              Manage customer relationships effectively with powerful CRM
+              solutions that streamline your sales and service.
+            </p>
+            <ul class="list-unstyled text-start">
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-warning me-2"></i>Customer
+                  Management</small>
+              </li>
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-warning me-2"></i>Sales
+                  Pipeline Tracking</small>
+              </li>
+              <li class="mb-2">
+                <small><i class="fas fa-dot-circle text-warning me-2"></i>Lead
+                  Management</small>
+              </li>
+              <li class="mb-0">
+                <small><i class="fas fa-dot-circle text-warning me-2"></i>Automation & Reporting</small>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Technologies -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center mb-5">
-            <h5 class="text-primary mb-3">TECHNOLOGIES</h5>
-            <h2 class="fw-bold mb-4">Tools & Platforms We Use</h2>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="tech-category text-center p-3">
-              <h6 class="fw-bold text-primary mb-3">Frontend</h6>
-              <ul class="list-unstyled">
-                <li class="mb-2 small">
-                  <i class="fab fa-react text-info me-2"></i>React
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-react text-dark me-2"></i>Next.js
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-angular text-danger me-2"></i>Angular
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-vuejs text-success me-2"></i>Vue.js
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-bootstrap text-primary me-2"></i>Bootstrap
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="tech-category text-center p-3">
-              <h6 class="fw-bold text-primary mb-3">Backend</h6>
-              <ul class="list-unstyled">
-                <li class="mb-2 small">
-                  <i class="fab fa-node-js text-success me-2"></i>Node.js
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-laravel text-danger me-2"></i>Laravel
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-python text-warning me-2"></i>Python
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-php text-info me-2"></i>PHP
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-java text-danger me-2"></i>Java
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="tech-category text-center p-3">
-              <h6 class="fw-bold text-primary mb-3">Cloud</h6>
-              <ul class="list-unstyled">
-                <li class="mb-2 small">
-                  <i class="fab fa-aws text-warning me-2"></i>AWS
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-microsoft text-info me-2"></i>Azure
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-google text-danger me-2"></i>Google Cloud
-                </li>
-                <li class="mb-2 small">
-                  <i class="fas fa-server text-dark me-2"></i>DigitalOcean
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="tech-category text-center p-3">
-              <h6 class="fw-bold text-primary mb-3">Mobile</h6>
-              <ul class="list-unstyled">
-                <li class="mb-2 small">
-                  <i class="fab fa-react text-info me-2"></i>React Native
-                </li>
-                <li class="mb-2 small">
-                  <i class="fas fa-mobile-alt text-primary me-2"></i>Flutter
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-apple text-dark me-2"></i>Swift
-                </li>
-                <li class="mb-2 small">
-                  <i class="fab fa-android text-success me-2"></i>Kotlin
-                </li>
-              </ul>
-            </div>
-          </div>
+  <!-- Service Process -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center mb-5">
+          <h5 class="text-primary mb-3">OUR PROCESS</h5>
+          <h2 class="fw-bold mb-4">How We Deliver Excellence</h2>
         </div>
       </div>
-    </section>
-
-    <!-- Service Benefits -->
-    <section class="py-5 bg-gradient-primary text-white">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center mb-5">
-            <h5 class="text-warning mb-3">💎 WHY CHOOSE US</h5>
-            <h2 class="fw-bold mb-4">Why Choose Our Services?</h2>
-            <p class="mb-0">
-              Experience the Everything Easy advantage with our comprehensive
-              approach
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="process-step text-center p-3">
+            <div
+              class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+              style="width: 50px; height: 50px">
+              <span class="fw-bold small">01</span>
+            </div>
+            <h5 class="fw-bold mb-3">Discovery</h5>
+            <p class="text-muted small">
+              We analyze your business requirements and technical needs to
+              understand your goals.
             </p>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="benefit-item text-center">
-              <div class="benefit-icon mb-3">
-                <div
-                  class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                  style="width: 80px; height: 80px"
-                >
-                  <i class="fas fa-clock fa-2x text-primary"></i>
-                </div>
-              </div>
-              <h6 class="fw-bold mb-2">Fast Delivery</h6>
-              <small class="text-white-50"
-                >Quick turnaround times without compromising quality</small
-              >
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="benefit-item text-center">
-              <div class="benefit-icon mb-3">
-                <div
-                  class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                  style="width: 80px; height: 80px"
-                >
-                  <i class="fas fa-dollar-sign fa-2x text-primary"></i>
-                </div>
-              </div>
-              <h6 class="fw-bold mb-2">Cost Effective</h6>
-              <small class="text-white-50"
-                >Competitive pricing with transparent cost structure</small
-              >
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="benefit-item text-center">
-              <div class="benefit-icon mb-3">
-                <div
-                  class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                  style="width: 80px; height: 80px"
-                >
-                  <i class="fas fa-cogs fa-2x text-primary"></i>
-                </div>
-              </div>
-              <h6 class="fw-bold mb-2">Scalable Solutions</h6>
-              <small class="text-white-50"
-                >Solutions that grow with your business needs</small
-              >
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3 mb-4">
-            <div class="benefit-item text-center">
-              <div class="benefit-icon mb-3">
-                <div
-                  class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
-                  style="width: 80px; height: 80px"
-                >
-                  <i class="fas fa-headset fa-2x text-primary"></i>
-                </div>
-              </div>
-              <h6 class="fw-bold mb-2">24/7 Support</h6>
-              <small class="text-white-50"
-                >Round-the-clock support and maintenance</small
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="fw-bold mb-4">Ready to Get Started?</h2>
-            <p class="text-muted mb-4">
-              Let's discuss your project requirements and find the perfect
-              solution for your business needs.
-            </p>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="process-step text-center p-3">
             <div
-              class="cta-buttons d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3"
-            >
-              <a href="index.html#quote" class="btn btn-primary btn-lg"
-                >Get Free Quote</a
-              >
-              <a
-                href="index.html#contact"
-                class="btn btn-outline-primary btn-lg"
-                >Contact Us</a
-              >
+              class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+              style="width: 50px; height: 50px">
+              <span class="fw-bold small">02</span>
             </div>
+            <h5 class="fw-bold mb-3">Strategy</h5>
+            <p class="text-muted small">
+              We create a detailed strategy and roadmap tailored to your
+              specific objectives.
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="process-step text-center p-3">
+            <div
+              class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+              style="width: 50px; height: 50px">
+              <span class="fw-bold small">03</span>
+            </div>
+            <h5 class="fw-bold mb-3">Implementation</h5>
+            <p class="text-muted small">
+              Our expert team implements the solution using best practices and
+              latest technologies.
+            </p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="process-step text-center p-3">
+            <div
+              class="process-number bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+              style="width: 50px; height: 50px">
+              <span class="fw-bold small">04</span>
+            </div>
+            <h5 class="fw-bold mb-3">Support</h5>
+            <p class="text-muted small">
+              We provide ongoing support and maintenance to ensure optimal
+              performance.
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Footer Container -->
-    <?php require_once 'footer.php'; ?>
-    <div id="whatsapp-container"></div>
+  <!-- Technologies -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center mb-5">
+          <h5 class="text-primary mb-3">TECHNOLOGIES</h5>
+          <h2 class="fw-bold mb-4">Tools & Platforms We Use</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="tech-category text-center p-3">
+            <h6 class="fw-bold text-primary mb-3">Frontend</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2 small">
+                <i class="fab fa-react text-info me-2"></i>React
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-react text-dark me-2"></i>Next.js
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-angular text-danger me-2"></i>Angular
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-vuejs text-success me-2"></i>Vue.js
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-bootstrap text-primary me-2"></i>Bootstrap
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="tech-category text-center p-3">
+            <h6 class="fw-bold text-primary mb-3">Backend</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2 small">
+                <i class="fab fa-node-js text-success me-2"></i>Node.js
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-laravel text-danger me-2"></i>Laravel
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-python text-warning me-2"></i>Python
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-php text-info me-2"></i>PHP
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-java text-danger me-2"></i>Java
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="tech-category text-center p-3">
+            <h6 class="fw-bold text-primary mb-3">Cloud</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2 small">
+                <i class="fab fa-aws text-warning me-2"></i>AWS
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-microsoft text-info me-2"></i>Azure
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-google text-danger me-2"></i>Google Cloud
+              </li>
+              <li class="mb-2 small">
+                <i class="fas fa-server text-dark me-2"></i>DigitalOcean
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="tech-category text-center p-3">
+            <h6 class="fw-bold text-primary mb-3">Mobile</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2 small">
+                <i class="fab fa-react text-info me-2"></i>React Native
+              </li>
+              <li class="mb-2 small">
+                <i class="fas fa-mobile-alt text-primary me-2"></i>Flutter
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-apple text-dark me-2"></i>Swift
+              </li>
+              <li class="mb-2 small">
+                <i class="fab fa-android text-success me-2"></i>Kotlin
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Service Benefits -->
+  <section class="py-5 bg-gradient-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center mb-5">
+          <h5 class="text-warning mb-3">💎 WHY CHOOSE US</h5>
+          <h2 class="fw-bold mb-4">Why Choose Our Services?</h2>
+          <p class="mb-0">
+            Experience the Everything Easy advantage with our comprehensive
+            approach
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="benefit-item text-center">
+            <div class="benefit-icon mb-3">
+              <div
+                class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
+                style="width: 80px; height: 80px">
+                <i class="fas fa-clock fa-2x text-primary"></i>
+              </div>
+            </div>
+            <h6 class="fw-bold mb-2">Fast Delivery</h6>
+            <small class="text-white-50">Quick turnaround times without compromising quality</small>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="benefit-item text-center">
+            <div class="benefit-icon mb-3">
+              <div
+                class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
+                style="width: 80px; height: 80px">
+                <i class="fas fa-dollar-sign fa-2x text-primary"></i>
+              </div>
+            </div>
+            <h6 class="fw-bold mb-2">Cost Effective</h6>
+            <small class="text-white-50">Competitive pricing with transparent cost structure</small>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="benefit-item text-center">
+            <div class="benefit-icon mb-3">
+              <div
+                class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
+                style="width: 80px; height: 80px">
+                <i class="fas fa-cogs fa-2x text-primary"></i>
+              </div>
+            </div>
+            <h6 class="fw-bold mb-2">Scalable Solutions</h6>
+            <small class="text-white-50">Solutions that grow with your business needs</small>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+          <div class="benefit-item text-center">
+            <div class="benefit-icon mb-3">
+              <div
+                class="icon-circle bg-warning bg-opacity-20 rounded-circle p-3 d-inline-flex align-items-center justify-content-center mx-auto"
+                style="width: 80px; height: 80px">
+                <i class="fas fa-headset fa-2x text-primary"></i>
+              </div>
+            </div>
+            <h6 class="fw-bold mb-2">24/7 Support</h6>
+            <small class="text-white-50">Round-the-clock support and maintenance</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="js/script.js"></script>
-    <script src="js/whatsapp-loader.js"></script>
-  </body>
+  <!-- Call to Action -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="fw-bold mb-4">Ready to Get Started?</h2>
+          <p class="text-muted mb-4">
+            Let's discuss your project requirements and find the perfect
+            solution for your business needs.
+          </p>
+          <div class="cta-buttons d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
+            <a href="index.html#quote" class="btn btn-primary btn-lg">Get Free Quote</a>
+            <a href="index.html#contact" class="btn btn-outline-primary btn-lg">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container -->
+  <?php require_once 'footer.php'; ?>
+  <div id="whatsapp-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+  <script src="js/script.js"></script>
+  <script src="js/whatsapp-loader.js"></script>
+</body>
+
 </html>
