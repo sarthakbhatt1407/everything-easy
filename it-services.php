@@ -147,7 +147,7 @@ $state = $loc['state'];
               PROFESSIONAL WEBSITE DEVELOPMENT
             </h5>
             <h1 class="display-4 fw-bold mb-4 text-white">
-              Website Development Services in <?php echo $loc['meta_title']; ?>
+              <?php echo $loc['meta_title']; ?>
             </h1>
             <p class="lead mb-4 text-white" style="font-size: 1.35rem;">
               Unleash the power of professional website development and take your business to a higher level with the
