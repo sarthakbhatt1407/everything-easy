@@ -44,7 +44,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 
 <?php
 // Dynamic location URLs
-$sql = "SELECT slug, updated_at FROM locations WHERE status='active'";
+$sql = "SELECT slug, updated_at FROM locations";
 $res = mysqli_query($conn, $sql);
 
 while ($row = mysqli_fetch_assoc($res)) {
