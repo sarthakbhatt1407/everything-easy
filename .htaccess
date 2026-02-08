@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# --- Sitemap ---
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+
 # --- Never rewrite CSS/JS/Images ---
 RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|svg|webp|ico)$ [NC]
 RewriteRule .* - [L]
