@@ -70,7 +70,7 @@
       $conn = getDBConnection();
 
       // Fetch all locations
-      $locations = mysqli_query($conn, "SELECT location_name, city_name , slug FROM locations ORDER BY id ASC");
+      $locations = mysqli_query($conn, "SELECT location_name, city_name , slug ,meta_title FROM locations ORDER BY id ASC");
       ?>
 
       <div class="row">
