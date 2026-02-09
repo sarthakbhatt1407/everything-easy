@@ -80,7 +80,7 @@
               <h5 class="fw-bold mb-3">
                 <a style="color: black; text-decoration: none;" href="/it-services/<?php echo $loc['slug']; ?>">
                   <i class="fas fa-check-circle text-success me-2"></i>
-                  Website Development in <?php echo $loc['location_name']; ?>
+                  <?php echo $loc['meta_title']; ?>
                 </a>
               </h5>
             </div>
