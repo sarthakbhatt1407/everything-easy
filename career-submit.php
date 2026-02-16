@@ -11,7 +11,7 @@ $conn = getDBConnection();
 // Required fields
 $required = ['fullName', 'email', 'phone', 'position', 'experience', 'coverLetter'];
 
-//  print all required fields data for debugging hj
+
 foreach ($required as $field) {
     error_log("$field: " . ($_POST[$field] ?? 'NULL'));
 }    
