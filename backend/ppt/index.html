@@ -1,0 +1,1709 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EverythingEasy Technology - Project Quotation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg1: #e9f3ff;
+        --bg2: #f8fbff;
+        --blue-900: #073b8a;
+        --blue-700: #1a5fd0;
+        --blue-600: #2f74ff;
+        --blue-500: #4b8bff;
+        --blue-200: #d9e7ff;
+        --text: #123057;
+        --white: #ffffff;
+        --ok: #25a56a;
+        --danger: #ff6a6a;
+        --shadow: 0 14px 34px rgba(19, 84, 176, 0.18);
+        --radius: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        min-height: 100vh;
+        color: var(--text);
+        overflow: hidden;
+        background: linear-gradient(120deg, var(--bg1), #ffffff, var(--bg2));
+        background-size: 200% 200%;
+        animation: bgFloat 14s ease-in-out infinite;
+      }
+
+      @keyframes bgFloat {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .presentation {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .deck {
+        position: relative;
+        width: min(1200px, 100%);
+        height: min(700px, calc(100vh - 64px));
+        border-radius: 24px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.76);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 24px 50px rgba(8, 54, 123, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: clamp(20px, 3vw, 42px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(8%) scale(0.98);
+        transition:
+          transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+          opacity 0.55s ease,
+          visibility 0.55s;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(47, 116, 255, 0.14),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at bottom left,
+            rgba(26, 95, 208, 0.1),
+            transparent 35%
+          );
+      }
+
+      .slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0.35;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.75),
+          transparent
+        );
+        transform: translateX(-100%);
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0) scale(1);
+        z-index: 2;
+        animation: slideInFade 0.8s ease;
+      }
+
+      .slide.active::before {
+        animation: sheen 1.1s ease;
+      }
+
+      .slide.prev {
+        transform: translateX(-8%) scale(0.98);
+        z-index: 1;
+      }
+
+      /* Hidden scrollbar styling */
+      .slide::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .slide::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .slide::-webkit-scrollbar-thumb {
+        background: rgba(26, 95, 208, 0.3);
+        border-radius: 4px;
+      }
+
+      .slide::-webkit-scrollbar-thumb:hover {
+        background: rgba(26, 95, 208, 0.5);
+      }
+
+      /* Firefox scrollbar */
+      .slide {
+        scrollbar-color: rgba(26, 95, 208, 0.3) transparent;
+        scrollbar-width: thin;
+      }
+
+      @keyframes slideInFade {
+        from {
+          opacity: 0;
+          transform: translateX(9%) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+        }
+      }
+
+      @keyframes zoomIn {
+        from {
+          opacity: 0;
+          transform: scale(0.94);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes sheen {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(100%);
+        }
+      }
+
+      .slide h1,
+      .slide h2 {
+        color: var(--blue-900);
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        line-height: 1.2;
+        animation: fadeUp 0.6s ease both;
+      }
+
+      .slide h1 {
+        font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+      }
+      .slide h2 {
+        font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+      }
+
+      .subtitle {
+        font-size: clamp(1rem, 1.8vw, 1.3rem);
+        font-weight: 500;
+        color: #2d568f;
+        animation: fadeUp 0.8s ease both;
+      }
+
+      .content {
+        display: grid;
+        gap: 14px;
+        animation: zoomIn 0.65s ease;
+        margin-bottom: 80px;
+      }
+
+      .bullets {
+        list-style: none;
+        display: grid;
+        gap: 11px;
+      }
+
+      .bullets li {
+        background: var(--white);
+        border: 1px solid var(--blue-200);
+        box-shadow: var(--shadow);
+        border-radius: 14px;
+        padding: 12px 14px;
+        font-size: clamp(0.94rem, 1.5vw, 1.08rem);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        opacity: 0;
+        animation: fadeUp 0.5s ease forwards;
+      }
+
+      .bullets li:nth-child(1) {
+        animation-delay: 0.08s;
+      }
+      .bullets li:nth-child(2) {
+        animation-delay: 0.16s;
+      }
+      .bullets li:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+      .bullets li:nth-child(4) {
+        animation-delay: 0.32s;
+      }
+      .bullets li:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      .bullets li:nth-child(6) {
+        animation-delay: 0.48s;
+      }
+
+      .bullet-title {
+        font-weight: 600;
+        color: var(--blue-900);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .bullet-description {
+        font-size: 0.85rem;
+        color: #325b95;
+        font-weight: 400;
+        line-height: 1.4;
+        display: block;
+      }
+
+      .emoji {
+        font-size: 1.2rem;
+        display: inline-block;
+        animation: floatIcon 2.6s ease-in-out infinite;
+      }
+
+      @keyframes floatIcon {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-4px) rotate(2deg);
+        }
+      }
+
+      .title-slide {
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .title-badge {
+        background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+        color: #fff;
+        padding: 9px 16px;
+        border-radius: 999px;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+        animation: zoomIn 0.9s ease both;
+      }
+
+      .step-flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .step {
+        position: relative;
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid var(--blue-200);
+        padding: 10px;
+        min-height: 72px;
+        font-size: 0.86rem;
+        line-height: 1.35;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeUp 0.45s ease forwards;
+      }
+
+      .step::after {
+        content: "➜";
+        position: absolute;
+        right: -10px;
+        color: var(--blue-600);
+        font-size: 1rem;
+        animation: pulse 1.2s ease infinite;
+      }
+
+      .step:nth-child(4n)::after,
+      .step:last-child::after {
+        display: none;
+      }
+
+      .step:nth-child(odd) {
+        background: linear-gradient(160deg, #fff, #f2f7ff);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      .roles {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 16px 12px;
+        text-align: center;
+        border: 1px solid var(--blue-200);
+        box-shadow: var(--shadow);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+        animation: zoomIn 0.6s ease both;
+      }
+
+      .card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 18px 36px rgba(19, 84, 176, 0.24);
+      }
+
+      .card .icon {
+        font-size: 1.9rem;
+        display: inline-block;
+        margin-bottom: 8px;
+        animation: floatIcon 2.2s ease-in-out infinite;
+      }
+
+      .checklist {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 80px;
+      }
+
+      .check {
+        background: #fff;
+        padding: 11px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--blue-200);
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        animation: fadeUp 0.45s ease forwards;
+      }
+
+      .check:nth-child(1) {
+        animation-delay: 0.08s;
+      }
+      .check:nth-child(2) {
+        animation-delay: 0.16s;
+      }
+      .check:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+      .check:nth-child(4) {
+        animation-delay: 0.32s;
+      }
+      .check:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+      .check:nth-child(6) {
+        animation-delay: 0.48s;
+      }
+
+      .phones {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+
+      .phone {
+        background: #f5f9ff;
+        border: 1px solid var(--blue-200);
+        border-radius: 22px;
+        padding: 12px;
+        box-shadow: var(--shadow);
+        min-height: 260px;
+        animation: zoomIn 0.7s ease both;
+      }
+
+      .phone-screen {
+        background: #fff;
+        border-radius: 16px;
+        min-height: 220px;
+        padding: 10px;
+        display: grid;
+        gap: 8px;
+        border: 1px solid #edf3ff;
+      }
+
+      .mini-row {
+        height: 20px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #e3edff, #f5f9ff, #e3edff);
+        background-size: 200% 100%;
+        animation: shimmer 2.2s linear infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .architecture {
+        display: grid;
+        gap: 10px;
+        max-width: 760px;
+        margin-bottom: 80px;
+      }
+
+      .layer {
+        background: #fff;
+        border: 1px solid var(--blue-200);
+        border-radius: 12px;
+        padding: 10px 12px;
+        box-shadow: var(--shadow);
+        text-align: center;
+        font-weight: 600;
+        animation: fadeUp 0.5s ease both;
+      }
+
+      .layer:nth-child(odd) {
+        background: linear-gradient(120deg, #fff, #eef5ff);
+      }
+
+      .footer-ui {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 5;
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0.85)
+        );
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn {
+        border: none;
+        background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+        color: #fff;
+        font-weight: 600;
+        padding: 10px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        transition:
+          transform 0.16s ease,
+          filter 0.16s ease;
+      }
+
+      .btn:hover {
+        filter: brightness(1.05);
+      }
+      .btn:active {
+        transform: scale(0.95);
+      }
+      .btn[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .progress-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 170px;
+        align-items: flex-end;
+      }
+
+      .progress-text {
+        font-size: 0.88rem;
+        color: var(--blue-900);
+        font-weight: 600;
+      }
+
+      .bar {
+        width: min(280px, 45vw);
+        height: 8px;
+        border-radius: 999px;
+        background: #dce9ff;
+        overflow: hidden;
+      }
+
+      .bar > span {
+        display: block;
+        height: 100%;
+        width: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--blue-700), var(--blue-500));
+        transition: width 0.45s ease;
+      }
+
+      .hint {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        font-size: 0.78rem;
+        color: #42689f;
+        opacity: 0.9;
+      }
+
+      @media (max-width: 980px) {
+        .deck {
+          height: calc(100vh - 20px);
+        }
+        .step-flow {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .step:nth-child(2n)::after {
+          display: none;
+        }
+        .roles {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .phones {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .presentation {
+          padding: 0;
+        }
+        .deck {
+          border-radius: 0;
+          height: 100vh;
+        }
+        .slide {
+          padding: 16px 14px 72px;
+          gap: 12px;
+        }
+        .bullets li {
+          padding: 10px 11px;
+          font-size: 0.92rem;
+        }
+        .footer-ui {
+          padding: 10px 10px env(safe-area-inset-bottom);
+        }
+        .btn {
+          padding: 9px 12px;
+          font-size: 0.9rem;
+        }
+        .progress-wrap {
+          min-width: 120px;
+        }
+        .hint {
+          font-size: 0.72rem;
+          right: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="presentation" aria-label="Used Car Marketplace Presentation">
+      <div class="deck" id="deck">
+        <p class="hint">Use ◀ ▶ keys</p>
+
+        <section class="slide title-slide active" data-index="1">
+          <div class="title-badge">EVERYTHINGEASY TECHNOLOGY</div>
+          <h1>Used Car Buy & Sell Platform</h1>
+          <p class="subtitle">Website + Mobile App + Admin Panel Development</p>
+        </section>
+
+        <section class="slide" data-index="2">
+          <h2>Project Overview</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🌐</span>
+                  <span class="bullet-title"
+                    >Complete Digital Platform for Used Cars</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >A comprehensive solution bringing together buyers, sellers,
+                  dealers, and inspectors through a unified digital ecosystem
+                  for seamless car transactions.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💻</span>
+                  <span class="bullet-title"
+                    >Web Application with Full Admin Access</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Desktop-based centralized management system allowing
+                  administrators to oversee all platform activities, approvals,
+                  and financial transactions in real-time.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📱</span>
+                  <span class="bullet-title"
+                    >Android Mobile App for Buyers & Sellers</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Native Android application optimized for performance,
+                  offering seamless experience for users to buy, sell, and track
+                  vehicles on-the-go.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📱</span>
+                  <span class="bullet-title"
+                    >iOS Mobile App Cross-Platform Support</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Native iOS application ensuring feature parity with Android,
+                  reaching Apple users with the same functionality and user
+                  experience.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">✅</span>
+                  <span class="bullet-title"
+                    >Includes Online Valuation, Inspection & Payments</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >All essential features bundled in one platform: automated car
+                  valuation, inspection scheduling, and secure payment
+                  processing.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="3">
+          <h2>Frontend Website - Car Discovery & Buying</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔍</span>
+                  <span class="bullet-title"
+                    >Search & Filter Cars by Budget & Preferences</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Powerful search engine allowing users to find cars by price
+                  range, brand, model, year, fuel type, transmission, and
+                  location for personalized results.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📋</span>
+                  <span class="bullet-title"
+                    >View Detailed Car Information & Specifications</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Comprehensive details including mileage, registration year,
+                  fuel efficiency, transmission type, ownership history, service
+                  records, and full specifications.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📸</span>
+                  <span class="bullet-title"
+                    >360° Car Photos & Video Preview</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >High-quality images from multiple angles, interior and
+                  exterior views, and video walkthroughs to explore vehicles
+                  comprehensively.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💬</span>
+                  <span class="bullet-title"
+                    >Contact Seller/Dealer Directly</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Direct messaging and contact options to reach sellers or
+                  dealers, ask questions, negotiate price, and schedule vehicle
+                  inspections.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">⭐</span>
+                  <span class="bullet-title"
+                    >Verified Sellers & Trusted Dealers</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Verified seller badges, ratings, and reviews to ensure safe
+                  transactions with trusted and certified dealers and individual
+                  sellers.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">❤️</span>
+                  <span class="bullet-title">Save Favorite Cars & Compare</span>
+                </div>
+                <span class="bullet-description"
+                  >Bookmark favorite listings and compare features, specs, and
+                  pricing of multiple cars side-by-side for informed decision
+                  making.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="4">
+          <h2>Web Application - User Panel</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔐</span>
+                  <span class="bullet-title"
+                    >Login/Signup (OTP, Email, Mobile)</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Multi-layered secure authentication system with OTP
+                  verification via email or SMS, plus mobile number verification
+                  for account security.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📝</span>
+                  <span class="bullet-title"
+                    >Sell Car Form & Document Upload</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >User-friendly form for sellers to input vehicle details like
+                  model, year, mileage, condition, and upload ownership
+                  documents.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📸</span>
+                  <span class="bullet-title"
+                    >Upload Photos & Required Documents</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Ability to attach vehicle photos from multiple angles and
+                  important documents like RC, insurance, service records for
+                  comprehensive verification.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🛒</span>
+                  <span class="bullet-title"
+                    >Buy Car Listings with Filters & Search</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Browse extensive inventory with advanced filtering by price,
+                  brand, model, year, condition, and location for perfect car
+                  discovery.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💳</span>
+                  <span class="bullet-title"
+                    >Online Payment & Order History</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Secure payment gateway integration with multiple payment
+                  options and complete transaction history for transparency and
+                  record-keeping.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="5">
+          <h2>Web Application - Dealer Panel</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🎯</span>
+                  <span class="bullet-title">Dealer Registration & Login</span>
+                </div>
+                <span class="bullet-description"
+                  >Streamlined dealer account creation with verification process
+                  and secure login, enabling dealers to manage inventory and
+                  access platform features.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🚗</span>
+                  <span class="bullet-title">Car Inventory Management</span>
+                </div>
+                <span class="bullet-description"
+                  >Complete control over vehicle inventory with ability to list,
+                  update, manage stock levels, and track status of each vehicle
+                  in real-time.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💳</span>
+                  <span class="bullet-title"
+                    >Payment Reports & Commission Tracking</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Detailed financial reports showing all transactions,
+                  commissions earned, deductions, and settlement details for
+                  transparent accounting.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📊</span>
+                  <span class="bullet-title">Sales Dashboard & Analytics</span>
+                </div>
+                <span class="bullet-description"
+                  >Visual dashboard displaying sales metrics, performance
+                  trends, top-selling categories, and analytics to drive
+                  business decisions.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="6">
+          <h2>Web Application - Admin Panel</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">👥</span>
+                  <span class="bullet-title">User & Dealer Management</span>
+                </div>
+                <span class="bullet-description"
+                  >Comprehensive user management system to create, edit,
+                  suspend, or delete user and dealer accounts with role-based
+                  permissions.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">✔️</span>
+                  <span class="bullet-title"
+                    >Listing Approval & Inspection Scheduling</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Review submitted car listings for quality and accuracy,
+                  approve listings, and assign inspections to available field
+                  inspectors.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">⚙️</span>
+                  <span class="bullet-title"
+                    >Commission Settings & Payment Control</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Configure commission percentages, set payment terms, manage
+                  refunds, and control all financial parameters from a
+                  centralized panel.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📈</span>
+                  <span class="bullet-title"
+                    >Reports, Analytics & CMS Pages</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Generate comprehensive reports, view platform analytics, and
+                  manage website content pages through an intuitive CMS
+                  interface.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💬</span>
+                  <span class="bullet-title"
+                    >Support System & Ticket Management</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Handle customer inquiries and complaints through a ticketing
+                  system with priority levels and automated assignment to
+                  support staff.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="7">
+          <h2>Mobile Apps - Buyer Features</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔐</span>
+                  <span class="bullet-title">Login & OTP Verification</span>
+                </div>
+                <span class="bullet-description"
+                  >Secure mobile authentication using OTP sent via SMS or email,
+                  ensuring only authorized users access their accounts.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🛍️</span>
+                  <span class="bullet-title"
+                    >Browse & Buy Used Cars Instantly</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Quick access to extensive car inventory with instant purchase
+                  capability, enabling buyers to find and purchase vehicles
+                  anytime, anywhere.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔍</span>
+                  <span class="bullet-title"
+                    >Advanced Filters & Search Features</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Powerful search with filters by price range, brand, model,
+                  year, mileage, condition, location, and other specifications
+                  for precise results.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📍</span>
+                  <span class="bullet-title"
+                    >Track Inspection & Delivery Status Real-Time</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Real-time tracking of vehicle inspection progress and
+                  delivery status with notifications at each stage of the
+                  transaction.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💳</span>
+                  <span class="bullet-title"
+                    >Secure Online Payment Integration</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Multiple secure payment options including credit cards, debit
+                  cards, digital wallets, and bank transfers with SSL
+                  encryption.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔔</span>
+                  <span class="bullet-title"
+                    >Push Notifications & Chat/Support</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Instant push notifications for important updates and in-app
+                  chat feature to communicate directly with sellers and support
+                  team.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="8">
+          <h2>Mobile Apps - Seller Features</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔐</span>
+                  <span class="bullet-title">Login & OTP Verification</span>
+                </div>
+                <span class="bullet-description"
+                  >Secure mobile authentication using OTP verification, ensuring
+                  sellers can safely access their account and manage
+                  listings.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🚗</span>
+                  <span class="bullet-title"
+                    >Sell Car from Mobile with Easy Form</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Simple, step-by-step form optimized for mobile to list
+                  vehicles with essential details like model, condition,
+                  mileage, and asking price.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📸</span>
+                  <span class="bullet-title">Upload Photos via Camera</span>
+                </div>
+                <span class="bullet-description"
+                  >Direct camera access to capture vehicle photos from multiple
+                  angles in real-time without leaving the app.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📄</span>
+                  <span class="bullet-title">Upload Required Documents</span>
+                </div>
+                <span class="bullet-description"
+                  >Easy document attachment for RC, insurance, pollution
+                  certificate, and other ownership proof directly from phone
+                  storage.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📍</span>
+                  <span class="bullet-title">Track Inspection Status</span>
+                </div>
+                <span class="bullet-description"
+                  >Monitor inspection progress with real-time updates on vehicle
+                  assessment and approval status.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">💬</span>
+                  <span class="bullet-title">Order History & Support Chat</span>
+                </div>
+                <span class="bullet-description"
+                  >Complete transaction history and direct messaging with buyers
+                  or support team for quick resolution of queries.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="9">
+          <h2>Inspector Mobile Application</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔑</span>
+                  <span class="bullet-title"
+                    >Employee Login with Role-Based Access</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Secure login system with role-based permissions ensuring
+                  inspectors can only access assigned tasks and data relevant to
+                  their role.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📋</span>
+                  <span class="bullet-title"
+                    >Assigned Inspection List & GPS Location Maps</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Daily task list showing all assigned inspections with
+                  integrated GPS maps for navigation to customer
+                  locations.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📸</span>
+                  <span class="bullet-title"
+                    >360° Photo & Video Upload Capability</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >High-quality photo and video capture from multiple angles
+                  providing comprehensive vehicle documentation for
+                  assessment.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide" data-index="10">
+          <h2>Technology Stack</h2>
+          <div class="architecture">
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                Backend: PHP (Laravel Framework)
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Powerful PHP framework for building scalable backend APIs and
+                business logic with rapid development capabilities.
+              </div>
+            </div>
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                Database: MySQL (Optimized)
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Reliable relational database with optimization for fast queries,
+                indexing, and handling large-scale data efficiently.
+              </div>
+            </div>
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                Web Frontend: HTML, CSS, JavaScript / React
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Modern web technologies with React for interactive user
+                interfaces, responsive design, and smooth user experience.
+              </div>
+            </div>
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                Mobile App: React Native (iOS & Android)
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Cross-platform mobile framework ensuring consistent experience
+                on both iOS and Android from single codebase.
+              </div>
+            </div>
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                Server: AWS / DigitalOcean / Hostinger
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Flexible hosting options with enterprise-grade infrastructure,
+                auto-scaling, and 99.9% uptime guarantee.
+              </div>
+            </div>
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                Payments: Razorpay / PayU / Stripe
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Multiple payment gateway integrations supporting various payment
+                methods with secure PCI compliance.
+              </div>
+            </div>
+            <div class="layer">
+              <div
+                style="
+                  font-weight: 600;
+                  color: var(--blue-900);
+                  margin-bottom: 6px;
+                "
+              >
+                APIs: SMS, Email, Maps Integration
+              </div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  line-height: 1.4;
+                "
+              >
+                Third-party integrations for SMS notifications, email services,
+                and GPS mapping for comprehensive platform functionality.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-index="11">
+          <h2>Support & Deliverables</h2>
+          <div class="checklist">
+            <div class="check">
+              <div>✅ Website Source Code (Full Project)</div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  margin-top: 4px;
+                "
+              >
+                Complete, well-documented source code of the website with
+                comments and README for easy maintenance and customization.
+              </div>
+            </div>
+            <div class="check">
+              <div>✅ Android APK / Play Store Build</div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  margin-top: 4px;
+                "
+              >
+                Ready-to-deploy Android application in APK format and
+                submission-ready build for Google Play Store listing.
+              </div>
+            </div>
+            <div class="check">
+              <div>✅ iOS IPA / App Store Build</div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  margin-top: 4px;
+                "
+              >
+                Compiled iOS application in IPA format and App Store-ready build
+                with all certificates and provisioning profiles.
+              </div>
+            </div>
+            <div class="check">
+              <div>✅ Admin Access & Database Setup</div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  margin-top: 4px;
+                "
+              >
+                Complete admin panel access credentials, database initialization
+                scripts, and sample data for testing.
+              </div>
+            </div>
+            <div class="check">
+              <div>✅ API Documentation & Deployment Support</div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  margin-top: 4px;
+                "
+              >
+                Comprehensive API documentation, endpoint guides, and technical
+                support during deployment to production.
+              </div>
+            </div>
+            <div class="check">
+              <div>✅ Training Session for Team</div>
+              <div
+                style="
+                  font-size: 0.85rem;
+                  color: #325b95;
+                  font-weight: 400;
+                  margin-top: 4px;
+                "
+              >
+                Live training sessions for client team covering admin panel
+                usage, API integration, and platform management.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-index="12">
+          <h2>Support & Maintenance</h2>
+          <div class="content">
+            <ul class="bullets">
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🎁</span>
+                  <span class="bullet-title"
+                    >Free Support: 3 Months (Bug Fixes, Updates)</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >90 days of complimentary support including bug fixes, minor
+                  updates, and technical assistance to ensure smooth platform
+                  operation.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">🔧</span>
+                  <span class="bullet-title"
+                    >Performance Optimization & Server Monitoring</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Continuous monitoring of server health, performance metrics,
+                  and proactive optimization to maintain uptime and platform
+                  speed.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">📅</span>
+                  <span class="bullet-title"
+                    >Annual Maintenance Plan: ₹12,000/Year (Optional)</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Extended maintenance package available after free support
+                  period, including ongoing updates, security patches, and
+                  technical support.</span
+                >
+              </li>
+              <li>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span class="emoji">⚠️</span>
+                  <span class="bullet-title"
+                    >Excludes: Hosting, Domains, API Charges, Marketing</span
+                  >
+                </div>
+                <span class="bullet-description"
+                  >Note: Server hosting costs, domain registration, third-party
+                  API charges, and marketing expenses are not included in the
+                  support package.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="slide title-slide" data-index="13">
+          <div class="title-badge">Thank You</div>
+          <h1>EverythingEasy Technology</h1>
+          <p class="subtitle">We appreciate your time and trust.</p>
+          <div class="content" style="width: min(720px, 100%); margin: 0 auto 80px">
+            <ul class="bullets">
+              <li>
+                <span class="bullet-title">Company Name</span>
+                <span class="bullet-description">EverythingEasy Technology</span>
+              </li>
+              <li>
+                <span class="bullet-title">Email</span>
+                <span class="bullet-description">info@everythingeasy.com</span>
+              </li>
+              <li>
+                <span class="bullet-title">Contact Number</span>
+                <span class="bullet-description">+91 86308 40577</span>
+              </li>
+            </ul>
+          </div>
+          <button class="btn" id="downloadQuotationBtn" type="button">
+            Download Quotation
+          </button>
+        </section>
+
+        <div class="footer-ui">
+          <div class="controls">
+            <button
+              class="btn"
+              id="prevBtn"
+              type="button"
+              aria-label="Previous slide"
+            >
+              ◀ Previous
+            </button>
+            <button
+              class="btn"
+              id="nextBtn"
+              type="button"
+              aria-label="Next slide"
+            >
+              Next ▶
+            </button>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-text" id="progressText">Slide 1 / 13</div>
+            <div class="bar" aria-hidden="true">
+              <span id="progressBar"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        const slides = Array.from(document.querySelectorAll(".slide"));
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const downloadQuotationBtn = document.getElementById(
+          "downloadQuotationBtn",
+        );
+        const progressText = document.getElementById("progressText");
+        const progressBar = document.getElementById("progressBar");
+        let current = 0;
+
+        const showSlide = (index, direction = 1) => {
+          const total = slides.length;
+          if (index < 0 || index >= total) return;
+
+          slides.forEach((slide, i) => {
+            slide.classList.remove("active", "prev");
+            if (i < index) slide.classList.add("prev");
+          });
+
+          const activeSlide = slides[index];
+          activeSlide.style.transform =
+            direction > 0
+              ? "translateX(8%) scale(0.98)"
+              : "translateX(-8%) scale(0.98)";
+          requestAnimationFrame(() => {
+            activeSlide.classList.add("active");
+            activeSlide.style.transform = "";
+          });
+
+          current = index;
+          const humanIndex = current + 1;
+          progressText.textContent = `Slide ${humanIndex} / ${total}`;
+          progressBar.style.width = `${(humanIndex / total) * 100}%`;
+
+          prevBtn.disabled = current === 0;
+          nextBtn.disabled = current === total - 1;
+
+          restartStaggerAnimations(activeSlide);
+        };
+
+        const restartStaggerAnimations = (slide) => {
+          const animatedItems = slide.querySelectorAll(
+            ".bullets li, .check, .step, .card, .layer",
+          );
+          animatedItems.forEach((item) => {
+            item.style.animation = "none";
+            item.offsetHeight;
+            item.style.animation = "";
+          });
+
+          if (slide.dataset.index === "4") {
+            const steps = slide.querySelectorAll(".step");
+            steps.forEach((step, idx) => {
+              step.style.animationDelay = `${idx * 0.12}s`;
+            });
+          }
+        };
+
+        const next = () => showSlide(current + 1, 1);
+        const prev = () => showSlide(current - 1, -1);
+
+        nextBtn.addEventListener("click", next);
+        prevBtn.addEventListener("click", prev);
+
+        if (downloadQuotationBtn) {
+          downloadQuotationBtn.addEventListener("click", () => {
+            const docType = "<!doctype html>\n";
+            const htmlContent = `${docType}${document.documentElement.outerHTML}`;
+            const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "17_FEB_25_QUOTATION_NO_2_Everything_Easy_Technology.pdf";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            URL.revokeObjectURL(url);
+          });
+        }
+
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") next();
+          if (e.key === "ArrowLeft") prev();
+        });
+
+        let startX = 0;
+        window.addEventListener(
+          "touchstart",
+          (e) => {
+            startX = e.changedTouches[0].clientX;
+          },
+          { passive: true },
+        );
+
+        window.addEventListener(
+          "touchend",
+          (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = endX - startX;
+            if (Math.abs(diff) < 48) return;
+            if (diff < 0) next();
+            else prev();
+          },
+          { passive: true },
+        );
+
+        showSlide(0);
+      })();
+    </script>
+  </body>
+</html>
