@@ -21,6 +21,7 @@
         user-select: none;
         -webkit-user-select: none;
         -webkit-touch-callout: none;
+        touch-action: pan-y;
       }
 
       .topbar {
@@ -47,13 +48,16 @@
 
       .viewer {
         width: 100%;
-        height: calc(100% - 44px);
+        height: calc(100dvh - 44px);
         border: 0;
         pointer-events: auto;
+        display: block;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .blocked {
-        height: calc(100% - 44px);
+        height: calc(100dvh - 44px);
         display: grid;
         place-items: center;
         color: #fff;
@@ -61,11 +65,35 @@
         text-align: center;
       }
 
+      @media (max-width: 768px) {
+        html,
+        body {
+          overflow: auto;
+          height: auto;
+          min-height: 100dvh;
+        }
+
+        .topbar {
+          position: sticky;
+          top: 0;
+          z-index: 2;
+        }
+
+        .viewer,
+        .blocked {
+          height: calc(100dvh - 44px);
+        }
+      }
+
       @media print {
         html,
         body {
           display: none !important;
         }
+      }
+
+      body.print-denied * {
+        visibility: hidden !important;
       }
     </style>
   </head>
@@ -75,7 +103,12 @@
       <div class="note">Download / Print disabled (best-effort)</div>
     </div>
 
-    <iframe id="pdfFrame" class="viewer" referrerpolicy="no-referrer"></iframe>
+    <iframe
+      id="pdfFrame"
+      class="viewer"
+      referrerpolicy="no-referrer"
+      sandbox="allow-same-origin"
+    ></iframe>
     <div id="blocked" class="blocked" hidden>Invalid PDF URL.</div>
 
     <script>
@@ -85,6 +118,8 @@
         const src = urlParams.get("src") || "";
         const frame = document.getElementById("pdfFrame");
         const blocked = document.getElementById("blocked");
+        const isTouchDevice =
+          "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
         const isAllowed = src.startsWith(allowedPrefix) && src.endsWith(".pdf");
 
@@ -106,13 +141,17 @@
           ) {
             event.preventDefault();
             event.stopPropagation();
+            event.stopImmediatePropagation();
             return false;
           }
 
           return true;
         };
 
-        document.addEventListener("keydown", blockedKeyCombo, true);
+        ["keydown", "keypress", "keyup"].forEach((eventName) => {
+          window.addEventListener(eventName, blockedKeyCombo, true);
+          document.addEventListener(eventName, blockedKeyCombo, true);
+        });
         document.addEventListener(
           "contextmenu",
           (event) => {
@@ -129,19 +168,33 @@
           true,
         );
 
-        window.addEventListener("beforeprint", () => {
-          document.body.innerHTML = "";
-        });
+        const denyPrint = () => {
+          document.body.classList.add("print-denied");
+          setTimeout(() => {
+            document.body.classList.remove("print-denied");
+          }, 700);
+        };
 
-        setInterval(() => {
-          const widthDiff = window.outerWidth - window.innerWidth;
-          const heightDiff = window.outerHeight - window.innerHeight;
-          const devToolsLikelyOpen = widthDiff > 160 || heightDiff > 160;
+        window.addEventListener("beforeprint", denyPrint);
 
-          if (devToolsLikelyOpen) {
-            document.body.innerHTML = "";
-          }
-        }, 1000);
+        const printMediaQuery = window.matchMedia("print");
+        if (printMediaQuery && printMediaQuery.addEventListener) {
+          printMediaQuery.addEventListener("change", (event) => {
+            if (event.matches) denyPrint();
+          });
+        }
+
+        if (!isTouchDevice) {
+          setInterval(() => {
+            const widthDiff = window.outerWidth - window.innerWidth;
+            const heightDiff = window.outerHeight - window.innerHeight;
+            const devToolsLikelyOpen = widthDiff > 160 || heightDiff > 160;
+
+            if (devToolsLikelyOpen) {
+              document.body.innerHTML = "";
+            }
+          }, 1000);
+        }
       })();
     </script>
   </body>
