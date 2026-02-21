@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -126,7 +126,7 @@
       }
     </style>
   </head>
-  <body>
+  <body oncontextmenu="return false">
     <div class="shell">
       <div class="viewer-card">
         <div class="topbar">
@@ -184,12 +184,50 @@
           window.addEventListener(eventName, blockedKeyCombo, true);
           document.addEventListener(eventName, blockedKeyCombo, true);
         });
-        document.addEventListener(
-          "contextmenu",
-          (event) => {
-            event.preventDefault();
+        const blockContextMenu = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        };
+
+        [window, document, document.documentElement, document.body].forEach(
+          (target) => {
+            target.addEventListener("contextmenu", blockContextMenu, true);
+            target.addEventListener(
+              "mousedown",
+              (event) => {
+                if (event.button === 2) blockContextMenu(event);
+              },
+              true,
+            );
+            target.addEventListener(
+              "auxclick",
+              (event) => {
+                if (event.button === 2) blockContextMenu(event);
+              },
+              true,
+            );
           },
-          true,
+        );
+
+        let touchStartTime = 0;
+        document.addEventListener(
+          "touchstart",
+          () => {
+            touchStartTime = Date.now();
+          },
+          { passive: true, capture: true },
+        );
+
+        document.addEventListener(
+          "touchend",
+          (event) => {
+            if (Date.now() - touchStartTime > 450) {
+              blockContextMenu(event);
+            }
+          },
+          { passive: false, capture: true },
         );
 
         document.addEventListener(
