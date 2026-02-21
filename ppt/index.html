@@ -599,6 +599,13 @@
         cursor: not-allowed;
       }
 
+      .quotation-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
       .progress-wrap {
         display: flex;
         flex-direction: column;
@@ -1589,9 +1596,14 @@
               </li>
             </ul>
           </div>
-          <button class="btn" id="downloadQuotationBtn" type="button">
-            Download Quotation
-          </button>
+          <div class="quotation-actions">
+            <button class="btn" id="viewQuotationBtn" type="button">
+              Open Quotation
+            </button>
+            <button class="btn" id="downloadQuotationBtn" type="button">
+              Download Quotation
+            </button>
+          </div>
         </section>
 
         <div class="footer-ui">
@@ -1628,6 +1640,7 @@
         const slides = Array.from(document.querySelectorAll(".slide"));
         const prevBtn = document.getElementById("prevBtn");
         const nextBtn = document.getElementById("nextBtn");
+        const viewQuotationBtn = document.getElementById("viewQuotationBtn");
         const downloadQuotationBtn = document.getElementById(
           "downloadQuotationBtn",
         );
@@ -1689,12 +1702,24 @@
         nextBtn.addEventListener("click", next);
         prevBtn.addEventListener("click", prev);
 
+        const quotationPdfUrl =
+          "https://everythingeasy.in/ppt/18_FEB_25_QUOTATION_NO_2_Everything_Easy_Technology.pdf";
+
+        if (viewQuotationBtn) {
+          viewQuotationBtn.addEventListener("click", () => {
+            window.open(quotationPdfUrl, "_blank", "noopener,noreferrer");
+          });
+        }
+
         if (downloadQuotationBtn) {
           downloadQuotationBtn.addEventListener("click", () => {
-            const pdfUrl =
-              "https://everythingeasy.in/ppt/18_FEB_25_QUOTATION_NO_2_Everything_Easy_Technology.pdf";
-            const viewerPage = `./pdf-viewer.html?src=${encodeURIComponent(pdfUrl)}`;
-            window.open(viewerPage, "_blank", "noopener,noreferrer");
+            const link = document.createElement("a");
+            link.href = quotationPdfUrl;
+            link.download =
+              "18_FEB_25_QUOTATION_NO_2_Everything_Easy_Technology.pdf";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
           });
         }
 
