@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure PDF Viewer</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #0f1e37;
+        font-family: Arial, sans-serif;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+      }
+
+      .topbar {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 12px;
+        color: #fff;
+        background: #17325f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .title {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+
+      .note {
+        font-size: 12px;
+        opacity: 0.85;
+      }
+
+      .viewer {
+        width: 100%;
+        height: calc(100% - 44px);
+        border: 0;
+        pointer-events: auto;
+      }
+
+      .blocked {
+        height: calc(100% - 44px);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      @media print {
+        html,
+        body {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="title">Protected PDF Preview</div>
+      <div class="note">Download / Print disabled (best-effort)</div>
+    </div>
+
+    <iframe id="pdfFrame" class="viewer" referrerpolicy="no-referrer"></iframe>
+    <div id="blocked" class="blocked" hidden>Invalid PDF URL.</div>
+
+    <script>
+      (function () {
+        const allowedPrefix = "https://everythingeasy.in/ppt/";
+        const urlParams = new URLSearchParams(window.location.search);
+        const src = urlParams.get("src") || "";
+        const frame = document.getElementById("pdfFrame");
+        const blocked = document.getElementById("blocked");
+
+        const isAllowed = src.startsWith(allowedPrefix) && src.endsWith(".pdf");
+
+        if (!isAllowed) {
+          frame.hidden = true;
+          blocked.hidden = false;
+        } else {
+          frame.src = `${src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`;
+        }
+
+        const blockedKeyCombo = (event) => {
+          const key = event.key.toLowerCase();
+          const ctrlOrCmd = event.ctrlKey || event.metaKey;
+
+          if (
+            key === "f12" ||
+            (ctrlOrCmd && event.shiftKey && ["i", "j", "c"].includes(key)) ||
+            (ctrlOrCmd && ["u", "s", "p"].includes(key))
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+
+          return true;
+        };
+
+        document.addEventListener("keydown", blockedKeyCombo, true);
+        document.addEventListener(
+          "contextmenu",
+          (event) => {
+            event.preventDefault();
+          },
+          true,
+        );
+
+        document.addEventListener(
+          "dragstart",
+          (event) => {
+            event.preventDefault();
+          },
+          true,
+        );
+
+        window.addEventListener("beforeprint", () => {
+          document.body.innerHTML = "";
+        });
+
+        setInterval(() => {
+          const widthDiff = window.outerWidth - window.innerWidth;
+          const heightDiff = window.outerHeight - window.innerHeight;
+          const devToolsLikelyOpen = widthDiff > 160 || heightDiff > 160;
+
+          if (devToolsLikelyOpen) {
+            document.body.innerHTML = "";
+          }
+        }, 1000);
+      })();
+    </script>
+  </body>
+</html>

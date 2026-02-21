@@ -1693,8 +1693,8 @@
           downloadQuotationBtn.addEventListener("click", () => {
             const pdfUrl =
               "https://everythingeasy.in/ppt/18_FEB_25_QUOTATION_NO_2_Everything_Easy_Technology.pdf";
-            const viewerUrl = `${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`;
-            window.open(viewerUrl, "_blank", "noopener,noreferrer");
+            const viewerPage = `./pdf-viewer.html?src=${encodeURIComponent(pdfUrl)}`;
+            window.open(viewerPage, "_blank", "noopener,noreferrer");
           });
         }
 
