@@ -23,8 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+// Health/info response for browser visits.
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    sendJSONResponse(true, 'Submit Quote API is running. Please send a POST request to submit data.');
+}
+
 // Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
     sendJSONResponse(false, 'Invalid request method. Only POST is allowed.');
 }
 
