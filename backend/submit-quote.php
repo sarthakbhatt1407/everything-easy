@@ -56,21 +56,30 @@ try {
     if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
         sendJSONResponse(false, 'Invalid email address.');
     }
-    
-    // Sanitize inputs
-    $firstName = mysqli_real_escape_string(getDBConnection(), trim($data['firstName']));
-    $lastName = mysqli_real_escape_string(getDBConnection(), trim($data['lastName']));
-    $email = mysqli_real_escape_string(getDBConnection(), trim($data['email']));
-    $phone = isset($data['phone']) ? mysqli_real_escape_string(getDBConnection(), trim($data['phone'])) : null;
-    $company = isset($data['company']) ? mysqli_real_escape_string(getDBConnection(), trim($data['company'])) : null;
-    $service = mysqli_real_escape_string(getDBConnection(), trim($data['service']));
-    $budget = isset($data['budget']) ? mysqli_real_escape_string(getDBConnection(), trim($data['budget'])) : null;
-    $timeline = isset($data['timeline']) ? mysqli_real_escape_string(getDBConnection(), trim($data['timeline'])) : null;
-    $projectDetails = mysqli_real_escape_string(getDBConnection(), trim($data['message']));
-    $newsletter = isset($data['newsletter']) && $data['newsletter'] ? 1 : 0;
-    
-    // Get database connection
+
+    // Get database connection once and reuse it.
     $conn = getDBConnection();
+
+    // Normalize optional fields to null when empty.
+    $phone = isset($data['phone']) ? trim((string)$data['phone']) : null;
+    $phone = ($phone === '') ? null : $phone;
+
+    $company = isset($data['company']) ? trim((string)$data['company']) : null;
+    $company = ($company === '') ? null : $company;
+
+    $budget = isset($data['budget']) ? trim((string)$data['budget']) : null;
+    $budget = ($budget === '') ? null : $budget;
+
+    $timeline = isset($data['timeline']) ? trim((string)$data['timeline']) : null;
+    $timeline = ($timeline === '') ? null : $timeline;
+    
+    // Prepared statements already handle SQL escaping.
+    $firstName = trim((string)$data['firstName']);
+    $lastName = trim((string)$data['lastName']);
+    $email = trim((string)$data['email']);
+    $service = trim((string)$data['service']);
+    $projectDetails = trim((string)$data['message']);
+    $newsletter = isset($data['newsletter']) && $data['newsletter'] ? 1 : 0;
     
     // Prepare SQL statement
     $sql = "INSERT INTO quotes (
@@ -114,8 +123,16 @@ try {
     if ($stmt->execute()) {
         $quoteId = $stmt->insert_id;
         
-        // Send thank you email to customer
-        sendThankYouEmail($email, $firstName, $quoteId);
+        // Do not fail API success if mail transport fails.
+        try {
+            sendThankYouEmail($email, $firstName, $quoteId);
+        } catch (Throwable $mailError) {
+            logError("Email step failed for Quote ID {$quoteId}: " . $mailError->getMessage());
+        }
+
+        // Close resources before sending final response.
+        $stmt->close();
+        closeDBConnection($conn);
         
         // Send success response
         sendJSONResponse(true, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours.', [
@@ -126,12 +143,16 @@ try {
         sendJSONResponse(false, 'Failed to submit quote request. Please try again.');
     }
     
-    // Close statement and connection
-    $stmt->close();
-    closeDBConnection($conn);
-    
-} catch (Exception $e) {
-    logError("Exception: " . $e->getMessage());
+} catch (Throwable $e) {
+    if (isset($stmt) && $stmt instanceof mysqli_stmt) {
+        $stmt->close();
+    }
+
+    if (isset($conn) && $conn instanceof mysqli) {
+        closeDBConnection($conn);
+    }
+
+    logError("Exception in submit-quote.php: " . $e->getMessage() . " at line " . $e->getLine());
     sendJSONResponse(false, 'An error occurred. Please try again later.');
 }
 
