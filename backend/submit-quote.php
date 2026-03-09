@@ -80,7 +80,7 @@ try {
 
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
-        logError('Prepare failed: ' . $conn->error);
+        safeLog('Prepare failed: ' . $conn->error);
         sendJSONResponse(false, 'Database error occurred. Please try again later.');
     }
 
@@ -99,7 +99,7 @@ try {
     );
 
     if (!$stmt->execute()) {
-        logError('Execute failed: ' . $stmt->error);
+        safeLog('Execute failed: ' . $stmt->error);
         sendJSONResponse(false, 'Failed to submit quote request. Please try again.');
     }
 
@@ -133,8 +133,25 @@ try {
         closeDBConnection($conn);
     }
 
-    logError('Exception in submit-quote.php: ' . $e->getMessage() . ' at line ' . $e->getLine());
+    safeLog('Exception in submit-quote.php: ' . $e->getMessage() . ' at line ' . $e->getLine());
     sendJSONResponse(false, 'An error occurred. Please try again later.');
+}
+
+function safeLog($message) {
+    try {
+        $logDir = __DIR__ . '/logs';
+        $logFile = $logDir . '/error.log';
+
+        if (!is_dir($logDir)) {
+            @mkdir($logDir, 0755, true);
+        }
+
+        $line = '[' . date('Y-m-d H:i:s') . '] ' . $message . PHP_EOL;
+        @file_put_contents($logFile, $line, FILE_APPEND);
+    } catch (Throwable $e) {
+        // Last-resort fallback to PHP error log.
+        error_log('submit-quote safeLog failure: ' . $e->getMessage());
+    }
 }
 
 function getRequestData() {
@@ -164,7 +181,6 @@ function nullableString($data, $key) {
 function sendLeadNotificationEmails($quoteId, $lead) {
     $adminRecipients = [
         'info@everythingeasy.in',
-        'akhilgusain2@gmail.com',
         'akhilgusain65@gmail.com',
     ];
 
@@ -177,10 +193,10 @@ function sendLeadNotificationEmails($quoteId, $lead) {
     foreach ($adminRecipients as $recipient) {
         $ok = safeSendHtmlMail($recipient, $adminSubject, $adminBody, $fromEmail, $fromName);
         if ($ok) {
-            logError('SUCCESS: Lead email sent to admin ' . $recipient . ' for Quote ID: ' . $quoteId);
+            safeLog('SUCCESS: Lead email sent to admin ' . $recipient . ' for Quote ID: ' . $quoteId);
         } else {
             $error = error_get_last();
-            logError('FAILED: Lead email to admin ' . $recipient . ' for Quote ID: ' . $quoteId . '. Error: ' . ($error ? json_encode($error) : 'Unknown error'));
+            safeLog('FAILED: Lead email to admin ' . $recipient . ' for Quote ID: ' . $quoteId . '. Error: ' . ($error ? json_encode($error) : 'Unknown error'));
         }
     }
 
@@ -189,10 +205,10 @@ function sendLeadNotificationEmails($quoteId, $lead) {
 
     $customerOk = safeSendHtmlMail($lead['email'], $customerSubject, $customerBody, $fromEmail, $fromName);
     if ($customerOk) {
-        logError('SUCCESS: Thank-you email sent to ' . $lead['email'] . ' for Quote ID: ' . $quoteId);
+        safeLog('SUCCESS: Thank-you email sent to ' . $lead['email'] . ' for Quote ID: ' . $quoteId);
     } else {
         $error = error_get_last();
-        logError('FAILED: Thank-you email to ' . $lead['email'] . ' for Quote ID: ' . $quoteId . '. Error: ' . ($error ? json_encode($error) : 'Unknown error'));
+        safeLog('FAILED: Thank-you email to ' . $lead['email'] . ' for Quote ID: ' . $quoteId . '. Error: ' . ($error ? json_encode($error) : 'Unknown error'));
     }
 }
 
@@ -209,7 +225,7 @@ function safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
 
         return @mail($to, $subject, $htmlBody, implode("\r\n", $headers));
     } catch (Throwable $e) {
-        logError('safeSendHtmlMail exception: ' . $e->getMessage());
+        safeLog('safeSendHtmlMail exception: ' . $e->getMessage());
         return false;
     }
 }
