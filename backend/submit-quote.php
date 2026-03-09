@@ -200,8 +200,8 @@ function sendLeadNotificationEmails($quoteId, $lead) {
         }
     }
 
-    $customerSubject = 'Thanks for contacting EverythingEasy - Quote #' . $quoteId;
-    $customerBody = buildCustomerThankYouEmailHtml($quoteId, $lead['firstName']);
+    $customerSubject = 'Quote Request Received #' . $quoteId;
+    $customerBody = buildCustomerThankYouPlainText($quoteId, $lead['firstName']);
 
     $customerOk = safeSendCustomerThankYouMail($lead['email'], $customerSubject, $customerBody, $fromEmail, $fromName);
     if ($customerOk) {
@@ -212,7 +212,7 @@ function sendLeadNotificationEmails($quoteId, $lead) {
     }
 }
 
-function safeSendCustomerThankYouMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
+function safeSendCustomerThankYouMail($to, $subject, $plainBody, $fromEmail, $fromName) {
     if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
         safeLog('Customer thank-you skipped due to invalid email: ' . $to);
         return false;
@@ -226,7 +226,7 @@ function safeSendCustomerThankYouMail($to, $subject, $htmlBody, $fromEmail, $fro
         $smtpFromEmail = (defined('SMTP_FROM_EMAIL') && SMTP_FROM_EMAIL !== '') ? SMTP_FROM_EMAIL : $fromEmail;
         $smtpFromName = (defined('SMTP_FROM_NAME') && SMTP_FROM_NAME !== '') ? SMTP_FROM_NAME : $fromName;
 
-        $smtpOk = smtpSendHtmlMail($to, $subject, $htmlBody, $smtpFromEmail, $smtpFromName);
+        $smtpOk = smtpSendPlainTextMail($to, $subject, $plainBody, $smtpFromEmail, $smtpFromName);
         if ($smtpOk) {
             return true;
         }
@@ -236,7 +236,44 @@ function safeSendCustomerThankYouMail($to, $subject, $htmlBody, $fromEmail, $fro
         safeLog('SMTP not configured for customer thank-you, using mail() fallback for: ' . $to);
     }
 
-    return safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName);
+    return safeSendPlainTextMail($to, $subject, $plainBody, $fromEmail, $fromName);
+}
+
+function safeSendPlainTextMail($to, $subject, $plainBody, $fromEmail, $fromName) {
+    try {
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+            safeLog('safeSendPlainTextMail invalid recipient email: ' . $to);
+            return false;
+        }
+
+        $safeFromName = str_replace(["\r", "\n"], '', $fromName);
+        $safeFromEmail = filter_var($fromEmail, FILTER_VALIDATE_EMAIL) ? $fromEmail : 'noreply@everythingeasy.in';
+        $safeSubject = trim(preg_replace('/[\r\n]+/', ' ', $subject));
+
+        $headers = [];
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+        $headers[] = 'Content-Transfer-Encoding: 8bit';
+        $headers[] = 'From: ' . $safeFromName . ' <' . $safeFromEmail . '>';
+        $headers[] = 'Reply-To: ' . $safeFromEmail;
+        $headers[] = 'Return-Path: ' . $safeFromEmail;
+        $headers[] = 'Date: ' . date(DATE_RFC2822);
+        $headers[] = 'Message-ID: <' . uniqid('', true) . '@everythingeasy.in>';
+        $headers[] = 'X-Mailer: PHP/' . phpversion();
+
+        $params = '-f ' . $safeFromEmail;
+        $headerString = implode("\r\n", $headers);
+
+        $sent = @mail($to, $safeSubject, $plainBody, $headerString, $params);
+        if ($sent) {
+            return true;
+        }
+
+        return @mail($to, $safeSubject, $plainBody, $headerString);
+    } catch (Throwable $e) {
+        safeLog('safeSendPlainTextMail exception: ' . $e->getMessage());
+        return false;
+    }
 }
 
 function safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
@@ -415,6 +452,11 @@ function smtpSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
     return true;
 }
 
+function smtpSendPlainTextMail($to, $subject, $plainBody, $fromEmail, $fromName) {
+    $safeBody = nl2br(htmlspecialchars($plainBody, ENT_QUOTES, 'UTF-8'));
+    return smtpSendHtmlMail($to, $subject, $safeBody, $fromEmail, $fromName);
+}
+
 function smtpWrite($socket, $command) {
     fwrite($socket, $command . "\r\n");
 }
@@ -471,157 +513,18 @@ function buildAdminLeadEmailHtml($quoteId, $lead) {
     ";
 }
 
-function buildCustomerThankYouEmailHtml($quoteId, $firstName) {
-    $safeName = htmlspecialchars((string)$firstName, ENT_QUOTES, 'UTF-8');
-    $year = date('Y');
-    
-    return '
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You - EverythingEasy</title>
-</head>
-<body style="margin:0;padding:0;background-color:#f4f7fa;font-family:Arial,Helvetica,sans-serif;">
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#f4f7fa;padding:30px 0;">
-        <tr>
-            <td align="center">
-                <table role="presentation" width="600" cellspacing="0" cellpadding="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
-                    
-                    <!-- Header -->
-                    <tr>
-                        <td style="background:linear-gradient(135deg,#0066cc 0%,#004499 100%);padding:40px 30px;text-align:center;">
-                            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;letter-spacing:-0.5px;">EverythingEasy</h1>
-                            <p style="margin:8px 0 0;color:rgba(255,255,255,0.9);font-size:14px;">Technology Solutions Partner</p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Success Icon -->
-                    <tr>
-                        <td style="padding:40px 30px 20px;text-align:center;">
-                            <div style="width:80px;height:80px;margin:0 auto;background-color:#e8f5e9;border-radius:50%;display:inline-block;line-height:80px;">
-                                <span style="font-size:40px;color:#4caf50;">&#10003;</span>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Greeting -->
-                    <tr>
-                        <td style="padding:0 30px 20px;text-align:center;">
-                            <h2 style="margin:0 0 10px;color:#222222;font-size:24px;font-weight:600;">Thank You, ' . $safeName . '!</h2>
-                            <p style="margin:0;color:#666666;font-size:16px;line-height:1.6;">We have received your quote request and our team is already on it.</p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Quote ID Box -->
-                    <tr>
-                        <td style="padding:0 30px 30px;">
-                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td style="background-color:#f8f9fa;border-left:4px solid #0066cc;padding:20px 25px;border-radius:0 8px 8px 0;">
-                                        <p style="margin:0 0 5px;color:#888888;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Your Reference Number</p>
-                                        <p style="margin:0;color:#0066cc;font-size:28px;font-weight:700;">#' . (int)$quoteId . '</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- What Happens Next -->
-                    <tr>
-                        <td style="padding:0 30px 30px;">
-                            <h3 style="margin:0 0 20px;color:#222222;font-size:18px;font-weight:600;">What Happens Next?</h3>
-                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td style="padding:12px 0;border-bottom:1px solid #eeeeee;">
-                                        <table role="presentation" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td style="width:40px;vertical-align:top;">
-                                                    <div style="width:28px;height:28px;background-color:#e3f2fd;border-radius:50%;text-align:center;line-height:28px;color:#0066cc;font-weight:600;font-size:14px;">1</div>
-                                                </td>
-                                                <td style="vertical-align:top;">
-                                                    <p style="margin:0;color:#333333;font-size:15px;"><strong>Review</strong> - Our experts will analyze your requirements</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:12px 0;border-bottom:1px solid #eeeeee;">
-                                        <table role="presentation" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td style="width:40px;vertical-align:top;">
-                                                    <div style="width:28px;height:28px;background-color:#e3f2fd;border-radius:50%;text-align:center;line-height:28px;color:#0066cc;font-weight:600;font-size:14px;">2</div>
-                                                </td>
-                                                <td style="vertical-align:top;">
-                                                    <p style="margin:0;color:#333333;font-size:15px;"><strong>Proposal</strong> - We\'ll prepare a customized solution for you</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:12px 0;">
-                                        <table role="presentation" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td style="width:40px;vertical-align:top;">
-                                                    <div style="width:28px;height:28px;background-color:#e3f2fd;border-radius:50%;text-align:center;line-height:28px;color:#0066cc;font-weight:600;font-size:14px;">3</div>
-                                                </td>
-                                                <td style="vertical-align:top;">
-                                                    <p style="margin:0;color:#333333;font-size:15px;"><strong>Contact</strong> - Expect a call within 24 hours</p>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- CTA Button -->
-                    <tr>
-                        <td style="padding:0 30px 30px;text-align:center;">
-                            <a href="https://everythingeasy.in" style="display:inline-block;padding:14px 40px;background-color:#0066cc;color:#ffffff;text-decoration:none;font-size:16px;font-weight:600;border-radius:8px;">Visit Our Website</a>
-                        </td>
-                    </tr>
-                    
-                    <!-- Contact Info -->
-                    <tr>
-                        <td style="padding:30px;background-color:#f8f9fa;border-top:1px solid #eeeeee;">
-                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td style="text-align:center;">
-                                        <p style="margin:0 0 15px;color:#333333;font-size:16px;font-weight:600;">Need Immediate Help?</p>
-                                        <p style="margin:0 0 8px;color:#666666;font-size:14px;">
-                                            <span style="color:#0066cc;">&#9742;</span>&nbsp;&nbsp;
-                                            <a href="tel:+918630840577" style="color:#333333;text-decoration:none;">+91 86308 40577</a>
-                                        </p>
-                                        <p style="margin:0;color:#666666;font-size:14px;">
-                                            <span style="color:#0066cc;">&#9993;</span>&nbsp;&nbsp;
-                                            <a href="mailto:info@everythingeasy.in" style="color:#333333;text-decoration:none;">info@everythingeasy.in</a>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- Footer -->
-                    <tr>
-                        <td style="padding:25px 30px;background-color:#222222;text-align:center;">
-                            <p style="margin:0 0 10px;color:#ffffff;font-size:14px;font-weight:600;">EverythingEasy Technology</p>
-                            <p style="margin:0 0 15px;color:#aaaaaa;font-size:12px;">Balawala, Dehradun 248001, Uttarakhand, India</p>
-                            <p style="margin:0;color:#888888;font-size:11px;">&copy; ' . $year . ' EverythingEasy Technology. All Rights Reserved.</p>
-                        </td>
-                    </tr>
-                    
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>';
+function buildCustomerThankYouPlainText($quoteId, $firstName) {
+    $name = trim((string)$firstName) !== '' ? trim((string)$firstName) : 'Customer';
+
+    return "Hello {$name},\n\n"
+        . "Thank you for contacting EverythingEasy.\n"
+        . "Your quote request has been received successfully.\n\n"
+        . "Quote ID: #{$quoteId}\n"
+        . "Expected response time: within 24 hours\n\n"
+        . "If you need immediate help, reply to this email or contact us at +91 86308 40577.\n\n"
+        . "Regards,\n"
+        . "EverythingEasy Team\n"
+        . "https://everythingeasy.in\n";
 }
 ?>
 
