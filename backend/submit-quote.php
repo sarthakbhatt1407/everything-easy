@@ -214,16 +214,56 @@ function sendLeadNotificationEmails($quoteId, $lead) {
 
 function safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
     try {
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+            safeLog('safeSendHtmlMail invalid recipient email: ' . $to);
+            return false;
+        }
+
         $safeFromName = str_replace(["\r", "\n"], '', $fromName);
         $safeFromEmail = filter_var($fromEmail, FILTER_VALIDATE_EMAIL) ? $fromEmail : 'noreply@everythingeasy.in';
+        $safeSubject = trim(preg_replace('/[\r\n]+/', ' ', $subject));
+
+        $boundary = 'b1_' . md5((string)microtime(true));
+        $textBody = html_entity_decode(strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\n", $htmlBody)), ENT_QUOTES, 'UTF-8');
 
         $headers = [];
         $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=UTF-8';
+        $headers[] = 'Content-Type: multipart/alternative; boundary="' . $boundary . '"';
         $headers[] = 'From: ' . $safeFromName . ' <' . $safeFromEmail . '>';
         $headers[] = 'Reply-To: ' . $safeFromEmail;
+        $headers[] = 'Return-Path: ' . $safeFromEmail;
+        $headers[] = 'Date: ' . date(DATE_RFC2822);
+        $headers[] = 'Message-ID: <' . uniqid('', true) . '@everythingeasy.in>';
+        $headers[] = 'X-Mailer: PHP/' . phpversion();
 
-        return @mail($to, $subject, $htmlBody, implode("\r\n", $headers));
+        $messageParts = [];
+        $messageParts[] = '--' . $boundary;
+        $messageParts[] = 'Content-Type: text/plain; charset=UTF-8';
+        $messageParts[] = 'Content-Transfer-Encoding: 8bit';
+        $messageParts[] = '';
+        $messageParts[] = $textBody;
+        $messageParts[] = '';
+        $messageParts[] = '--' . $boundary;
+        $messageParts[] = 'Content-Type: text/html; charset=UTF-8';
+        $messageParts[] = 'Content-Transfer-Encoding: 8bit';
+        $messageParts[] = '';
+        $messageParts[] = $htmlBody;
+        $messageParts[] = '';
+        $messageParts[] = '--' . $boundary . '--';
+
+        $messageBody = implode("\r\n", $messageParts);
+
+        // Envelope sender improves SPF/DMARC alignment on many hosts.
+        $params = '-f ' . $safeFromEmail;
+        $headerString = implode("\r\n", $headers);
+
+        $sent = @mail($to, $safeSubject, $messageBody, $headerString, $params);
+        if ($sent) {
+            return true;
+        }
+
+        // Fallback for hosts that disallow 5th parameter.
+        return @mail($to, $safeSubject, $messageBody, $headerString);
     } catch (Throwable $e) {
         safeLog('safeSendHtmlMail exception: ' . $e->getMessage());
         return false;
