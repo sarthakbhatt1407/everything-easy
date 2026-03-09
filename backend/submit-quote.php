@@ -181,6 +181,7 @@ function nullableString($data, $key) {
 function sendLeadNotificationEmails($quoteId, $lead) {
     $adminRecipients = [
         'info@everythingeasy.in',
+        'akhilgusain2@gmail.com',
         'akhilgusain65@gmail.com',
     ];
 
@@ -222,8 +223,19 @@ function safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
         $headers[] = 'Content-type: text/html; charset=UTF-8';
         $headers[] = 'From: ' . $safeFromName . ' <' . $safeFromEmail . '>';
         $headers[] = 'Reply-To: ' . $safeFromEmail;
+        $headers[] = 'X-Mailer: PHP/' . phpversion();
 
-        return @mail($to, $subject, $htmlBody, implode("\r\n", $headers));
+        // On many shared hosts this improves delivery by setting envelope sender.
+        $params = '-f ' . $safeFromEmail;
+        $headerString = implode("\r\n", $headers);
+
+        $sent = @mail($to, $subject, $htmlBody, $headerString, $params);
+        if ($sent) {
+            return true;
+        }
+
+        // Fallback for hosts that block the 5th mail() parameter.
+        return @mail($to, $subject, $htmlBody, $headerString);
     } catch (Throwable $e) {
         safeLog('safeSendHtmlMail exception: ' . $e->getMessage());
         return false;
