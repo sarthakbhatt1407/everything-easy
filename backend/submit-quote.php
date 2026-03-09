@@ -203,13 +203,40 @@ function sendLeadNotificationEmails($quoteId, $lead) {
     $customerSubject = 'Thanks for contacting EverythingEasy - Quote #' . $quoteId;
     $customerBody = buildCustomerThankYouEmailHtml($quoteId, $lead['firstName']);
 
-    $customerOk = safeSendHtmlMail($lead['email'], $customerSubject, $customerBody, $fromEmail, $fromName);
+    $customerOk = safeSendCustomerThankYouMail($lead['email'], $customerSubject, $customerBody, $fromEmail, $fromName);
     if ($customerOk) {
         safeLog('SUCCESS: Thank-you email sent to ' . $lead['email'] . ' for Quote ID: ' . $quoteId);
     } else {
         $error = error_get_last();
         safeLog('FAILED: Thank-you email to ' . $lead['email'] . ' for Quote ID: ' . $quoteId . '. Error: ' . ($error ? json_encode($error) : 'Unknown error'));
     }
+}
+
+function safeSendCustomerThankYouMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
+    if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+        safeLog('Customer thank-you skipped due to invalid email: ' . $to);
+        return false;
+    }
+
+    $smtpConfigured = defined('SMTP_HOST') && SMTP_HOST !== ''
+        && defined('SMTP_USER') && SMTP_USER !== ''
+        && defined('SMTP_PASS') && SMTP_PASS !== '';
+
+    if ($smtpConfigured) {
+        $smtpFromEmail = (defined('SMTP_FROM_EMAIL') && SMTP_FROM_EMAIL !== '') ? SMTP_FROM_EMAIL : $fromEmail;
+        $smtpFromName = (defined('SMTP_FROM_NAME') && SMTP_FROM_NAME !== '') ? SMTP_FROM_NAME : $fromName;
+
+        $smtpOk = smtpSendHtmlMail($to, $subject, $htmlBody, $smtpFromEmail, $smtpFromName);
+        if ($smtpOk) {
+            return true;
+        }
+
+        safeLog('SMTP failed for customer thank-you, using mail() fallback for: ' . $to);
+    } else {
+        safeLog('SMTP not configured for customer thank-you, using mail() fallback for: ' . $to);
+    }
+
+    return safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName);
 }
 
 function safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
@@ -268,6 +295,152 @@ function safeSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
         safeLog('safeSendHtmlMail exception: ' . $e->getMessage());
         return false;
     }
+}
+
+function smtpSendHtmlMail($to, $subject, $htmlBody, $fromEmail, $fromName) {
+    $host = SMTP_HOST;
+    $port = defined('SMTP_PORT') ? (int)SMTP_PORT : 587;
+    $user = SMTP_USER;
+    $pass = SMTP_PASS;
+    $secure = defined('SMTP_SECURE') ? strtolower((string)SMTP_SECURE) : 'tls';
+
+    $remote = $host . ':' . $port;
+    if ($secure === 'ssl') {
+        $remote = 'ssl://' . $host . ':' . $port;
+    }
+
+    $socket = @stream_socket_client($remote, $errno, $errstr, 20, STREAM_CLIENT_CONNECT);
+    if (!$socket) {
+        safeLog('SMTP connect failed: ' . $errno . ' ' . $errstr);
+        return false;
+    }
+
+    stream_set_timeout($socket, 20);
+
+    if (!smtpExpect($socket, [220])) {
+        fclose($socket);
+        return false;
+    }
+
+    $helloHost = gethostname() ?: 'localhost';
+    smtpWrite($socket, 'EHLO ' . $helloHost);
+    if (!smtpExpect($socket, [250])) {
+        fclose($socket);
+        return false;
+    }
+
+    if ($secure === 'tls') {
+        smtpWrite($socket, 'STARTTLS');
+        if (!smtpExpect($socket, [220])) {
+            fclose($socket);
+            return false;
+        }
+
+        if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            safeLog('SMTP TLS negotiation failed.');
+            fclose($socket);
+            return false;
+        }
+
+        smtpWrite($socket, 'EHLO ' . $helloHost);
+        if (!smtpExpect($socket, [250])) {
+            fclose($socket);
+            return false;
+        }
+    }
+
+    smtpWrite($socket, 'AUTH LOGIN');
+    if (!smtpExpect($socket, [334])) {
+        fclose($socket);
+        return false;
+    }
+
+    smtpWrite($socket, base64_encode($user));
+    if (!smtpExpect($socket, [334])) {
+        fclose($socket);
+        return false;
+    }
+
+    smtpWrite($socket, base64_encode($pass));
+    if (!smtpExpect($socket, [235])) {
+        fclose($socket);
+        return false;
+    }
+
+    smtpWrite($socket, 'MAIL FROM:<' . $fromEmail . '>');
+    if (!smtpExpect($socket, [250])) {
+        fclose($socket);
+        return false;
+    }
+
+    smtpWrite($socket, 'RCPT TO:<' . $to . '>');
+    if (!smtpExpect($socket, [250, 251])) {
+        fclose($socket);
+        return false;
+    }
+
+    smtpWrite($socket, 'DATA');
+    if (!smtpExpect($socket, [354])) {
+        fclose($socket);
+        return false;
+    }
+
+    $encodedName = function_exists('mb_encode_mimeheader')
+        ? mb_encode_mimeheader($fromName, 'UTF-8')
+        : $fromName;
+
+    $safeSubject = trim(preg_replace('/[\r\n]+/', ' ', $subject));
+    $headers = [];
+    $headers[] = 'Date: ' . date(DATE_RFC2822);
+    $headers[] = 'From: ' . $encodedName . ' <' . $fromEmail . '>';
+    $headers[] = 'To: <' . $to . '>';
+    $headers[] = 'Subject: ' . $safeSubject;
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-Type: text/html; charset=UTF-8';
+    $headers[] = 'Content-Transfer-Encoding: 8bit';
+
+    $payload = implode("\r\n", $headers) . "\r\n\r\n" . $htmlBody;
+    $payload = str_replace("\r\n.\r\n", "\r\n..\r\n", $payload);
+
+    smtpWrite($socket, $payload . "\r\n.");
+    if (!smtpExpect($socket, [250])) {
+        fclose($socket);
+        return false;
+    }
+
+    smtpWrite($socket, 'QUIT');
+    smtpExpect($socket, [221]);
+    fclose($socket);
+
+    return true;
+}
+
+function smtpWrite($socket, $command) {
+    fwrite($socket, $command . "\r\n");
+}
+
+function smtpExpect($socket, $expectedCodes) {
+    $response = '';
+
+    while (($line = fgets($socket, 515)) !== false) {
+        $response .= $line;
+        if (isset($line[3]) && $line[3] === ' ') {
+            break;
+        }
+    }
+
+    if ($response === '') {
+        safeLog('SMTP empty response from server.');
+        return false;
+    }
+
+    $code = (int)substr($response, 0, 3);
+    if (!in_array($code, $expectedCodes, true)) {
+        safeLog('SMTP unexpected response: ' . trim($response));
+        return false;
+    }
+
+    return true;
 }
 
 function buildAdminLeadEmailHtml($quoteId, $lead) {
