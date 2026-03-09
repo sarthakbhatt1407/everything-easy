@@ -491,6 +491,15 @@ function buildAdminLeadEmailHtml($quoteId, $lead) {
         return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
     };
 
+    $phoneRaw = trim((string)($lead['phone'] ?? ''));
+    $phoneDisplay = $phoneRaw !== '' ? $safe($phoneRaw) : 'N/A';
+    $phoneDial = preg_replace('/[^0-9+]/', '', $phoneRaw);
+    $phoneButton = '';
+
+    if ($phoneDial !== '') {
+        $phoneButton = '<br><a href="tel:' . $phoneDial . '" style="display:inline-block;margin-top:8px;padding:6px 10px;background:#0066cc;color:#ffffff;text-decoration:none;border-radius:4px;font-size:12px;">Call Now</a>';
+    }
+
     return "
     <html>
     <body style='font-family:Arial,sans-serif;color:#222;'>
@@ -500,7 +509,7 @@ function buildAdminLeadEmailHtml($quoteId, $lead) {
         <tr><td><strong>First Name</strong></td><td>" . $safe($lead['firstName']) . "</td></tr>
         <tr><td><strong>Last Name</strong></td><td>" . $safe($lead['lastName']) . "</td></tr>
         <tr><td><strong>Email</strong></td><td>" . $safe($lead['email']) . "</td></tr>
-        <tr><td><strong>Phone</strong></td><td>" . $safe($lead['phone']) . "</td></tr>
+        <tr><td><strong>Phone</strong></td><td>" . $phoneDisplay . $phoneButton . "</td></tr>
         <tr><td><strong>Company</strong></td><td>" . $safe($lead['company']) . "</td></tr>
         <tr><td><strong>Service</strong></td><td>" . $safe($lead['service']) . "</td></tr>
         <tr><td><strong>Budget</strong></td><td>" . $safe($lead['budget']) . "</td></tr>
@@ -518,13 +527,13 @@ function buildCustomerThankYouPlainText($quoteId, $firstName) {
     $name = trim((string)$firstName) !== '' ? trim((string)$firstName) : 'Customer';
 
     return "Hello {$name},\n\n"
-        . "Thank you for contacting EverythingEasy.\n"
+        . "Thank you for contacting EverythingEasy Technology.\n"
         . "Your quote request has been received successfully.\n\n"
         . "Quote ID: #{$quoteId}\n"
         . "Expected response time: within 24 hours\n\n"
         . "If you need immediate help, reply to this email or contact us at +91 86308 40577.\n\n"
         . "Regards,\n"
-        . "EverythingEasy Team\n"
+        . "EverythingEasy Technology Team\n"
         . "https://everythingeasy.in\n";
 }
 ?>
