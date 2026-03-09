@@ -182,6 +182,7 @@ function sendLeadNotificationEmails($quoteId, $lead) {
     $adminRecipients = [
         'info@everythingeasy.in',
         'akhilgusain65@gmail.com',
+        'akhilgusain2@gmail.com',
     ];
 
     $fromEmail = 'info@everythingeasy.in';
