@@ -105,7 +105,15 @@ try {
 
     $quoteId = (int)$stmt->insert_id;
 
-    // Email failure should never break API success response.
+    $stmt->close();
+    closeDBConnection($conn);
+
+    // Send response to client immediately (loader stops)
+    sendJSONResponse(true, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours.', [
+        'quoteId' => $quoteId,
+    ], false);
+
+    // Send emails in background (user already got response)
     sendLeadNotificationEmails($quoteId, [
         'firstName' => $firstName,
         'lastName' => $lastName,
@@ -117,13 +125,6 @@ try {
         'timeline' => $timeline,
         'message' => $projectDetails,
         'newsletter' => $newsletter,
-    ]);
-
-    $stmt->close();
-    closeDBConnection($conn);
-
-    sendJSONResponse(true, 'Thank you! Your quote request has been submitted successfully. We will contact you within 24 hours.', [
-        'quoteId' => $quoteId,
     ]);
 } catch (Throwable $e) {
     if ($stmt instanceof mysqli_stmt) {
@@ -536,6 +537,23 @@ function buildCustomerThankYouPlainText($quoteId, $firstName) {
         . "Regards,\n"
         . "EverythingEasy Technology Team\n"
         . "https://everythingeasy.in\n";
+}
+
+function sendJSONResponse($success, $message, $data = [], $exit = true) {
+    $response = [
+        'success' => $success,
+        'message' => $message,
+    ];
+    
+    if (!empty($data)) {
+        $response['data'] = $data;
+    }
+    
+    echo json_encode($response);
+    
+    if ($exit) {
+        exit;
+    }
 }
 ?>
 
