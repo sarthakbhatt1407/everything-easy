@@ -1368,10 +1368,96 @@
 
   <!-- Quote Forms Handler -->
   <script>
+    function getQuoteToastContainer() {
+      let container = document.getElementById("quoteToastContainer");
+
+      if (!container) {
+        container = document.createElement("div");
+        container.id = "quoteToastContainer";
+        container.style.position = "fixed";
+        container.style.top = "20px";
+        container.style.right = "20px";
+        container.style.zIndex = "9999";
+        container.style.width = "min(360px, calc(100vw - 32px))";
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.gap = "10px";
+        document.body.appendChild(container);
+      }
+
+      return container;
+    }
+
+    function showQuoteToast(type, message) {
+      const container = getQuoteToastContainer();
+      const toast = document.createElement("div");
+
+      const typeStyles = {
+        success: {
+          bg: "#e8f8ee",
+          border: "#24a148",
+          text: "#12572a",
+          icon: "fa-check-circle",
+        },
+        error: {
+          bg: "#fdecec",
+          border: "#da1e28",
+          text: "#7a0d13",
+          icon: "fa-exclamation-circle",
+        },
+      };
+
+      const selectedType = typeStyles[type] || typeStyles.success;
+
+      toast.style.background = selectedType.bg;
+      toast.style.borderLeft = "4px solid " + selectedType.border;
+      toast.style.color = selectedType.text;
+      toast.style.borderRadius = "12px";
+      toast.style.padding = "12px 14px";
+      toast.style.boxShadow = "0 10px 24px rgba(0, 0, 0, 0.15)";
+      toast.style.display = "flex";
+      toast.style.alignItems = "center";
+      toast.style.gap = "10px";
+      toast.style.fontSize = "14px";
+      toast.style.fontWeight = "500";
+      toast.style.opacity = "0";
+      toast.style.transform = "translateY(-8px)";
+      toast.style.transition = "all 0.25s ease";
+
+      toast.innerHTML =
+        '<i class="fas ' +
+        selectedType.icon +
+        '" aria-hidden="true"></i><span>' +
+        message +
+        "</span>";
+
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.style.opacity = "1";
+        toast.style.transform = "translateY(0)";
+      });
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(-8px)";
+        setTimeout(() => toast.remove(), 250);
+      }, 4000);
+    }
+
     // Function to submit quote form
     function submitQuoteForm(formId, resultId) {
       const form = document.getElementById(formId);
       const formResult = document.getElementById(resultId);
+
+      if (!form) {
+        return;
+      }
+
+      // Keep old result containers hidden to avoid form height stretching.
+      if (formResult) {
+        formResult.classList.add("d-none");
+      }
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -1402,6 +1488,14 @@
           '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
         submitBtn.disabled = true;
 
+        // Show instant confirmation so users do not wait for email processing.
+        showQuoteToast("success", "Done! Your request has been submitted.");
+
+        // Reset form and button right away for better UX.
+        form.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
         // Submit via AJAX
         fetch("backend/submit-quote.php", {
           method: "POST",
@@ -1412,51 +1506,19 @@
         })
           .then((response) => response.json())
           .then((result) => {
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-
-            if (result.success) {
-              // Show success message
-              formResult.className = "mt-2 alert alert-success";
-              formResult.innerHTML =
-                '<i class="fas fa-check-circle me-2"></i>' + result.message;
-              formResult.classList.remove("d-none");
-
-              // Reset form
-              form.reset();
-              form.classList.remove("was-validated");
-            } else {
-              // Show error message
-              formResult.className = "mt-2 alert alert-danger";
-              formResult.innerHTML =
-                '<i class="fas fa-exclamation-circle me-2"></i>' +
-                result.message;
-              formResult.classList.remove("d-none");
+            if (!result.success) {
+              showQuoteToast(
+                "error",
+                result.message || "Unable to submit your request. Please try again."
+              );
             }
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-              formResult.classList.add("d-none");
-            }, 5000);
           })
           .catch((error) => {
             console.error("Error:", error);
-
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-
-            // Show error message
-            formResult.className = "mt-2 alert alert-danger";
-            formResult.innerHTML =
-              '<i class="fas fa-exclamation-circle me-2"></i>An error occurred. Please try again later.';
-            formResult.classList.remove("d-none");
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-              formResult.classList.add("d-none");
-            }, 5000);
+            showQuoteToast(
+              "error",
+              "There was a network issue. Please submit again if needed."
+            );
           });
       });
     }
