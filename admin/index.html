@@ -2,38 +2,194 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Everything Easy</title>
-    <script>
-        // Redirect to login or dashboard based on session
-        const SESSION_KEY = 'admin_logged_in';
-        const SESSION_TIMESTAMP = 'admin_login_time';
-
-        if (sessionStorage.getItem(SESSION_KEY) === 'true') {
-            // Check if session is still valid (24 hours)
-            const loginTime = sessionStorage.getItem(SESSION_TIMESTAMP);
-            const currentTime = new Date().getTime();
-            const hoursPassed = (currentTime - loginTime) / (1000 * 60 * 60);
-
-            if (hoursPassed < 24) {
-                window.location.href = 'dashboard.html';
-            } else {
-                // Session expired
-                sessionStorage.removeItem(SESSION_KEY);
-                sessionStorage.removeItem(SESSION_TIMESTAMP);
-                window.location.href = 'login.html';
-            }
-        } else {
-            window.location.href = 'login.html';
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Admin Access - Everything Easy</title>
+    <style>
+        :root {
+            --bg-1: #0b1220;
+            --bg-2: #142a45;
+            --bg-3: #1f4f7d;
+            --surface: rgba(255, 255, 255, 0.92);
+            --surface-border: rgba(255, 255, 255, 0.55);
+            --text-primary: #132338;
+            --text-secondary: #5d6e86;
+            --accent: #0b69c7;
+            --spinner-track: #d7e4f4;
+            --shadow: 0 22px 60px rgba(3, 14, 34, 0.4);
         }
-    </script>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-primary);
+            background:
+                radial-gradient(circle at 12% 18%, rgba(14, 165, 233, 0.2), transparent 38%),
+                radial-gradient(circle at 88% 82%, rgba(96, 165, 250, 0.18), transparent 42%),
+                linear-gradient(145deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+        }
+
+        .redirect-shell {
+            width: min(430px, 100%);
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px 24px;
+            text-align: center;
+        }
+
+        .brand-title {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .brand-subtitle {
+            margin: 6px 0 22px;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        .loading-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .spinner {
+            width: 26px;
+            height: 26px;
+            border: 3px solid var(--spinner-track);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .status-text {
+            margin: 0;
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .helper-text {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        .fallback-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .fallback-link:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .spinner {
+                animation-duration: 1.8s;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
-        <p>Redirecting...</p>
+    <div class="redirect-shell" role="status" aria-live="polite">
+        <h1 class="brand-title">Everything Easy Admin</h1>
+        <p class="brand-subtitle">Secure access check in progress</p>
+
+        <div class="loading-row">
+            <span class="spinner" aria-hidden="true"></span>
+            <p class="status-text">Redirecting...</p>
+        </div>
+
+        <p class="helper-text">You will be sent to your destination automatically.</p>
+        <a class="fallback-link" href="login.html">Continue manually</a>
     </div>
+
+    <script>
+        (function initAdminRedirect() {
+            const CONFIG = {
+                sessionKey: "admin_logged_in",
+                timestampKey: "admin_login_time",
+                sessionDurationHours: 24,
+            };
+
+            const ROUTES = {
+                login: "login.html",
+                dashboard: "dashboard.html",
+            };
+
+            function redirectTo(path) {
+                window.location.replace(path);
+            }
+
+            function clearSession() {
+                sessionStorage.removeItem(CONFIG.sessionKey);
+                sessionStorage.removeItem(CONFIG.timestampKey);
+            }
+
+            function getSessionInfo() {
+                const isLoggedIn = sessionStorage.getItem(CONFIG.sessionKey) === "true";
+                const loginTimestampRaw = sessionStorage.getItem(CONFIG.timestampKey);
+                const loginTimestamp = Number(loginTimestampRaw);
+
+                return {
+                    isLoggedIn,
+                    loginTimestamp,
+                    hasValidTimestamp: Number.isFinite(loginTimestamp) && loginTimestamp > 0,
+                };
+            }
+
+            function isSessionValid(loginTimestamp) {
+                const elapsedMs = Date.now() - loginTimestamp;
+                const maxDurationMs = CONFIG.sessionDurationHours * 60 * 60 * 1000;
+                return elapsedMs >= 0 && elapsedMs < maxDurationMs;
+            }
+
+            const session = getSessionInfo();
+
+            if (!session.isLoggedIn || !session.hasValidTimestamp) {
+                clearSession();
+                redirectTo(ROUTES.login);
+                return;
+            }
+
+            if (isSessionValid(session.loginTimestamp)) {
+                redirectTo(ROUTES.dashboard);
+                return;
+            }
+
+            clearSession();
+            redirectTo(ROUTES.login);
+        })();
+    </script>
 </body>
 
 </html>
