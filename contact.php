@@ -207,11 +207,11 @@
                 <label for="budget" class="form-label">Project Budget</label>
                 <select class="form-select" id="budget" name="budget">
                   <option value="">Select budget range</option>
-                  <option value="under-5k">Under $5,000</option>
-                  <option value="5k-10k">$5,000 - $10,000</option>
-                  <option value="10k-25k">$10,000 - $25,000</option>
-                  <option value="25k-50k">$25,000 - $50,000</option>
-                  <option value="over-50k">Over $50,000</option>
+                  <option value="under-5k">Under INR 50,000</option>
+                  <option value="5k-10k">INR 50,000 - INR 1,00,000</option>
+                  <option value="10k-25k">INR 1,00,000 - INR 2,50,000</option>
+                  <option value="25k-50k">INR 2,50,000 - INR 5,00,000</option>
+                  <option value="over-50k">Over INR 5,00,000</option>
                   <option value="discuss">Let's Discuss</option>
                 </select>
               </div>
