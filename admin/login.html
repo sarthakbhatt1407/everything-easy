@@ -177,14 +177,24 @@
 
     .password-toggle {
       position: absolute;
+      left: auto;
       right: 15px;
       top: 50%;
       transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
       cursor: pointer;
       color: #7a879d;
       font-size: 17px;
       z-index: 10;
       transition: color 0.2s ease;
+    }
+
+    #password {
+      padding-right: 44px;
     }
 
     .password-toggle:hover {
