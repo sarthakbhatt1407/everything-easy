@@ -144,7 +144,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <div class="bg-white p-5 rounded shadow">
+          <div class="bg-white p-5 rounded shadow contact-form-card">
             <div class="text-center mb-4">
               <h5 class="text-primary mb-3">SEND US A MESSAGE</h5>
               <h2 class="fw-bold mb-4">Tell Us About Your Project</h2>
