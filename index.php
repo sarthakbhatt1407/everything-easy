@@ -213,6 +213,43 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6503835695821013"
     crossorigin="anonymous"></script>
 
+  <style>
+    @media (max-width: 768px) {
+      .hero-section,
+      .hero-container,
+      .hero-wrapper,
+      .hero-right,
+      #hero-contact-form,
+      #hero-contact-form .hero-form-wrapper,
+      #hero-contact-form .hero-quote-form,
+      #hero-contact-form .hero-form-group,
+      #hero-contact-form .hero-input,
+      #hero-contact-form .hero-select,
+      #hero-contact-form .hero-textarea,
+      #hero-contact-form .hero-submit-btn {
+        position: relative;
+        z-index: 50;
+        pointer-events: auto !important;
+      }
+
+      .hero-section,
+      .hero-container,
+      .hero-wrapper,
+      .hero-right,
+      #hero-contact-form {
+        z-index: 50;
+      }
+
+      #hero-contact-form .hero-input,
+      #hero-contact-form .hero-select,
+      #hero-contact-form .hero-textarea {
+        touch-action: manipulation;
+        -webkit-user-select: text;
+        user-select: text;
+      }
+    }
+  </style>
+
   <!-- Meta Pixel Code -->
   <script>
     !(function (f, b, e, v, n, t, s) {
