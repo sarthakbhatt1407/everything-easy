@@ -13,27 +13,50 @@
 
     <!-- Session Protection -->
     <script>
-        // Check if user is logged in
-        const SESSION_KEY = 'admin_logged_in';
-        const SESSION_TIMESTAMP = 'admin_login_time';
+        (function guardAdminSession() {
+            const CONFIG = {
+                sessionKey: 'admin_logged_in',
+                timestampKey: 'admin_login_time',
+                sessionDurationHours: 24,
+                expiredMessage: 'Your session has expired. Please login again.'
+            };
 
-        if (sessionStorage.getItem(SESSION_KEY) !== 'true') {
-            // Not logged in, redirect to login
-            window.location.href = 'login.html';
-        } else {
-            // Check if session is still valid (24 hours)
-            const loginTime = sessionStorage.getItem(SESSION_TIMESTAMP);
-            const currentTime = new Date().getTime();
-            const hoursPassed = (currentTime - loginTime) / (1000 * 60 * 60);
-
-            if (hoursPassed >= 24) {
-                // Session expired
-                sessionStorage.removeItem(SESSION_KEY);
-                sessionStorage.removeItem(SESSION_TIMESTAMP);
-                alert('Your session has expired. Please login again.');
-                window.location.href = 'login.html';
+            function clearSession() {
+                sessionStorage.removeItem(CONFIG.sessionKey);
+                sessionStorage.removeItem(CONFIG.timestampKey);
             }
-        }
+
+            function redirectToLogin(showMessage) {
+                if (showMessage) {
+                    alert(CONFIG.expiredMessage);
+                }
+                window.location.replace('login.html');
+            }
+
+            function getSessionTimestamp() {
+                return Number(sessionStorage.getItem(CONFIG.timestampKey));
+            }
+
+            function isSessionValid(timestamp) {
+                const maxDurationMs = CONFIG.sessionDurationHours * 60 * 60 * 1000;
+                const elapsedMs = Date.now() - timestamp;
+                return Number.isFinite(timestamp) && timestamp > 0 && elapsedMs >= 0 && elapsedMs < maxDurationMs;
+            }
+
+            const isLoggedIn = sessionStorage.getItem(CONFIG.sessionKey) === 'true';
+
+            if (!isLoggedIn) {
+                clearSession();
+                redirectToLogin(false);
+                return;
+            }
+
+            const sessionTimestamp = getSessionTimestamp();
+            if (!isSessionValid(sessionTimestamp)) {
+                clearSession();
+                redirectToLogin(true);
+            }
+        })();
     </script>
 </head>
 
@@ -168,7 +191,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                          
+
 
                         </tbody>
                     </table>
