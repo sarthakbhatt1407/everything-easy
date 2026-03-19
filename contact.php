@@ -482,6 +482,18 @@
           '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
         submitBtn.disabled = true;
 
+        // Instant success feedback for better UX while request processes in background.
+        formResult.className = "mt-3 alert alert-success";
+        formResult.innerHTML =
+          '<i class="fas fa-check-circle me-2"></i>Thank you! Your message has been submitted successfully.';
+        formResult.classList.remove("d-none");
+
+        // Reset form and button immediately so users do not wait on email processing.
+        this.reset();
+        this.classList.remove("was-validated");
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
         // Submit form via AJAX
         fetch("backend/submit-quote.php", {
           method: "POST",
@@ -492,40 +504,23 @@
         })
           .then((response) => response.json())
           .then((result) => {
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-
-            if (result.success) {
-              // Show success message
-              formResult.className = "mt-3 alert alert-success";
-              formResult.innerHTML =
-                '<i class="fas fa-check-circle me-2"></i>' + result.message;
-              formResult.classList.remove("d-none");
-
-              // Reset form
-              this.reset();
-              this.classList.remove("was-validated");
-            } else {
+            if (!result.success) {
               // Show error message
               formResult.className = "mt-3 alert alert-danger";
               formResult.innerHTML =
                 '<i class="fas fa-exclamation-circle me-2"></i>' +
-                result.message;
+                (result.message ||
+                  "Unable to process your request. Please try again.");
               formResult.classList.remove("d-none");
-            }
 
-            // Hide message after 5 seconds
-            setTimeout(() => {
-              formResult.classList.add("d-none");
-            }, 5000);
+              // Hide message after 5 seconds
+              setTimeout(() => {
+                formResult.classList.add("d-none");
+              }, 5000);
+            }
           })
           .catch((error) => {
             console.error("Error:", error);
-
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
 
             // Show error message
             formResult.className = "mt-3 alert alert-danger";
