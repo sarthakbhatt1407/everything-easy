@@ -1320,6 +1320,20 @@ $state = $loc['state'];
           '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
         submitBtn.disabled = true;
 
+        // Show instant confirmation for better UX while email processing continues.
+        if (formResult) {
+          formResult.className = "mt-2 alert alert-success";
+          formResult.innerHTML =
+            '<i class="fas fa-check-circle me-2"></i>Thank you! Your request has been submitted successfully.';
+          formResult.classList.remove("d-none");
+        }
+
+        // Reset form and button immediately so users are not blocked by mail send time.
+        form.reset();
+        form.classList.remove("was-validated");
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+
         // Submit via AJAX
         fetch("https://everythingeasy.in/backend/submit-quote.php", {
           method: "POST",
@@ -1330,50 +1344,40 @@ $state = $loc['state'];
         })
           .then((response) => response.json())
           .then((result) => {
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-
-            if (result.success) {
-              // Show success message
-              formResult.className = "mt-2 alert alert-success";
-              formResult.innerHTML =
-                '<i class="fas fa-check-circle me-2"></i>' + result.message;
-              formResult.classList.remove("d-none");
-
-              // Reset form
-              form.reset();
-              form.classList.remove("was-validated");
-            } else {
+            if (!result.success) {
               // Show error message
+              if (formResult) {
+                formResult.className = "mt-2 alert alert-danger";
+                formResult.innerHTML =
+                  '<i class="fas fa-exclamation-circle me-2"></i>' +
+                  (result.message || "Unable to process your request. Please try again.");
+                formResult.classList.remove("d-none");
+              }
+
+              // Hide message after 5 seconds
+              setTimeout(() => {
+                if (formResult) {
+                  formResult.classList.add("d-none");
+                }
+              }, 5000);
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+
+            // Show error message
+            if (formResult) {
               formResult.className = "mt-2 alert alert-danger";
               formResult.innerHTML =
-                '<i class="fas fa-exclamation-circle me-2"></i>' +
-                result.message;
+                '<i class="fas fa-exclamation-circle me-2"></i>An error occurred. Please try again later.';
               formResult.classList.remove("d-none");
             }
 
             // Hide message after 5 seconds
             setTimeout(() => {
-              formResult.classList.add("d-none");
-            }, 5000);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-
-            // Reset button
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-
-            // Show error message
-            formResult.className = "mt-2 alert alert-danger";
-            formResult.innerHTML =
-              '<i class="fas fa-exclamation-circle me-2"></i>An error occurred. Please try again later.';
-            formResult.classList.remove("d-none");
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-              formResult.classList.add("d-none");
+              if (formResult) {
+                formResult.classList.add("d-none");
+              }
             }, 5000);
           });
       });
