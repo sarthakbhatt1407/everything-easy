@@ -491,6 +491,16 @@
         // Reset form and button immediately so users do not wait on email processing.
         this.reset();
         this.classList.remove("was-validated");
+
+        // A secondary validation listener adds `was-validated` on submit;
+        // clear visual validation state after the submit event completes.
+        setTimeout(() => {
+          this.classList.remove("was-validated");
+          this
+            .querySelectorAll(".is-valid, .is-invalid")
+            .forEach((field) => field.classList.remove("is-valid", "is-invalid"));
+        }, 0);
+
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
 
