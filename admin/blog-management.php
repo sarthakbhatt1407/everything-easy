@@ -299,23 +299,23 @@ function generateSlug($title) {
 
 <body>
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+      <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3><i class="fas fa-blog"></i> Everything Easy</h3>
+            <h3><i class="fas fa-home"></i> EverythingEasy</h3>
             <p class="text-muted small">Admin Panel</p>
         </div>
         <ul class="sidebar-menu">
-            <li>
+            <li class="active">
                 <a href="dashboard.html">
-                    <i class="fas fa-quote-right"></i>
+                    <i class="fas fa-clipboard-list"></i>
                     <span>Quote Requests</span>
+                    <span class="badge">0</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="blog-management.php">
                     <i class="fas fa-blog"></i>
                     <span>Blog Posts</span>
-                    <span class="badge"><?php echo $totalBlogs; ?></span>
                 </a>
             </li>
             <li>
@@ -325,7 +325,7 @@ function generateSlug($title) {
                 </a>
             </li>
             <li>
-                <a href="#" onclick="logout(); return false;">
+                <a href="#" id="logoutBtn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
