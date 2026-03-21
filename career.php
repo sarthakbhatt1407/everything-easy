@@ -538,7 +538,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="col-lg-8 mx-auto">
           <div class="bg-white rounded shadow p-4 p-md-5">
             <h3 class="fw-bold mb-4 text-center">Apply for a Position</h3>
-            <form id="careerForm">
+            <form id="careerForm" method="POST" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="fullName" class="form-label">Full Name *</label>
