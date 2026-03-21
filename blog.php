@@ -75,7 +75,55 @@ function getImageUrl($imageUrl) {
 </head>
 
 <body>
-  <?php require_once 'navbar.php'; ?>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="/">
+      <img
+        src="/images/logo.webp"
+        alt="Everything Easy Logo"
+        class="navbar-logo"
+      />
+      EverythingEasy
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'about.php' ? 'active' : ''; ?>" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'services.php' || basename($_SERVER['PHP_SELF']) == 'it-services.php' ? 'active' : ''; ?>" href="/services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'portfolio.php' ? 'active' : ''; ?>" href="/portfolio">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'blog.php' || basename($_SERVER['PHP_SELF']) == 'blog-detail.php' ? 'active' : ''; ?>" href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'contact.php' ? 'active' : ''; ?>" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'career.php' ? 'active' : ''; ?>" href="/career">Career</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-primary ms-2" href="/#quote">Get Quote</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
   <!-- Navigation Container -->
 
   <!-- Blog Header -->
@@ -156,7 +204,150 @@ function getImageUrl($imageUrl) {
     </div>
   </section>
 
-  <?php require_once 'footer.php'; ?>
+<!-- Footer -->
+<footer class="bg-dark text-white py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="footer-about">
+<!--        
+              <image
+        src="https://i.ibb.co/hJRZz403/elogo-removebg-preview.png"
+        alt="Everything Easy Logo"
+        style="height: 40px; margin-right: -8px"
+      /> -->
+      EverythingEasy Technology
+
+          <p class="text-muted mb-4">
+            Leading IT solutions company providing innovative technology
+            services to help businesses grow digitally.
+          </p>
+          <div class="social-links mb-5">
+            <a
+              href="https://www.facebook.com/profile.php?id=61575148140871"
+              target="_blank"
+              class="facebook"
+              ><i class="fab fa-facebook fa-lg"></i
+            ></a>
+            <a
+              href="https://x.com/Everythingeasy0"
+              target="_blank"
+              class="twitter"
+              ><i class="fab fa-twitter fa-lg"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/company/everythingeasy/"
+              target="_blank"
+              class="linkedin"
+              ><i class="fab fa-linkedin fa-lg"></i
+            ></a>
+            <a
+              href="https://www.instagram.com/everythingeasy0/"
+              target="_blank"
+              class="instagram"
+              ><i class="fab fa-instagram fa-lg"></i
+            ></a>
+          </div>
+          <!-- Trustpilot Widget -->
+          <div class="trustpilot-widget mt-3" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="693706f7f444175f88990f6c" data-style-height="52px" data-style-width="100%" data-token="448d2ef3-edd9-486d-8d48-04a5d3ac55b6">
+            <a href="https://www.trustpilot.com/review/everythingeasy.in" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4">
+        <div class="footer-links">
+          <h6 class="fw-bold mb-3">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="/" class="text-muted">Home</a></li>
+            <li><a href="/about" class="text-muted">About Us</a></li>
+            <li>
+              <a href="/services" class="text-muted">Our Services</a>
+            </li>
+            <li><a href="/portfolio" class="text-muted">Portfolio</a></li>
+            <li><a href="/blog" class="text-muted">Blog</a></li>
+            <li><a href="/contact" class="text-muted">Contact Us</a></li>
+            <li><a href="/career" class="text-muted">Careers</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4">
+        <div class="footer-links">
+          <h6 class="fw-bold mb-3">Services</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-muted">Digital Marketing</a></li>
+            <li><a href="#" class="text-muted">E-commerce</a></li>
+            <li><a href="#" class="text-muted">Web Development</a></li>
+            <li><a href="#" class="text-muted">App Development</a></li>
+            <li><a href="#" class="text-muted">SEO Optimization</a></li>
+            <li><a href="#" class="text-muted">Custom Software</a></li>
+            <li>
+              <a href="services-locations.php" class="text-muted"
+                >Services location</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="footer-contact">
+          <h6 class="fw-bold mb-3">Get In Touch</h6>
+          <div class="contact-item d-flex mb-2">
+            <a
+              href="https://www.google.com/maps/dir//Bhagwandas+chowk,+Bisht+colony,+ghoda+factory+road,+Balawala,+Dehradun,+Uttarakhand+248019/@30.2657584,78.1273607,13.15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3909256beff80bed:0x5b9bdb3eed18518d!2m2!1d78.1228234!2d30.2612601?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              class="text-muted text-decoration-none"
+            >
+              <i class="fas fa-map-marker-alt me-2 mt-1"></i>EverythingEasy
+              Technology Balawala, Dehradun 248001 Uttarakhand, India</a
+            >
+          </div>
+          <div class="contact-item d-flex mb-2">
+            <i class="fas fa-envelope me-2 mt-1"></i>
+            <a
+              href="mailto:info@everythingeasy.com"
+              class="text-muted text-decoration-none"
+              >info@everythingeasy.com</a
+            >
+          </div>
+          <div class="contact-item d-flex mb-3">
+            <i class="fas fa-phone me-2 mt-1"></i>
+            <a href="tel:+918630840577" class="text-muted text-decoration-none"
+              >+91 86308 40577</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" />
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p class="text-muted mb-0">
+          &copy; <?php echo date('Y'); ?> EverythingEasy Technology. All
+          Rights Reserved.
+        </p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <p class="text-muted mb-0">
+          Designed with <i class="fas fa-heart text-danger"></i> by Everything
+          Easy Team
+        </p>
+      </div>
+    </div>
+    <!-- TrustBox widget - Review Collector -->
+<!-- TrustBox script -->
+ <!-- TrustBox widget - Review Collector -->
+
+<!-- End TrustBox widget -->
+<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+<!-- End TrustBox script -->
+</div>
+<!-- End TrustBox widget -->
+  </div>
+</footer>
+<!-- TrustBox script -->
+
+<!-- End TrustBox script -->
+
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
