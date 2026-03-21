@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
 
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="/css/style.css" rel="stylesheet" />
   <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -59,7 +59,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center bg-transparent">
               <li class="breadcrumb-item">
-                <a href="index.html" class="text-warning">Home</a>
+                <a href="/" class="text-warning">Home</a>
               </li>
               <li class="breadcrumb-item active text-white" aria-current="page">
                 Careers
@@ -472,7 +472,7 @@
             <a href="mailto:info@everythingeasy.com" class="btn btn-warning btn-lg">
               <i class="fas fa-envelope me-2"></i>Email Your Resume
             </a>
-            <a href="contact.html" class="btn btn-outline-light btn-lg">
+            <a href="/contact" class="btn btn-outline-light btn-lg">
               Contact Us
             </a>
           </div>
@@ -486,7 +486,7 @@
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="/js/script.js"></script>
 
   <script>
     document
@@ -501,18 +501,26 @@
           console.log(key, value);
         }
 
-        fetch("career-submit.php", {
+        fetch("/career-submit.php", {
           method: "POST",
           body: formData,
         })
-          .then((res) => res.json())
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            return res.json();
+          })
           .then((data) => {
             alert(data.message);
-            if (data.status === "success") {
-              document.getElementById("careerForm").reset();
+            if (data.success === true) {
+              document.getElementById(\"careerForm\").reset();
             }
           })
-          .catch((err) => alert("Error: " + err));
+          .catch((err) => {
+            console.error(\"Fetch error:\", err);
+            alert(\"Error: \" + err.message);
+          });
       });
   </script>
 </body>
