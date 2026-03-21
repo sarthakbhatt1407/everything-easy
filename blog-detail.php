@@ -6,7 +6,7 @@ $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $blogId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($slug === '' && $blogId === 0) {
-  header('Location: blog');
+  header('Location: /blog');
   exit;
 }
 
