@@ -87,9 +87,9 @@ function getCurrentUrl() {
 
 function getBlogUrl($blog) {
   if (!empty($blog['slug'])) {
-    return 'blog/' . rawurlencode($blog['slug']);
+    return '/blog/' . rawurlencode($blog['slug']);
   }
-  return 'blog-detail.php?id=' . (int)$blog['id'];
+  return '/blog-detail.php?id=' . (int)$blog['id'];
 }
 
 $postUrl = getCurrentUrl();
@@ -170,7 +170,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
         <div class="col-lg-10 mx-auto">
           <!-- Blog Header -->
           <div class="blog-detail-header mb-4">
-            <a href="blog" class="text-primary mb-3 d-inline-block">
+            <a href="/blog" class="text-primary mb-3 d-inline-block">
               <i class="fas fa-arrow-left me-2"></i>Back to Blog
             </a>
             
@@ -179,7 +179,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
               <div class="alert alert-warning">
                 <i class="fas fa-exclamation-triangle me-2"></i>
                 Sorry, this blog post could not be found or has been removed.
-                <a href="blog" class="alert-link">Go back to blog</a>
+                <a href="/blog" class="alert-link">Go back to blog</a>
               </div>
             <?php else: ?>
               <h1 class="display-5 fw-bold mb-3"><?php echo htmlspecialchars($blog['title']); ?></h1>
@@ -249,7 +249,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
                   <i class="fab fa-whatsapp me-2"></i>WhatsApp
                 </a>
               </div>
-            </div>
+            </div> 
 
             <!-- Related Posts -->
             <?php if (count($relatedBlogs) > 0): ?>

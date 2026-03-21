@@ -30,9 +30,9 @@ function getImageUrl($imageUrl) {
 
   function getBlogUrl($blog) {
     if (!empty($blog['slug'])) {
-      return 'blog/' . rawurlencode($blog['slug']);
+      return '/blog/' . rawurlencode($blog['slug']);
     }
-    return 'blog-detail.php?id=' . (int)$blog['id'];
+    return '/blog-detail.php?id=' . (int)$blog['id'];
   }
 ?>
 <!DOCTYPE html>
