@@ -319,6 +319,12 @@ function generateSlug($title) {
                 </a>
             </li>
             <li>
+                <a href="applications-management.php">
+                    <i class="fas fa-file-lines"></i>
+                    <span>Job Applications</span>
+                </a>
+            </li>
+            <li>
                 <a href="#" onclick="logout(); return false;">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>

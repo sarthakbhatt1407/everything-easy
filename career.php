@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $emailBody .= "We have received your application and will review it shortly. We appreciate your interest in joining our team.\n\n";
             $emailBody .= "If your profile matches our requirements, our HR team will contact you within 5-7 business days.\n\n";
             $emailBody .= "Best regards,\n";
-            $emailBody .= "Everything Easy Technology Team\n";
+            $emailBody .= "EverythingEasy Technology Team\n";
             $emailBody .= "Email: info@everythingeasy.in\n";
             $emailBody .= "Phone: +91-8630840577\n";
 
