@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $uploadPath = $uploadDir . $newFileName;
                     
                     if (move_uploaded_file($_FILES['blog_image']['tmp_name'], $uploadPath)) {
-                        $imageUrl = 'uploads/blog-images/' . $newFileName;
+                         $imageUrl = 'uploads/blog-images/' . $newFileName;
                     } else {
                         $message = 'Failed to upload image.';
                         $messageType = 'danger';
@@ -521,7 +521,7 @@ function generateSlug($title) {
 
                                 <div class="mb-3">
                                     <label for="blogContent" class="form-label">Content *</label>
-                                    <textarea class="form-control" id="blogContent" name="content" rows="15" required></textarea>
+                                    <textarea class="form-control" id="blogContent" name="content" rows="15"></textarea>
                                     <small class="text-muted">Use the editor toolbar for Word-like formatting (headings, bold, lists, links, tables, etc.)</small>
                                 </div>
                             </div>
@@ -760,6 +760,19 @@ function generateSlug($title) {
 
             if (blogContentEditor) {
                 document.getElementById('blogContent').value = blogContentEditor.getData();
+            }
+
+            const contentValue = document.getElementById('blogContent').value || '';
+            const plainTextContent = contentValue.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+            if (!plainTextContent) {
+                e.preventDefault();
+                alert('Please add blog content.');
+                if (blogContentEditor) {
+                    blogContentEditor.editing.view.focus();
+                } else {
+                    document.getElementById('blogContent').focus();
+                }
+                return false;
             }
             
             // For new posts (create), require either file or URL
