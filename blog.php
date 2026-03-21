@@ -27,6 +27,13 @@ function getImageUrl($imageUrl) {
     // Otherwise, it's a local path, return as is (relative path)
     return $imageUrl;
 }
+
+  function getBlogUrl($blog) {
+    if (!empty($blog['slug'])) {
+      return 'blog/' . rawurlencode($blog['slug']);
+    }
+    return 'blog-detail.php?id=' . (int)$blog['id'];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,13 +132,13 @@ function getImageUrl($imageUrl) {
                     </span>
                   </div>
                   <h4 class="blog-title fw-bold mb-3">
-                    <a href="blog-detail.php?id=<?php echo $blog['id']; ?>" class="text-dark">
+                    <a href="<?php echo htmlspecialchars(getBlogUrl($blog)); ?>" class="text-dark">
                       <?php echo htmlspecialchars($blog['title']); ?>
                     </a>
                   </h4>
                   <p class="text-muted mb-3"><?php echo htmlspecialchars($blog['excerpt']); ?></p>
                   <div class="d-flex justify-content-between align-items-center">
-                    <a href="blog-detail.php?id=<?php echo $blog['id']; ?>" class="btn btn-outline-primary">
+                    <a href="<?php echo htmlspecialchars(getBlogUrl($blog)); ?>" class="btn btn-outline-primary">
                       Read More <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                     <?php if ($blog['views'] > 0): ?>

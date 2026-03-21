@@ -1,28 +1,28 @@
 <?php
 require_once 'backend/config.php';
 
-// Get blog ID from URL
+// Support both clean slug URLs and legacy ?id= URLs.
+$slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 $blogId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if ($blogId === 0) {
-    header('Location: blog.php');
-    exit;
+if ($slug === '' && $blogId === 0) {
+  header('Location: blog');
+  exit;
 }
 
 // Get blog post
 $conn = getDBConnection();
 
-// Increment view count
-$updateSql = "UPDATE blogs SET views = views + 1 WHERE id = ?";
-$updateStmt = $conn->prepare($updateSql);
-$updateStmt->bind_param("i", $blogId);
-$updateStmt->execute();
-$updateStmt->close();
-
-// Get blog details
-$sql = "SELECT * FROM blogs WHERE id = ? AND status = 'published'";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $blogId);
+// Get blog details by slug if available, otherwise by legacy ID.
+if ($slug !== '') {
+  $sql = "SELECT * FROM blogs WHERE slug = ? AND status = 'published'";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $slug);
+} else {
+  $sql = "SELECT * FROM blogs WHERE id = ? AND status = 'published'";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $blogId);
+}
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -30,8 +30,22 @@ if ($result->num_rows === 0) {
     $blogNotFound = true;
     $blog = null;
 } else {
-    $blogNotFound = false;
-    $blog = $result->fetch_assoc();
+  $blogNotFound = false;
+  $blog = $result->fetch_assoc();
+  $blogId = (int)$blog['id'];
+
+  // Canonical redirect from old ?id URL to clean /blog/{slug} URL.
+  if (!empty($blog['slug']) && $slug === '' && isset($_GET['id'])) {
+    header('Location: /blog/' . rawurlencode($blog['slug']), true, 301);
+    exit;
+  }
+
+  // Increment view count only for valid posts.
+  $updateSql = "UPDATE blogs SET views = views + 1 WHERE id = ?";
+  $updateStmt = $conn->prepare($updateSql);
+  $updateStmt->bind_param("i", $blogId);
+  $updateStmt->execute();
+  $updateStmt->close();
 }
 $stmt->close();
 
@@ -67,8 +81,15 @@ function getImageUrl($imageUrl) {
 }
 
 function getCurrentUrl() {
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-    return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+  return $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+}
+
+function getBlogUrl($blog) {
+  if (!empty($blog['slug'])) {
+    return 'blog/' . rawurlencode($blog['slug']);
+  }
+  return 'blog-detail.php?id=' . (int)$blog['id'];
 }
 
 $postUrl = getCurrentUrl();
@@ -149,7 +170,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
         <div class="col-lg-10 mx-auto">
           <!-- Blog Header -->
           <div class="blog-detail-header mb-4">
-            <a href="blog.php" class="text-primary mb-3 d-inline-block">
+            <a href="blog" class="text-primary mb-3 d-inline-block">
               <i class="fas fa-arrow-left me-2"></i>Back to Blog
             </a>
             
@@ -158,7 +179,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
               <div class="alert alert-warning">
                 <i class="fas fa-exclamation-triangle me-2"></i>
                 Sorry, this blog post could not be found or has been removed.
-                <a href="blog.php" class="alert-link">Go back to blog</a>
+                <a href="blog" class="alert-link">Go back to blog</a>
               </div>
             <?php else: ?>
               <h1 class="display-5 fw-bold mb-3"><?php echo htmlspecialchars($blog['title']); ?></h1>
@@ -244,7 +265,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
                              style="height: 200px; object-fit: cover; width: 100%;" />
                         <div class="p-3">
                           <h6 class="fw-bold mb-2">
-                            <a href="blog-detail.php?id=<?php echo $relatedBlog['id']; ?>" class="text-dark">
+                            <a href="<?php echo htmlspecialchars(getBlogUrl($relatedBlog)); ?>" class="text-dark">
                               <?php echo htmlspecialchars($relatedBlog['title']); ?>
                             </a>
                           </h6>
