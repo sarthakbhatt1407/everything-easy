@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'create':
-                $title = mysqli_real_escape_string($conn, $_POST['title']);
+                $rawTitle = trim($_POST['title']);
+                $title = mysqli_real_escape_string($conn, $rawTitle);
                 $excerpt = mysqli_real_escape_string($conn, $_POST['excerpt']);
                 $content = mysqli_real_escape_string($conn, $_POST['content']);
                 $category = mysqli_real_escape_string($conn, $_POST['category']);
@@ -20,6 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tags = mysqli_real_escape_string($conn, $_POST['tags']);
                 $metaDescription = mysqli_real_escape_string($conn, $_POST['meta_description']);
                 $metaKeywords = mysqli_real_escape_string($conn, $_POST['meta_keywords']);
+
+                $slug = generateSlug($rawTitle);
+                if (empty($slug)) {
+                    $message = 'Unable to generate slug from this title. Please use a different title.';
+                    $messageType = 'danger';
+                    break;
+                }
+
+                $slugCheckSql = "SELECT id FROM blogs WHERE slug = ? LIMIT 1";
+                $slugCheckStmt = $conn->prepare($slugCheckSql);
+                $slugCheckStmt->bind_param("s", $slug);
+                $slugCheckStmt->execute();
+                $slugCheckResult = $slugCheckStmt->get_result();
+                if ($slugCheckResult->num_rows > 0) {
+                    $slugCheckStmt->close();
+                    $message = 'This title is already in use.';
+                    $messageType = 'danger';
+                    break;
+                }
+                $slugCheckStmt->close();
                 
                 // Handle image upload
                 $imageUrl = '';
@@ -63,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
                 
-                $sql = "INSERT INTO blogs (title, excerpt, meta_description, meta_keywords, content, image_url, category, author, status, tags) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO blogs (title, slug, excerpt, meta_description, meta_keywords, content, image_url, category, author, status, tags) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ssssssssss", $title, $excerpt, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags);
+                $stmt->bind_param("sssssssssss", $title, $slug, $excerpt, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags);
                 
                 if ($stmt->execute()) {
                     $message = 'Blog post created successfully!';
@@ -80,7 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
             case 'update':
                 $id = intval($_POST['id']);
-                $title = mysqli_real_escape_string($conn, $_POST['title']);
+                $rawTitle = trim($_POST['title']);
+                $title = mysqli_real_escape_string($conn, $rawTitle);
                 $excerpt = mysqli_real_escape_string($conn, $_POST['excerpt']);
                 $content = mysqli_real_escape_string($conn, $_POST['content']);
                 $category = mysqli_real_escape_string($conn, $_POST['category']);
@@ -89,6 +111,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tags = mysqli_real_escape_string($conn, $_POST['tags']);
                 $metaDescription = mysqli_real_escape_string($conn, $_POST['meta_description']);
                 $metaKeywords = mysqli_real_escape_string($conn, $_POST['meta_keywords']);
+
+                $slug = generateSlug($rawTitle);
+                if (empty($slug)) {
+                    $message = 'Unable to generate slug from this title. Please use a different title.';
+                    $messageType = 'danger';
+                    break;
+                }
+
+                $slugCheckSql = "SELECT id FROM blogs WHERE slug = ? AND id != ? LIMIT 1";
+                $slugCheckStmt = $conn->prepare($slugCheckSql);
+                $slugCheckStmt->bind_param("si", $slug, $id);
+                $slugCheckStmt->execute();
+                $slugCheckResult = $slugCheckStmt->get_result();
+                if ($slugCheckResult->num_rows > 0) {
+                    $slugCheckStmt->close();
+                    $message = 'This title is already in use.';
+                    $messageType = 'danger';
+                    break;
+                }
+                $slugCheckStmt->close();
                 
                 // Handle image upload for update
                 $imageUrl = mysqli_real_escape_string($conn, $_POST['existing_image_url']);
@@ -132,11 +174,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $imageUrl = mysqli_real_escape_string($conn, $_POST['image_url']);
                 }
                 
-                $sql = "UPDATE blogs SET title = ?, excerpt = ?, content = ?, image_url = ?, 
+                $sql = "UPDATE blogs SET title = ?, slug = ?, excerpt = ?, content = ?, image_url = ?, 
                     category = ?, author = ?, status = ?, tags = ?, meta_description = ?, meta_keywords = ?, updated_at = CURRENT_TIMESTAMP 
                         WHERE id = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ssssssssssi", $title, $excerpt, $content, $imageUrl, $category, $author, $status, $tags, $metaDescription, $metaKeywords, $id);
+                $stmt->bind_param("sssssssssssi", $title, $slug, $excerpt, $content, $imageUrl, $category, $author, $status, $tags, $metaDescription, $metaKeywords, $id);
                 
                 if ($stmt->execute()) {
                     $message = 'Blog post updated successfully!';
@@ -208,6 +250,13 @@ function getImageUrl($imageUrl) {
     }
     // Otherwise, it's a local path relative to project root
     return '../' . $imageUrl;
+}
+
+function generateSlug($title) {
+    $slug = strtolower(trim($title));
+    $slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+    $slug = preg_replace('/[\s-]+/', '-', $slug);
+    return trim($slug, '-');
 }
 ?>
 <!DOCTYPE html>
@@ -419,10 +468,9 @@ function getImageUrl($imageUrl) {
                                                    class="btn-action btn-view" title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <button class="btn-action btn-edit" title="Edit" 
-                                                        onclick='editBlog(<?php echo json_encode($blog); ?>)'>
+                                                <a href="edit-blog.php?id=<?php echo $blog['id']; ?>" class="btn-action btn-edit" title="Edit">
                                                     <i class="fas fa-edit"></i>
-                                                </button>
+                                                </a>
                                                 <form method="POST" style="display: inline;" 
                                                       onsubmit="return confirm('Are you sure you want to delete this blog post?');">
                                                     <input type="hidden" name="action" value="delete">
