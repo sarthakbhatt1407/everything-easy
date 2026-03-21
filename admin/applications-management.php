@@ -124,7 +124,7 @@ function getResumeUrl($path) {
             </div>
             <div class="topnav-right">
                 <div class="admin-profile">
-                     <img src="../image/logo.jpg" alt="EverythingEasy Logo" class="admin-avatar">
+                    <img src="../images/logo.jpg" alt="EverythingEasy Logo" class="admin-avatar">
                     <span>Admin</span>
                 </div>
                 <button class="btn btn-sm btn-outline-danger ms-3" onclick="logout()" title="Logout">
