@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $author = mysqli_real_escape_string($conn, $_POST['author']);
                 $status = mysqli_real_escape_string($conn, $_POST['status']);
                 $tags = mysqli_real_escape_string($conn, $_POST['tags']);
+                $metaDescription = mysqli_real_escape_string($conn, $_POST['meta_description']);
+                $metaKeywords = mysqli_real_escape_string($conn, $_POST['meta_keywords']);
                 
                 // Handle image upload
                 $imageUrl = '';
@@ -61,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
                 
-                $sql = "INSERT INTO blogs (title, excerpt, content, image_url, category, author, status, tags) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO blogs (title, excerpt, meta_description, meta_keywords, content, image_url, category, author, status, tags) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ssssssss", $title, $excerpt, $content, $imageUrl, $category, $author, $status, $tags);
+                $stmt->bind_param("ssssssssss", $title, $excerpt, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags);
                 
                 if ($stmt->execute()) {
                     $message = 'Blog post created successfully!';
@@ -85,6 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $author = mysqli_real_escape_string($conn, $_POST['author']);
                 $status = mysqli_real_escape_string($conn, $_POST['status']);
                 $tags = mysqli_real_escape_string($conn, $_POST['tags']);
+                $metaDescription = mysqli_real_escape_string($conn, $_POST['meta_description']);
+                $metaKeywords = mysqli_real_escape_string($conn, $_POST['meta_keywords']);
                 
                 // Handle image upload for update
                 $imageUrl = mysqli_real_escape_string($conn, $_POST['existing_image_url']);
@@ -129,10 +133,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 
                 $sql = "UPDATE blogs SET title = ?, excerpt = ?, content = ?, image_url = ?, 
-                        category = ?, author = ?, status = ?, tags = ?, updated_at = CURRENT_TIMESTAMP 
+                    category = ?, author = ?, status = ?, tags = ?, meta_description = ?, meta_keywords = ?, updated_at = CURRENT_TIMESTAMP 
                         WHERE id = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ssssssssi", $title, $excerpt, $content, $imageUrl, $category, $author, $status, $tags, $id);
+                $stmt->bind_param("ssssssssssi", $title, $excerpt, $content, $imageUrl, $category, $author, $status, $tags, $metaDescription, $metaKeywords, $id);
                 
                 if ($stmt->execute()) {
                     $message = 'Blog post updated successfully!';
@@ -543,6 +547,18 @@ function getImageUrl($imageUrl) {
                                     <label for="blogTags" class="form-label">Tags (comma separated)</label>
                                     <input type="text" class="form-control" id="blogTags" name="tags" placeholder="web, design, seo">
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="blogMetaDescription" class="form-label">Meta Description</label>
+                                    <textarea class="form-control" id="blogMetaDescription" name="meta_description" rows="3"
+                                              placeholder="SEO meta description for search engines (recommended: 150-160 characters)"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="blogMetaKeywords" class="form-label">Meta Keywords</label>
+                                    <input type="text" class="form-control" id="blogMetaKeywords" name="meta_keywords"
+                                           placeholder="keyword1, keyword2, keyword3">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -567,6 +583,8 @@ function getImageUrl($imageUrl) {
             document.getElementById('existingImageUrl').value = '';
             document.getElementById('blogModalTitle').innerHTML = '<i class="fas fa-plus-circle me-2"></i>Add New Blog Post';
             document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('blogMetaDescription').value = '';
+            document.getElementById('blogMetaKeywords').value = '';
             
             // Remove required attribute from file input and URL input for new posts
             document.getElementById('blogImageFile').removeAttribute('required');
@@ -585,6 +603,8 @@ function getImageUrl($imageUrl) {
             document.getElementById('blogAuthor').value = blog.author;
             document.getElementById('blogStatus').value = blog.status;
             document.getElementById('blogTags').value = blog.tags || '';
+            document.getElementById('blogMetaDescription').value = blog.meta_description || '';
+            document.getElementById('blogMetaKeywords').value = blog.meta_keywords || '';
             document.getElementById('blogModalTitle').innerHTML = '<i class="fas fa-edit me-2"></i>Edit Blog Post';
             
             // Show existing image preview

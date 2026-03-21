@@ -70,6 +70,25 @@ function getCurrentUrl() {
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     return $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 }
+
+$postUrl = getCurrentUrl();
+$createdDate = $blog ? date('c', strtotime($blog['created_at'])) : date('c');
+$imageUrl = $blog ? getImageUrl($blog['image_url']) : '';
+
+$defaultDescription = 'Read the latest insights and updates from EverythingEasy Technology.';
+$metaDescription = $defaultDescription;
+if ($blog && !empty($blog['meta_description'])) {
+  $metaDescription = trim($blog['meta_description']);
+} elseif ($blog && !empty($blog['excerpt'])) {
+  $metaDescription = trim(strip_tags($blog['excerpt']));
+}
+
+$metaKeywords = 'everythingeasy, technology, blog';
+if ($blog && !empty($blog['meta_keywords'])) {
+  $metaKeywords = trim($blog['meta_keywords']);
+} elseif ($blog && !empty($blog['tags'])) {
+  $metaKeywords = trim($blog['tags']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +100,8 @@ function getCurrentUrl() {
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="theme-color" content="#0066cc" />
+  <meta name="description" content="<?php echo htmlspecialchars($metaDescription, ENT_QUOTES, 'UTF-8'); ?>" />
+  <meta name="keywords" content="<?php echo htmlspecialchars($metaKeywords, ENT_QUOTES, 'UTF-8'); ?>" />
   <title><?php echo $blog ? htmlspecialchars($blog['title']) . ' - ' : ''; ?>EverythingEasy Technology</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -92,11 +113,11 @@ function getCurrentUrl() {
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "<?php echo $post_url; ?>"
+    "@id": "<?php echo htmlspecialchars($postUrl, ENT_QUOTES, 'UTF-8'); ?>"
   },
-  "headline": "<?php echo htmlspecialchars($blog['title']); ?>",
-  "description": "<?php echo htmlspecialchars($blog['excerpt'] ); ?>",
-  "image": "<?php echo $image_url; ?>",
+  "headline": "<?php echo $blog ? htmlspecialchars($blog['title'], ENT_QUOTES, 'UTF-8') : 'Blog Post'; ?>",
+  "description": "<?php echo htmlspecialchars($metaDescription, ENT_QUOTES, 'UTF-8'); ?>",
+  "image": "<?php echo htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8'); ?>",
   "author": {
     "@type": "Organization",
     "name": "EverythingEasy"
@@ -109,9 +130,9 @@ function getCurrentUrl() {
       "url": "https://everythingeasy.in/assets/logo.png"
     }
   },
-  "datePublished": "<?php echo $created_date; ?>",
-  "dateModified": "<?php echo $created_date; ?>",
-  "url": "<?php echo $post_url; ?>"
+  "datePublished": "<?php echo htmlspecialchars($createdDate, ENT_QUOTES, 'UTF-8'); ?>",
+  "dateModified": "<?php echo htmlspecialchars($createdDate, ENT_QUOTES, 'UTF-8'); ?>",
+  "url": "<?php echo htmlspecialchars($postUrl, ENT_QUOTES, 'UTF-8'); ?>"
 }
 </script>
 

@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS blogs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     excerpt TEXT NOT NULL,
+    meta_description TEXT,
+    meta_keywords VARCHAR(500),
     content LONGTEXT NOT NULL,
     image_url VARCHAR(500) NOT NULL,
     category VARCHAR(100) NOT NULL,

@@ -125,12 +125,14 @@ function createBlog($conn, $data) {
     $author = mysqli_real_escape_string($conn, $data['author']);
     $status = isset($data['status']) ? mysqli_real_escape_string($conn, $data['status']) : 'draft';
     $tags = isset($data['tags']) ? mysqli_real_escape_string($conn, $data['tags']) : '';
+        $metaDescription = isset($data['meta_description']) ? mysqli_real_escape_string($conn, $data['meta_description']) : '';
+        $metaKeywords = isset($data['meta_keywords']) ? mysqli_real_escape_string($conn, $data['meta_keywords']) : '';
     
-    $sql = "INSERT INTO blogs (title, excerpt, content, image_url, category, author, status, tags) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO blogs (title, excerpt, meta_description, meta_keywords, content, image_url, category, author, status, tags) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssss", $title, $excerpt, $content, $imageUrl, $category, $author, $status, $tags);
+        $stmt->bind_param("ssssssssss", $title, $excerpt, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags);
     
     if ($stmt->execute()) {
         sendJSONResponse(true, 'Blog created successfully', ['id' => $stmt->insert_id]);
@@ -155,10 +157,14 @@ function updateBlog($conn, $data) {
     $author = mysqli_real_escape_string($conn, $data['author']);
     $status = mysqli_real_escape_string($conn, $data['status']);
     $tags = isset($data['tags']) ? mysqli_real_escape_string($conn, $data['tags']) : '';
+        $metaDescription = isset($data['meta_description']) ? mysqli_real_escape_string($conn, $data['meta_description']) : '';
+        $metaKeywords = isset($data['meta_keywords']) ? mysqli_real_escape_string($conn, $data['meta_keywords']) : '';
     
     $sql = "UPDATE blogs SET 
             title = ?, 
             excerpt = ?, 
+            meta_description = ?,
+            meta_keywords = ?,
             content = ?, 
             image_url = ?, 
             category = ?, 
@@ -169,7 +175,7 @@ function updateBlog($conn, $data) {
             WHERE id = ?";
     
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssi", $title, $excerpt, $content, $imageUrl, $category, $author, $status, $tags, $id);
+        $stmt->bind_param("ssssssssssi", $title, $excerpt, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags, $id);
     
     if ($stmt->execute()) {
         sendJSONResponse(true, 'Blog updated successfully');
