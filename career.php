@@ -657,12 +657,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           .then((data) => {
             alert(data.message);
             if (data.success === true) {
-              document.getElementById(\"careerForm\").reset();
+              document.getElementById("careerForm").reset();
             }
           })
           .catch((err) => {
-            console.error(\"Fetch error:\", err);
-            alert(\"Error: \" + err.message);
+            console.error("Fetch error:", err);
+            alert("Error: " + err.message);
           });
       });
   </script>
