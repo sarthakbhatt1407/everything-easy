@@ -474,7 +474,7 @@ function getImageUrl($imageUrl) {
                                 <div class="mb-3">
                                     <label for="blogContent" class="form-label">Content *</label>
                                     <textarea class="form-control" id="blogContent" name="content" rows="15" required></textarea>
-                                    <small class="text-muted">You can use HTML tags for formatting</small>
+                                    <small class="text-muted">Use the editor toolbar for Word-like formatting (headings, bold, lists, links, tables, etc.)</small>
                                 </div>
                             </div>
 
@@ -575,7 +575,32 @@ function getImageUrl($imageUrl) {
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
     <script>
+        let blogContentEditor = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#blogContent'), {
+                    toolbar: [
+                        'heading', '|',
+                        'bold', 'italic', 'underline', '|',
+                        'link', 'bulletedList', 'numberedList', '|',
+                        'blockQuote', 'insertTable', '|',
+                        'undo', 'redo'
+                    ],
+                    table: {
+                        contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+                    }
+                })
+                .then(function(editor) {
+                    blogContentEditor = editor;
+                })
+                .catch(function(error) {
+                    console.error('Failed to initialize content editor:', error);
+                });
+        });
+
         function resetForm() {
             document.getElementById('blogForm').reset();
             document.getElementById('formAction').value = 'create';
@@ -585,6 +610,10 @@ function getImageUrl($imageUrl) {
             document.getElementById('imagePreview').style.display = 'none';
             document.getElementById('blogMetaDescription').value = '';
             document.getElementById('blogMetaKeywords').value = '';
+
+            if (blogContentEditor) {
+                blogContentEditor.setData('');
+            }
             
             // Remove required attribute from file input and URL input for new posts
             document.getElementById('blogImageFile').removeAttribute('required');
@@ -596,7 +625,11 @@ function getImageUrl($imageUrl) {
             document.getElementById('blogId').value = blog.id;
             document.getElementById('blogTitle').value = blog.title;
             document.getElementById('blogExcerpt').value = blog.excerpt;
-            document.getElementById('blogContent').value = blog.content;
+            if (blogContentEditor) {
+                blogContentEditor.setData(blog.content || '');
+            } else {
+                document.getElementById('blogContent').value = blog.content;
+            }
             document.getElementById('existingImageUrl').value = blog.image_url;
             document.getElementById('blogImageUrl').value = blog.image_url;
             document.getElementById('blogCategory').value = blog.category;
@@ -676,6 +709,10 @@ function getImageUrl($imageUrl) {
             const fileInput = document.getElementById('blogImageFile');
             const urlInput = document.getElementById('blogImageUrl');
             const existingUrl = document.getElementById('existingImageUrl');
+
+            if (blogContentEditor) {
+                document.getElementById('blogContent').value = blogContentEditor.getData();
+            }
             
             // For new posts (create), require either file or URL
             if (document.getElementById('formAction').value === 'create') {
