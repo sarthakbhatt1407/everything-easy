@@ -1,144 +1,146 @@
 <?php
 require_once 'backend/config.php';
 
-$response = ['success' => false, 'message' => ''];
+$formSuccess = false;
+$formMessage = '';
+
+$formData = [
+  'fullName' => '',
+  'email' => '',
+  'phone' => '',
+  'position' => '',
+  'experience' => '',
+  'portfolio' => '',
+  'coverLetter' => ''
+];
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if resume exists
-    if (!isset($_FILES['resume']) || $_FILES['resume']['error'] === UPLOAD_ERR_NO_FILE) {
-        $response['message'] = 'Resume file is required';
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
-    }
+  foreach ($formData as $key => $value) {
+    $formData[$key] = trim($_POST[$key] ?? '');
+  }
 
+  // Check if resume exists
+  if (!isset($_FILES['resume']) || $_FILES['resume']['error'] === UPLOAD_ERR_NO_FILE) {
+    $formMessage = 'Resume file is required';
+  }
+
+  if ($formMessage === '') {
     // Validate required fields
     $required = ['fullName', 'email', 'phone', 'position', 'experience', 'coverLetter'];
     foreach ($required as $field) {
-        if (empty($_POST[$field])) {
-            $response['message'] = ucfirst(str_replace('_', ' ', $field)) . ' is required';
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit;
+      if (empty($_POST[$field])) {
+        $formMessage = ucfirst(str_replace('_', ' ', $field)) . ' is required';
+        break;
+      }
         }
     }
 
-    // Validate email
-    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $response['message'] = 'Invalid email format';
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
+  // Validate email
+  if ($formMessage === '' && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    $formMessage = 'Invalid email format';
     }
 
     // Prepare inputs
-    $fullName = trim($_POST['fullName']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $position = trim($_POST['position']);
+  $fullName = $formData['fullName'];
+  $email = $formData['email'];
+  $phone = $formData['phone'];
+  $position = $formData['position'];
     $experience = (int) $_POST['experience'];
-    $portfolio = trim($_POST['portfolio'] ?? '');
-    $coverLetter = trim($_POST['coverLetter']);
+  $portfolio = $formData['portfolio'];
+  $coverLetter = $formData['coverLetter'];
 
     // Validate and upload resume
+  if ($formMessage === '') {
     $resume = $_FILES['resume'];
     $allowed_ext = ['pdf'];
     $file_ext = strtolower(pathinfo($resume['name'], PATHINFO_EXTENSION));
 
     if (!in_array($file_ext, $allowed_ext)) {
-        $response['message'] = 'Only PDF files are allowed';
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
-    }
-
-    if ($resume['size'] > 5 * 1024 * 1024) {
-        $response['message'] = 'File size too large. Maximum is 5MB';
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
-    }
-
-    // Create upload directory
-    $uploadDir = __DIR__ . '/upload/';
-    if (!file_exists($uploadDir)) {
+      $formMessage = 'Only PDF files are allowed';
+    } elseif ($resume['size'] > 5 * 1024 * 1024) {
+      $formMessage = 'File size too large. Maximum is 5MB';
+    } else {
+      // Create upload directory
+      $uploadDir = __DIR__ . '/upload/';
+      if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0755, true);
-    }
+      }
 
-    // Upload file
-    $fileName = uniqid('RESUME_') . '.' . $file_ext;
-    $uploadPath = $uploadDir . $fileName;
-    $dbFilePath = 'upload/' . $fileName;
+      // Upload file
+      $fileName = uniqid('RESUME_') . '.' . $file_ext;
+      $uploadPath = $uploadDir . $fileName;
+      $dbFilePath = 'upload/' . $fileName;
 
-    if (!move_uploaded_file($resume['tmp_name'], $uploadPath)) {
-        $response['message'] = 'Failed to upload resume';
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
-    }
-
-    // Insert into database
-    $conn = getDBConnection();
-    $sql = "INSERT INTO job_applications 
+      if (!move_uploaded_file($resume['tmp_name'], $uploadPath)) {
+        $formMessage = 'Failed to upload resume';
+      } else {
+        // Insert into database
+        $conn = getDBConnection();
+        $sql = "INSERT INTO job_applications 
             (full_name, email, phone, position, experience, portfolio, cover_letter, resume_path) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        $response['message'] = 'Database error occurred';
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+          $formMessage = 'Database error occurred';
+        } else {
+          $stmt->bind_param("ssssisss", $fullName, $email, $phone, $position, $experience, $portfolio, $coverLetter, $dbFilePath);
+
+          if ($stmt->execute()) {
+            // Send thank you email
+            $subject = 'Application Received - Everything Easy Technology';
+            $emailBody = "Hi $fullName,\n\n";
+            $emailBody .= "Thank you for applying for the position of $position at Everything Easy Technology!\n\n";
+            $emailBody .= "We have received your application and will review it shortly. We appreciate your interest in joining our team.\n\n";
+            $emailBody .= "If your profile matches our requirements, our HR team will contact you within 5-7 business days.\n\n";
+            $emailBody .= "Best regards,\n";
+            $emailBody .= "Everything Easy Technology Team\n";
+            $emailBody .= "Email: info@everythingeasy.in\n";
+            $emailBody .= "Phone: +91-8630840577\n";
+
+            $headers = "From: info@everythingeasy.in\r\n";
+            $headers .= "Reply-To: info@everythingeasy.in\r\n";
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+            @mail($email, $subject, $emailBody, $headers);
+
+            // Also send notification to admin
+            $adminSubject = 'New Job Application - ' . $position;
+            $adminBody = "New application received:\n\n";
+            $adminBody .= "Name: $fullName\n";
+            $adminBody .= "Email: $email\n";
+            $adminBody .= "Phone: $phone\n";
+            $adminBody .= "Position: $position\n";
+            $adminBody .= "Experience: $experience years\n";
+            $adminBody .= "Portfolio: $portfolio\n";
+            $adminBody .= "Cover Letter:\n$coverLetter\n";
+            $adminBody .= "\nResume: " . $dbFilePath;
+
+            @mail('info@everythingeasy.in', $adminSubject, $adminBody, $headers);
+
+            $formSuccess = true;
+            $formMessage = 'Application submitted successfully! Thank you for applying. A confirmation email has been sent to ' . $email;
+            $formData = [
+              'fullName' => '',
+              'email' => '',
+              'phone' => '',
+              'position' => '',
+              'experience' => '',
+              'portfolio' => '',
+              'coverLetter' => ''
+            ];
+          } else {
+            $formMessage = 'Failed to submit application';
+          }
+
+          $stmt->close();
+        }
+
+        closeDBConnection($conn);
+      }
     }
-
-    $stmt->bind_param("ssssisss", $fullName, $email, $phone, $position, $experience, $portfolio, $coverLetter, $dbFilePath);
-
-    if ($stmt->execute()) {
-        // Send thank you email
-        $subject = 'Application Received - Everything Easy Technology';
-        $emailBody = "Hi $fullName,\n\n";
-        $emailBody .= "Thank you for applying for the position of $position at Everything Easy Technology!\n\n";
-        $emailBody .= "We have received your application and will review it shortly. We appreciate your interest in joining our team.\n\n";
-        $emailBody .= "If your profile matches our requirements, our HR team will contact you within 5-7 business days.\n\n";
-        $emailBody .= "Best regards,\n";
-        $emailBody .= "Everything Easy Technology Team\n";
-        $emailBody .= "Email: info@everythingeasy.in\n";
-        $emailBody .= "Phone: +91-8630840577\n";
-
-        $headers = "From: info@everythingeasy.in\r\n";
-        $headers .= "Reply-To: info@everythingeasy.in\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-        // Try to send email
-        @mail($email, $subject, $emailBody, $headers);
-
-        // Also send notification to admin
-        $adminSubject = 'New Job Application - ' . $position;
-        $adminBody = "New application received:\n\n";
-        $adminBody .= "Name: $fullName\n";
-        $adminBody .= "Email: $email\n";
-        $adminBody .= "Phone: $phone\n";
-        $adminBody .= "Position: $position\n";
-        $adminBody .= "Experience: $experience years\n";
-        $adminBody .= "Portfolio: $portfolio\n";
-        $adminBody .= "Cover Letter:\n$coverLetter\n";
-        $adminBody .= "\nResume: " . $dbFilePath;
-
-        @mail('info@everythingeasy.in', $adminSubject, $adminBody, $headers);
-
-        $response['success'] = true;
-        $response['message'] = 'Application submitted successfully! Thank you for applying. A confirmation email has been sent to ' . $email;
-    } else {
-        $response['message'] = 'Failed to submit application';
-    }
-
-    $stmt->close();
-    closeDBConnection($conn);
-
-    header('Content-Type: application/json');
-    echo json_encode($response);
-    exit;
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -538,43 +540,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="col-lg-8 mx-auto">
           <div class="bg-white rounded shadow p-4 p-md-5">
             <h3 class="fw-bold mb-4 text-center">Apply for a Position</h3>
+            <?php if (!empty($formMessage)): ?>
+              <div class="alert <?php echo $formSuccess ? 'alert-success' : 'alert-danger'; ?>" role="alert">
+                <?php echo htmlspecialchars($formMessage); ?>
+              </div>
+            <?php endif; ?>
             <form id="careerForm" method="POST" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="fullName" class="form-label">Full Name *</label>
-                  <input type="text" class="form-control" id="fullName" name="fullName" required />
+                  <input type="text" class="form-control" id="fullName" name="fullName" value="<?php echo htmlspecialchars($formData['fullName']); ?>" required />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="email" class="form-label">Email *</label>
-                  <input type="email" class="form-control" id="email" name="email" required />
+                  <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($formData['email']); ?>" required />
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="phone" class="form-label">Phone Number *</label>
-                  <input type="tel" class="form-control" id="phone" name="phone" required />
+                  <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo htmlspecialchars($formData['phone']); ?>" required />
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="position" class="form-label">Position Applied For *</label>
                   <select class="form-select" id="position" name="position" required>
                     <option value="">Select Position</option>
-                    <option value="Full Stack Developer">
+                    <option value="Full Stack Developer" <?php echo $formData['position'] === 'Full Stack Developer' ? 'selected' : ''; ?>>
                       Full Stack Developer
                     </option>
-                    <option value="UI/UX Designer">UI/UX Designer</option>
-                    <option value="Digital Marketing Specialist">
+                    <option value="UI/UX Designer" <?php echo $formData['position'] === 'UI/UX Designer' ? 'selected' : ''; ?>>UI/UX Designer</option>
+                    <option value="Digital Marketing Specialist" <?php echo $formData['position'] === 'Digital Marketing Specialist' ? 'selected' : ''; ?>>
                       Digital Marketing Specialist
                     </option>
-                    <option value="Mobile App Developer">
+                    <option value="Mobile App Developer" <?php echo $formData['position'] === 'Mobile App Developer' ? 'selected' : ''; ?>>
                       Mobile App Developer
                     </option>
-                    <option value="Other">Other</option>
+                    <option value="Other" <?php echo $formData['position'] === 'Other' ? 'selected' : ''; ?>>Other</option>
                   </select>
                 </div>
               </div>
               <div class="mb-3">
                 <label for="experience" class="form-label">Years of Experience *</label>
-                <input type="number" class="form-control" id="experience" name="experience" min="0" required />
+                <input type="number" class="form-control" id="experience" name="experience" min="0" value="<?php echo htmlspecialchars($formData['experience']); ?>" required />
               </div>
               <div class="mb-3">
                 <label for="resume" class="form-label">Resume/CV (PDF) *</label>
@@ -582,12 +589,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
               <div class="mb-3">
                 <label for="portfolio" class="form-label">Portfolio Link (Optional)</label>
-                <input type="url" class="form-control" id="portfolio" name="portfolio" placeholder="https://" />
+                <input type="url" class="form-control" id="portfolio" name="portfolio" value="<?php echo htmlspecialchars($formData['portfolio']); ?>" placeholder="https://" />
               </div>
               <div class="mb-3">
                 <label for="coverLetter" class="form-label">Cover Letter *</label>
                 <textarea class="form-control" id="coverLetter" name="coverLetter" rows="5"
-                  placeholder="Tell us why you'd be a great fit for this role..." required></textarea>
+                  placeholder="Tell us why you'd be a great fit for this role..." required><?php echo htmlspecialchars($formData['coverLetter']); ?></textarea>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-lg">
@@ -630,42 +637,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   <script src="/js/script.js"></script>
-
-  <script>
-    document
-      .getElementById("careerForm")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        let formData = new FormData(this);
-
-        // Debug: Log FormData contents
-        for (let [key, value] of formData.entries()) {
-          console.log(key, value);
-        }
-
-        fetch("/career.php", {
-          method: "POST",
-          body: formData,
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-          })
-          .then((data) => {
-            alert(data.message);
-            if (data.success === true) {
-              document.getElementById("careerForm").reset();
-            }
-          })
-          .catch((err) => {
-            console.error("Fetch error:", err);
-            alert("Error: " + err.message);
-          });
-      });
-  </script>
 </body>
 
 </html>
