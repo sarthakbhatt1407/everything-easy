@@ -92,3 +92,23 @@ INSERT INTO blogs (title, slug, excerpt, content, image_url, category, author, s
  'website, responsive design, business',
  124,
  '2025-12-01 09:15:00');
+
+-- Create job_applications table
+CREATE TABLE IF NOT EXISTS job_applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    position VARCHAR(255) NOT NULL,
+    experience INT NOT NULL,
+    portfolio VARCHAR(500),
+    cover_letter TEXT NOT NULL,
+    resume_path VARCHAR(500) NOT NULL,
+    status ENUM('pending', 'reviewing', 'accepted', 'rejected') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_email (email),
+    INDEX idx_position (position),
+    INDEX idx_status (status),
+    INDEX idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
