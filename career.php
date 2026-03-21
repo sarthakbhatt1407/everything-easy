@@ -1,3 +1,146 @@
+<?php
+require_once 'backend/config.php';
+
+$response = ['success' => false, 'message' => ''];
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if resume exists
+    if (!isset($_FILES['resume']) || $_FILES['resume']['error'] === UPLOAD_ERR_NO_FILE) {
+        $response['message'] = 'Resume file is required';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+
+    // Validate required fields
+    $required = ['fullName', 'email', 'phone', 'position', 'experience', 'coverLetter'];
+    foreach ($required as $field) {
+        if (empty($_POST[$field])) {
+            $response['message'] = ucfirst(str_replace('_', ' ', $field)) . ' is required';
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+    }
+
+    // Validate email
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $response['message'] = 'Invalid email format';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+
+    // Prepare inputs
+    $fullName = trim($_POST['fullName']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $position = trim($_POST['position']);
+    $experience = (int) $_POST['experience'];
+    $portfolio = trim($_POST['portfolio'] ?? '');
+    $coverLetter = trim($_POST['coverLetter']);
+
+    // Validate and upload resume
+    $resume = $_FILES['resume'];
+    $allowed_ext = ['pdf'];
+    $file_ext = strtolower(pathinfo($resume['name'], PATHINFO_EXTENSION));
+
+    if (!in_array($file_ext, $allowed_ext)) {
+        $response['message'] = 'Only PDF files are allowed';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+
+    if ($resume['size'] > 5 * 1024 * 1024) {
+        $response['message'] = 'File size too large. Maximum is 5MB';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+
+    // Create upload directory
+    $uploadDir = __DIR__ . '/upload/';
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    // Upload file
+    $fileName = uniqid('RESUME_') . '.' . $file_ext;
+    $uploadPath = $uploadDir . $fileName;
+    $dbFilePath = 'upload/' . $fileName;
+
+    if (!move_uploaded_file($resume['tmp_name'], $uploadPath)) {
+        $response['message'] = 'Failed to upload resume';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+
+    // Insert into database
+    $conn = getDBConnection();
+    $sql = "INSERT INTO job_applications 
+            (full_name, email, phone, position, experience, portfolio, cover_letter, resume_path) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        $response['message'] = 'Database error occurred';
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    }
+
+    $stmt->bind_param("ssssisss", $fullName, $email, $phone, $position, $experience, $portfolio, $coverLetter, $dbFilePath);
+
+    if ($stmt->execute()) {
+        // Send thank you email
+        $subject = 'Application Received - Everything Easy Technology';
+        $emailBody = "Hi $fullName,\n\n";
+        $emailBody .= "Thank you for applying for the position of $position at Everything Easy Technology!\n\n";
+        $emailBody .= "We have received your application and will review it shortly. We appreciate your interest in joining our team.\n\n";
+        $emailBody .= "If your profile matches our requirements, our HR team will contact you within 5-7 business days.\n\n";
+        $emailBody .= "Best regards,\n";
+        $emailBody .= "Everything Easy Technology Team\n";
+        $emailBody .= "Email: info@everythingeasy.in\n";
+        $emailBody .= "Phone: +91-8630840577\n";
+
+        $headers = "From: info@everythingeasy.in\r\n";
+        $headers .= "Reply-To: info@everythingeasy.in\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+        // Try to send email
+        @mail($email, $subject, $emailBody, $headers);
+
+        // Also send notification to admin
+        $adminSubject = 'New Job Application - ' . $position;
+        $adminBody = "New application received:\n\n";
+        $adminBody .= "Name: $fullName\n";
+        $adminBody .= "Email: $email\n";
+        $adminBody .= "Phone: $phone\n";
+        $adminBody .= "Position: $position\n";
+        $adminBody .= "Experience: $experience years\n";
+        $adminBody .= "Portfolio: $portfolio\n";
+        $adminBody .= "Cover Letter:\n$coverLetter\n";
+        $adminBody .= "\nResume: " . $dbFilePath;
+
+        @mail('info@everythingeasy.in', $adminSubject, $adminBody, $headers);
+
+        $response['success'] = true;
+        $response['message'] = 'Application submitted successfully! Thank you for applying. A confirmation email has been sent to ' . $email;
+    } else {
+        $response['message'] = 'Failed to submit application';
+    }
+
+    $stmt->close();
+    closeDBConnection($conn);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -501,7 +644,7 @@
           console.log(key, value);
         }
 
-        fetch("/career-submit.php", {
+        fetch("/career.php", {
           method: "POST",
           body: formData,
         })
