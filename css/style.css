@@ -233,7 +233,7 @@ body {
   background: var(--gradient-primary);
   color: white;
   padding-top: 120px !important;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
