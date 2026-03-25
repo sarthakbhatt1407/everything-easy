@@ -1309,6 +1309,11 @@ $state = $loc['state'];
                 >Services location</a
               >
             </li>
+              <li>
+              <a href="it-applications.php" class="text-muted"
+                >Services application location</a
+              >
+            </li>
           </ul>
         </div>
       </div>
