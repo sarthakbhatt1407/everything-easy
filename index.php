@@ -288,6 +288,8 @@
 <body>
   <?php require_once 'navbar.php'; ?>
 
+  <main id="main-content">
+
   <!-- Hero Section -->
   <section id="home" class="hero-section">
     <div class="hero-container">
@@ -1393,6 +1395,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <?php require_once 'footer.php'; ?>
   <div id="whatsapp-container"></div>
