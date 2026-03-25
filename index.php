@@ -37,7 +37,7 @@
   <link rel="canonical" href="https://everythingeasy.in/" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://everythingeasy.in/assets/logo.jpg" />
+  <link rel="icon" type="image/png" href="https://everythingeasy.in/images/logo.jpg" /> 
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -50,7 +50,7 @@
   <meta property="og:title" content="EverythingEasy – Website Development & Digital Marketing Company" />
   <meta property="og:description"
     content="We help businesses grow with modern websites, SEO, and digital marketing services. Fast delivery, premium quality." />
-  <meta property="og:image" content="https://everythingeasy.in/assets/logo.jpg" />
+  <meta property="og:image" content="https://everythingeasy.in/images/logo.jpg" />
   <meta property="og:url" content="https://everythingeasy.in/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="EverythingEasy" />
@@ -60,7 +60,7 @@
   <meta name="twitter:title" content="EverythingEasy – Website Development & SEO Company" />
   <meta name="twitter:description"
     content="We create responsive websites, ecommerce platforms, and provide SEO + digital marketing services." />
-  <meta name="twitter:image" content="https://everythingeasy.in/assets/logo.jpg" />
+  <meta name="twitter:image" content="https://everythingeasy.in/images/logo.jpg" />
   <meta name="twitter:site" content="@everythingeasy" />
 
   <!-- Mobile Meta -->
@@ -79,7 +79,7 @@
   "@type": "LocalBusiness",
   "name": "EverythingEasy Technology",
   "url": "https://everythingeasy.in",
-  "image": "https://everythingeasy.in/assets/logo.png",
+  "image": "https://everythingeasy.in/images/logo.jpg",
   "telephone": "+91-8630840577",
   "address": {
     "@type": "PostalAddress",
