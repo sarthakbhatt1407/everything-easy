@@ -1081,12 +1081,12 @@ $state = $loc['state'];
             <li><a href="#" class="text-muted">Custom Software</a></li>
             <li>
               <a href="services-locations" class="text-muted"
-                >Services location</a
+                >Services location web</a
               >
             </li>
-              <li>
-              <a href="it-applications.php" class="text-muted"
-                >Services application location</a
+             <li>
+              <a href="it-applications-location.php" class="text-muted"
+                >Services location app</a
               >
             </li>
           </ul>
