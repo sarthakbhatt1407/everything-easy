@@ -2,11 +2,26 @@
 <html lang="en">
 
 <head>
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "url": "https://everythingeasy.in/contact
+  "url": "https://everythingeasy.in/contact",
+  "name": "Contact Us - EverythingEasy Technology",
+  "description": "Get in touch with EverythingEasy Technology for web development, app development, cyber security, and more.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "EverythingEasy Technology",
+    "url": "https://everythingeasy.in",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-8630840577",
+      "contactType": "customer support",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi"],
+      "email": "info@everythingeasy.in"
+    }
+  }
 }
 </script>
 
