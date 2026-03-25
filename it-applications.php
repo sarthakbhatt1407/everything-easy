@@ -3,7 +3,7 @@
 $slug = $_GET['slug'];
 $conn = getDBConnection();
 //fetch location details based on slug
-$sql = "SELECT * FROM locations WHERE slug = '$slug'";
+$sql = "SELECT * FROM locations_application WHERE slug = '$slug'";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
   $loc = mysqli_fetch_assoc($result);
