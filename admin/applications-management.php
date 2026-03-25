@@ -99,10 +99,16 @@ function getResumeUrl($path) {
                     <span>Blog Posts</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="applications-management.php">
                     <i class="fas fa-file-lines"></i>
                     <span>Job Applications</span>
+                </a>
+            </li>
+            <li>
+                <a href="locations-management.php">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Service Locations</span>
                 </a>
             </li>
             <li>

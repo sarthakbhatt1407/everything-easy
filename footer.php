@@ -76,7 +76,12 @@
             <li><a href="#" class="text-muted">Custom Software</a></li>
             <li>
               <a href="services-locations.php" class="text-muted"
-                >Services location</a
+                >Services website location</a
+              >
+            </li>
+            <li>
+              <a href="services-locations.php" class="text-muted"
+                >Services application location</a
               >
             </li>
           </ul>

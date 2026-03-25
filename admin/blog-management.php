@@ -325,6 +325,12 @@ function generateSlug($title) {
                 </a>
             </li>
             <li>
+                <a href="locations-management.php">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Service Locations</span>
+                </a>
+            </li>
+            <li>
                 <a href="#" id="logoutBtn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
