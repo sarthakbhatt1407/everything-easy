@@ -80,7 +80,7 @@
               >
             </li>
             <li>
-              <a href="it-applications.php" class="text-muted"
+              <a href="it-applications-location.php" class="text-muted"
                 >Services application location</a
               >
             </li>

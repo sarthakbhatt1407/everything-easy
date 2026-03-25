@@ -27,10 +27,22 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^it-services/([^/]+)/?$ /it-services.php?slug=$1 [L,QSA]
 
+# Pretty URL → it-applications.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^it-applications/([^/]+)/?$ /it-applications.php?slug=$1 [L,QSA]
+
+# Additional pretty alias → it-applications.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^application-development/([^/]+)/?$ /it-applications.php?slug=$1 [L,QSA]
+
 # Pretty URL → blog-detail.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([^/]+)/?$ /blog-detail.php?slug=$1 [L,QSA]
+
+
 
 # --- Remove .php extension from all PHP files ---
 # Redirect .php URLs to clean URLs (301 permanent redirect)
