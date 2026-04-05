@@ -366,6 +366,12 @@ function fieldValue($row, $key)
             min-width: 1100px;
         }
 
+        th:last-child,
+        td:last-child {
+            width: 180px;
+            white-space: nowrap;
+        }
+
         th, td {
             padding: 14px 16px;
             border-bottom: 1px solid var(--line);
@@ -413,6 +419,7 @@ function fieldValue($row, $key)
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            min-width: 160px;
         }
 
         .row-edit-btn {
@@ -426,6 +433,7 @@ function fieldValue($row, $key)
             text-decoration: none;
             font-weight: 700;
             border: 1px solid #cfe0f6;
+            box-shadow: 0 2px 8px rgba(11, 105, 199, 0.08);
         }
 
         .row-edit-btn:hover {
@@ -445,6 +453,7 @@ function fieldValue($row, $key)
             font-weight: 600;
             cursor: pointer;
             border: 1px solid #f3b9b9;
+            box-shadow: 0 2px 8px rgba(185, 28, 28, 0.08);
         }
 
         .row-delete-btn:hover {
@@ -644,7 +653,7 @@ function fieldValue($row, $key)
                                         <td><?php echo htmlspecialchars($hotel['price'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="row-actions">
                                             <a class="row-edit-btn" href="?edit=<?php echo (int) $hotel['id']; ?>">Edit</a>
-                                            <form method="post" style="display:inline;" onsubmit="return confirm('Delete this hotel?');">
+                                            <form method="post" style="display:inline-block; margin:0;" onsubmit="return confirm('Delete this hotel?');">
                                                 <input type="hidden" name="delete_id" value="<?php echo (int) $hotel['id']; ?>">
                                                 <button type="submit" class="row-delete-btn">Delete</button>
                                             </form>
