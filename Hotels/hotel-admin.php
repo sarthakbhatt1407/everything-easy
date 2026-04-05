@@ -15,7 +15,28 @@ $messageType = 'success';
 $editingHotel = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $hotelData = [
+    if (isset($_POST['delete_id'])) {
+        $deleteId = (int) $_POST['delete_id'];
+
+        if ($deleteId > 0) {
+            try {
+                $stmt = $conn->prepare('DELETE FROM hotels WHERE id = ?');
+                $stmt->bind_param('i', $deleteId);
+
+                if ($stmt->execute()) {
+                    header('Location: ' . $_SERVER['PHP_SELF'] . '?deleted=1');
+                    exit;
+                }
+
+                $message = 'Failed to delete hotel: ' . $stmt->error;
+                $messageType = 'error';
+            } catch (Throwable $e) {
+                $message = 'Database error: ' . $e->getMessage();
+                $messageType = 'error';
+            }
+        }
+    } else {
+        $hotelData = [
         'name' => trim($_POST['name'] ?? ''),
         'city' => trim($_POST['city'] ?? ''),
         'state' => trim($_POST['state'] ?? ''),
@@ -38,94 +59,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'customer_review3' => trim($_POST['customer_review3'] ?? ''),
         'customer_review4' => trim($_POST['customer_review4'] ?? ''),
         'customer_review5' => trim($_POST['customer_review5'] ?? ''),
-    ];
+        ];
 
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+        $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 
-    if ($hotelData['name'] === '' || $hotelData['city'] === '' || $hotelData['state'] === '') {
-        $message = 'Name, city, and state are required.';
-        $messageType = 'error';
-    } else {
-        try {
-            if ($id > 0) {
-                $sql = "UPDATE hotels SET name = ?, city = ?, state = ?, rating = ?, price = ?, contact = ?, email = ?, address = ?, facilities = ?, food_type = ?, cuisine = ?, reviews_count = ?, opening_time = ?, closing_time = ?, latitude = ?, longitude = ?, open_days = ?, customer_review = ?, customer_review2 = ?, customer_review3 = ?, customer_review4 = ?, customer_review5 = ? WHERE id = ?";
-                $stmt = $conn->prepare($sql);
-                $types = str_repeat('s', 11) . 'i' . str_repeat('s', 10) . 'i';
-                $stmt->bind_param(
-                    $types,
-                    $hotelData['name'],
-                    $hotelData['city'],
-                    $hotelData['state'],
-                    $hotelData['rating'],
-                    $hotelData['price'],
-                    $hotelData['contact'],
-                    $hotelData['email'],
-                    $hotelData['address'],
-                    $hotelData['facilities'],
-                    $hotelData['food_type'],
-                    $hotelData['cuisine'],
-                    $hotelData['reviews_count'],
-                    $hotelData['opening_time'],
-                    $hotelData['closing_time'],
-                    $hotelData['latitude'],
-                    $hotelData['longitude'],
-                    $hotelData['open_days'],
-                    $hotelData['customer_review'],
-                    $hotelData['customer_review2'],
-                    $hotelData['customer_review3'],
-                    $hotelData['customer_review4'],
-                    $hotelData['customer_review5'],
-                    $id
-                );
+        if ($hotelData['name'] === '' || $hotelData['city'] === '' || $hotelData['state'] === '') {
+            $message = 'Name, city, and state are required.';
+            $messageType = 'error';
+        } else {
+            try {
+                if ($id > 0) {
+                    $sql = "UPDATE hotels SET name = ?, city = ?, state = ?, rating = ?, price = ?, contact = ?, email = ?, address = ?, facilities = ?, food_type = ?, cuisine = ?, reviews_count = ?, opening_time = ?, closing_time = ?, latitude = ?, longitude = ?, open_days = ?, customer_review = ?, customer_review2 = ?, customer_review3 = ?, customer_review4 = ?, customer_review5 = ? WHERE id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $types = str_repeat('s', 11) . 'i' . str_repeat('s', 10) . 'i';
+                    $stmt->bind_param(
+                        $types,
+                        $hotelData['name'],
+                        $hotelData['city'],
+                        $hotelData['state'],
+                        $hotelData['rating'],
+                        $hotelData['price'],
+                        $hotelData['contact'],
+                        $hotelData['email'],
+                        $hotelData['address'],
+                        $hotelData['facilities'],
+                        $hotelData['food_type'],
+                        $hotelData['cuisine'],
+                        $hotelData['reviews_count'],
+                        $hotelData['opening_time'],
+                        $hotelData['closing_time'],
+                        $hotelData['latitude'],
+                        $hotelData['longitude'],
+                        $hotelData['open_days'],
+                        $hotelData['customer_review'],
+                        $hotelData['customer_review2'],
+                        $hotelData['customer_review3'],
+                        $hotelData['customer_review4'],
+                        $hotelData['customer_review5'],
+                        $id
+                    );
 
-                if ($stmt->execute()) {
-                    header('Location: ' . $_SERVER['PHP_SELF'] . '?updated=1');
-                    exit;
+                    if ($stmt->execute()) {
+                        header('Location: ' . $_SERVER['PHP_SELF'] . '?updated=1');
+                        exit;
+                    }
+
+                    $message = 'Failed to update hotel: ' . $stmt->error;
+                    $messageType = 'error';
+                } else {
+                    $sql = "INSERT INTO hotels (name, city, state, rating, price, contact, email, address, facilities, food_type, cuisine, reviews_count, opening_time, closing_time, latitude, longitude, open_days, customer_review, customer_review2, customer_review3, customer_review4, customer_review5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    $stmt = $conn->prepare($sql);
+                    $types = str_repeat('s', 11) . 'i' . str_repeat('s', 10);
+                    $stmt->bind_param(
+                        $types,
+                        $hotelData['name'],
+                        $hotelData['city'],
+                        $hotelData['state'],
+                        $hotelData['rating'],
+                        $hotelData['price'],
+                        $hotelData['contact'],
+                        $hotelData['email'],
+                        $hotelData['address'],
+                        $hotelData['facilities'],
+                        $hotelData['food_type'],
+                        $hotelData['cuisine'],
+                        $hotelData['reviews_count'],
+                        $hotelData['opening_time'],
+                        $hotelData['closing_time'],
+                        $hotelData['latitude'],
+                        $hotelData['longitude'],
+                        $hotelData['open_days'],
+                        $hotelData['customer_review'],
+                        $hotelData['customer_review2'],
+                        $hotelData['customer_review3'],
+                        $hotelData['customer_review4'],
+                        $hotelData['customer_review5']
+                    );
+
+                    if ($stmt->execute()) {
+                        header('Location: ' . $_SERVER['PHP_SELF'] . '?added=1');
+                        exit;
+                    }
+
+                    $message = 'Failed to add hotel: ' . $stmt->error;
+                    $messageType = 'error';
                 }
-
-                $message = 'Failed to update hotel: ' . $stmt->error;
-                $messageType = 'error';
-            } else {
-                $sql = "INSERT INTO hotels (name, city, state, rating, price, contact, email, address, facilities, food_type, cuisine, reviews_count, opening_time, closing_time, latitude, longitude, open_days, customer_review, customer_review2, customer_review3, customer_review4, customer_review5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $conn->prepare($sql);
-                $types = str_repeat('s', 11) . 'i' . str_repeat('s', 10);
-                $stmt->bind_param(
-                    $types,
-                    $hotelData['name'],
-                    $hotelData['city'],
-                    $hotelData['state'],
-                    $hotelData['rating'],
-                    $hotelData['price'],
-                    $hotelData['contact'],
-                    $hotelData['email'],
-                    $hotelData['address'],
-                    $hotelData['facilities'],
-                    $hotelData['food_type'],
-                    $hotelData['cuisine'],
-                    $hotelData['reviews_count'],
-                    $hotelData['opening_time'],
-                    $hotelData['closing_time'],
-                    $hotelData['latitude'],
-                    $hotelData['longitude'],
-                    $hotelData['open_days'],
-                    $hotelData['customer_review'],
-                    $hotelData['customer_review2'],
-                    $hotelData['customer_review3'],
-                    $hotelData['customer_review4'],
-                    $hotelData['customer_review5']
-                );
-
-                if ($stmt->execute()) {
-                    header('Location: ' . $_SERVER['PHP_SELF'] . '?added=1');
-                    exit;
-                }
-
-                $message = 'Failed to add hotel: ' . $stmt->error;
+            } catch (Throwable $e) {
+                $message = 'Database error: ' . $e->getMessage();
                 $messageType = 'error';
             }
-        } catch (Throwable $e) {
-            $message = 'Database error: ' . $e->getMessage();
-            $messageType = 'error';
         }
     }
 }
@@ -386,6 +408,16 @@ function fieldValue($row, $key)
             font-weight: 600;
         }
 
+        .row-delete-btn {
+            border: none;
+            background: transparent;
+            color: var(--danger);
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+        }
+
         .empty {
             padding: 28px;
             color: var(--muted);
@@ -423,6 +455,10 @@ function fieldValue($row, $key)
 
                 <?php if (!empty($_GET['updated'])): ?>
                     <div class="notice success">Hotel updated successfully.</div>
+                <?php endif; ?>
+
+                <?php if (!empty($_GET['deleted'])): ?>
+                    <div class="notice success">Hotel deleted successfully.</div>
                 <?php endif; ?>
 
                 <?php if ($message !== ''): ?>
@@ -575,6 +611,10 @@ function fieldValue($row, $key)
                                         <td><?php echo htmlspecialchars($hotel['price'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="row-actions">
                                             <a href="?edit=<?php echo (int) $hotel['id']; ?>">Edit</a>
+                                            <form method="post" style="display:inline;" onsubmit="return confirm('Delete this hotel?');">
+                                                <input type="hidden" name="delete_id" value="<?php echo (int) $hotel['id']; ?>">
+                                                <button type="submit" class="row-delete-btn">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
