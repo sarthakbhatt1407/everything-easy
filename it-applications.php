@@ -1010,11 +1010,18 @@ $state = $loc['state'];
 
   <!-- Footer Container -->
  <!-- Footer -->
+<!-- Footer -->
 <footer class="bg-dark text-white py-5">
   <div class="container">
     <div class="row">
       <div class="col-lg-4 mb-4">
         <div class="footer-about">
+<!--        
+              <image
+        src="https://i.ibb.co/hJRZz403/elogo-removebg-preview.png"
+        alt="Everything Easy Logo"
+        style="height: 40px; margin-right: -8px"
+      /> -->
       EverythingEasy Technology
 
           <p class="text-muted mb-4">
@@ -1041,7 +1048,7 @@ $state = $loc['state'];
               ><i class="fab fa-linkedin fa-lg"></i
             ></a>
             <a
-              href="https://www.instagram.com/everythingeasy0/"
+              href="https://www.instagram.com/everythingeasy_technology/"
               target="_blank"
               class="instagram"
               ><i class="fab fa-instagram fa-lg"></i
@@ -1081,12 +1088,12 @@ $state = $loc['state'];
             <li><a href="#" class="text-muted">Custom Software</a></li>
             <li>
               <a href="/services-locations" class="text-muted"
-                >Services location web</a
+                >Services location Web</a
               >
             </li>
-             <li>
+            <li>
               <a href="/it-applications-location" class="text-muted"
-                >Services location app</a
+                >Services location App</a
               >
             </li>
           </ul>
@@ -1148,6 +1155,12 @@ $state = $loc['state'];
 <!-- End TrustBox widget -->
   </div>
 </footer>
+<!--Start of Tawk.to Script--> 
+<script type="text/javascript"> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0]; s1.async=true; s1.src='https://embed.tawk.to/69d20bf25b6b4c1c37f3d691/1jle7tbuh'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->
+<!-- TrustBox script -->
+
+<!-- End TrustBox script -->
+
 <!-- TrustBox script -->
 
 <!-- End TrustBox script -->
