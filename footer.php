@@ -103,9 +103,9 @@
           <div class="contact-item d-flex mb-2">
             <i class="fas fa-envelope me-2 mt-1"></i>
             <a
-              href="mailto:info@everythingeasy.com"
+              href="mailto:info@everythingeasy.in"
               class="text-muted text-decoration-none"
-              >info@everythingeasy.com</a
+              >info@everythingeasy.in</a
             >
           </div>
           <div class="contact-item d-flex mb-3">

@@ -1375,8 +1375,8 @@
             </div>
             <h5 class="fw-bold mb-2">Email Us</h5>
             <p class="text-muted">
-              <a href="mailto:info@everythingeasy.com"
-                class="text-muted text-decoration-none">info@everythingeasy.com</a>
+              <a href="mailto:info@everythingeasy.in"
+                class="text-muted text-decoration-none">info@everythingeasy.in</a>
             </p>
           </div>
         </div>

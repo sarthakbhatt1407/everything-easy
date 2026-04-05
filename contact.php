@@ -139,13 +139,13 @@
             <h5 class="fw-bold mb-3">Email Addresses</h5>
             <p class="text-muted mb-2">
               <strong>General Inquiries:</strong><br />
-              <a href="mailto:info@everythingeasy.com" class="text-decoration-none">info@everythingeasy.com</a>
+              <a href="mailto:info@everythingeasy.in" class="text-decoration-none">info@everythingeasy.in</a>
             </p>
             <!-- <p class="text-muted mb-0">
               <strong>Support:</strong><br />
               <a href="mailto:support@everythingeasy.com" class="text-decoration-none">support@everythingeasy.com</a>
             </p> -->
-            <button class="btn btn-outline-primary btn-sm mt-3" onclick="window.open('mailto:info@everythingeasy.com')">
+            <button class="btn btn-outline-primary btn-sm mt-3" onclick="window.open('mailto:info@everythingeasy.in')">
               <i class="fas fa-envelope me-1"></i>Send Email
             </button>
           </div>
@@ -297,7 +297,7 @@
           <a href="tel:+918630840577" class="btn btn-light btn-lg me-2 mb-2">
             <i class="fas fa-phone me-2"></i>Call Support
           </a>
-          <a href="mailto:info@everythingeasy.com" class="btn btn-outline-light btn-lg mb-2">
+          <a href="mailto:info@everythingeasy.in" class="btn btn-outline-light btn-lg mb-2">
             <i class="fas fa-envelope me-2"></i>Email Us
           </a>
         </div>

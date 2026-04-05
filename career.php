@@ -619,7 +619,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             and we'll keep you in mind for future opportunities.
           </p>
           <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3">
-            <a href="mailto:info@everythingeasy.com" class="btn btn-warning btn-lg">
+            <a href="mailto:info@everythingeasy.in" class="btn btn-warning btn-lg">
               <i class="fas fa-envelope me-2"></i>Email Your Resume
             </a>
             <a href="/contact" class="btn btn-outline-light btn-lg">
