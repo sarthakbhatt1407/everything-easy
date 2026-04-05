@@ -408,14 +408,47 @@ function fieldValue($row, $key)
             font-weight: 600;
         }
 
+        .row-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .row-edit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: #e8f1fd;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid #cfe0f6;
+        }
+
+        .row-edit-btn:hover {
+            background: #dbeaff;
+        }
+
         .row-delete-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 10px;
             border: none;
-            background: transparent;
+            background: #ffecec;
             color: var(--danger);
             font: inherit;
             font-weight: 600;
             cursor: pointer;
-            padding: 0;
+            border: 1px solid #f3b9b9;
+        }
+
+        .row-delete-btn:hover {
+            background: #ffdcdc;
         }
 
         .empty {
@@ -610,7 +643,7 @@ function fieldValue($row, $key)
                                         <td><?php echo htmlspecialchars($hotel['rating'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($hotel['price'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="row-actions">
-                                            <a href="?edit=<?php echo (int) $hotel['id']; ?>">Edit</a>
+                                            <a class="row-edit-btn" href="?edit=<?php echo (int) $hotel['id']; ?>">Edit</a>
                                             <form method="post" style="display:inline;" onsubmit="return confirm('Delete this hotel?');">
                                                 <input type="hidden" name="delete_id" value="<?php echo (int) $hotel['id']; ?>">
                                                 <button type="submit" class="row-delete-btn">Delete</button>
