@@ -422,6 +422,14 @@ function fieldValue($row, $key)
             min-width: 160px;
         }
 
+        .hotel-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
         .row-edit-btn {
             display: inline-flex;
             align-items: center;
@@ -629,13 +637,12 @@ function fieldValue($row, $key)
                                 <th>Location</th>
                                 <th>Rating</th>
                                 <th>Price</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (empty($hotels)): ?>
                                 <tr>
-                                    <td colspan="6"><div class="empty">No hotels added yet.</div></td>
+                                    <td colspan="5"><div class="empty">No hotels added yet.</div></td>
                                 </tr>
                             <?php else: ?>
                                 <?php foreach ($hotels as $hotel): ?>
@@ -644,6 +651,13 @@ function fieldValue($row, $key)
                                         <td>
                                             <strong><?php echo htmlspecialchars($hotel['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?></strong><br>
                                             <span class="meta"><?php echo htmlspecialchars($hotel['food_type'] ?? '', ENT_QUOTES, 'UTF-8'); ?> | <?php echo htmlspecialchars($hotel['cuisine'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+                                            <div class="hotel-actions">
+                                                <a class="row-edit-btn" href="?edit=<?php echo (int) $hotel['id']; ?>">Edit</a>
+                                                <form method="post" style="display:inline-block; margin:0;" onsubmit="return confirm('Delete this hotel?');">
+                                                    <input type="hidden" name="delete_id" value="<?php echo (int) $hotel['id']; ?>">
+                                                    <button type="submit" class="row-delete-btn">Delete</button>
+                                                </form>
+                                            </div>
                                         </td>
                                         <td>
                                             <?php echo htmlspecialchars($hotel['city'] ?? '', ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($hotel['state'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
@@ -651,13 +665,6 @@ function fieldValue($row, $key)
                                         </td>
                                         <td><?php echo htmlspecialchars($hotel['rating'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($hotel['price'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
-                                        <td class="row-actions">
-                                            <a class="row-edit-btn" href="?edit=<?php echo (int) $hotel['id']; ?>">Edit</a>
-                                            <form method="post" style="display:inline-block; margin:0;" onsubmit="return confirm('Delete this hotel?');">
-                                                <input type="hidden" name="delete_id" value="<?php echo (int) $hotel['id']; ?>">
-                                                <button type="submit" class="row-delete-btn">Delete</button>
-                                            </form>
-                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
