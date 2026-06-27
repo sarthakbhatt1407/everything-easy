@@ -71,6 +71,10 @@
   <!-- Language -->
   <meta name="language" content="English" />
   <meta http-equiv="content-language" content="en" />
+  <!-- Google Adsense -->
+  <meta name="google-adsense-account" content="ca-pub-6503835695821013">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6503835695821013"
+     crossorigin="anonymous"></script>
 
   <!-- Schema Markup - Organization -->
   <script type="application/ld+json">
