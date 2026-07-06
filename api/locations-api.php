@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
 // Include database config
-require_once 'config.php';
+require_once '../backend/config.php';
 
 // Set headers for CORS and JSON
 header('Access-Control-Allow-Origin: *');
