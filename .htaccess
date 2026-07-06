@@ -12,8 +12,8 @@ RewriteRule .* - [L]
 RewriteCond %{REQUEST_URI} ^/assets/ [NC]
 RewriteRule .* - [L]
 
-# --- Never rewrite backend/admin/uploads folders ---
-RewriteCond %{REQUEST_URI} ^/(backend|admin|uploads)/ [NC]
+# --- Never rewrite backend/admin/uploads/api folders ---
+RewriteCond %{REQUEST_URI} ^/(backend|admin|uploads|api)/ [NC]
 RewriteRule .* - [L]
 
 # --- ONLY rewrite URLs starting with /it-services/ ---
