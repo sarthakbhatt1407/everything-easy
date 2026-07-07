@@ -120,7 +120,7 @@ function updateTable(quotes) {
   if (!quotes || quotes.length === 0) {
     tbody.innerHTML = `
             <tr>
-                <td colspan="10" class="text-center py-5">
+                <td colspan="11" class="text-center py-5">
                     <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
                     <p class="text-muted">No quote requests found.</p>
                 </td>
@@ -133,13 +133,14 @@ function updateTable(quotes) {
     .map((quote, index) => {
       const serviceClass = getServiceClass(quote.service);
       const statusClass = getStatusClass(quote.status);
+      const categoryClass = getLeadCategoryClass(quote.lead_category);
       const initials = getInitials(quote.first_name, quote.last_name);
       const formattedDate = formatDate(quote.created_at);
 
       return `
             <tr data-quote-id="${quote.id}">
-                <td>${(currentPage - 1) * 10 + index + 1}</td>
-                <td>
+                <td data-label="#">${(currentPage - 1) * 10 + index + 1}</td>
+                <td data-label="Name">
                     <div class="user-info">
                         <div class="user-avatar">${initials}</div>
                         <div>
@@ -152,18 +153,25 @@ function updateTable(quotes) {
                         </div>
                     </div>
                 </td>
-                <td>${quote.email}</td>
-                <td>${quote.phone || "N/A"}</td>
-                <td><span class="service-badge ${serviceClass}">${formatService(
+                <td data-label="Email">${quote.email}</td>
+                <td data-label="Phone">${
+                  quote.phone
+                    ? `<a href="tel:${quote.phone}" class="phone-link"><i class="fas fa-phone-alt"></i> ${quote.phone}</a>`
+                    : "N/A"
+                }</td>
+                <td data-label="Service"><span class="service-badge ${serviceClass}">${formatService(
         quote.service
       )}</span></td>
-                <td>${formatBudget(quote.budget)}</td>
-                <td>${formatTimeline(quote.timeline)}</td>
-                <td>${formattedDate}</td>
-                <td><span class="status-badge ${statusClass}" data-id="${
+                <td data-label="Category"><span class="lead-category-badge ${categoryClass}">${formatLeadCategory(
+        quote.lead_category
+      )}</span></td>
+                <td data-label="Budget">${formatBudget(quote.budget)}</td>
+                <td data-label="Timeline">${formatTimeline(quote.timeline)}</td>
+                <td data-label="Date">${formattedDate}</td>
+                <td data-label="Status"><span class="status-badge ${statusClass}" data-id="${
         quote.id
       }">${formatStatus(quote.status)}</span></td>
-                <td>
+                <td data-label="Actions">
                     <div class="action-buttons">
                         <button class="btn-action btn-view" data-id="${
                           quote.id
@@ -174,6 +182,11 @@ function updateTable(quotes) {
                           quote.id
                         }" title="Edit">
                             <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action btn-remark" data-id="${
+                          quote.id
+                        }" title="Add/View Remark">
+                            <i class="fas fa-sticky-note"></i>
                         </button>
                         <button class="btn-action btn-delete" data-id="${
                           quote.id
@@ -276,6 +289,32 @@ function setupEventListeners() {
     });
   }
 
+  // Add Lead button
+  const addLeadBtn = document.getElementById("addLeadBtn");
+  if (addLeadBtn) {
+    addLeadBtn.addEventListener("click", function () {
+      openLeadModal(null);
+    });
+  }
+
+  // Add/Edit Lead form submit
+  const leadForm = document.getElementById("leadForm");
+  if (leadForm) {
+    leadForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      saveLead();
+    });
+  }
+
+  // Remark form submit
+  const remarkForm = document.getElementById("remarkForm");
+  if (remarkForm) {
+    remarkForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      saveRemark();
+    });
+  }
+
   // Close sidebar when clicking outside on mobile
   document.addEventListener("click", function (event) {
     const sidebar = document.getElementById("sidebar");
@@ -302,11 +341,21 @@ function attachTableEventListeners() {
     });
   });
 
-  // Edit buttons (update status)
+  // Edit buttons (open full edit modal)
   document.querySelectorAll(".btn-edit").forEach((button) => {
     button.addEventListener("click", function () {
       const quoteId = this.getAttribute("data-id");
-      showStatusUpdateDialog(quoteId);
+      const quote = allQuotes.find((q) => q.id == quoteId);
+      if (quote) openLeadModal(quote);
+    });
+  });
+
+  // Remark buttons
+  document.querySelectorAll(".btn-remark").forEach((button) => {
+    button.addEventListener("click", function () {
+      const quoteId = this.getAttribute("data-id");
+      const quote = allQuotes.find((q) => q.id == quoteId);
+      if (quote) openRemarkModal(quote);
     });
   });
 
@@ -318,14 +367,137 @@ function attachTableEventListeners() {
     });
   });
 
-  // Status badge click to change status
+  // Status badge click to open the edit modal (status is one of the editable fields)
   document.querySelectorAll(".status-badge").forEach((badge) => {
     badge.addEventListener("click", function () {
       const quoteId = this.getAttribute("data-id");
-      showStatusUpdateDialog(quoteId);
+      const quote = allQuotes.find((q) => q.id == quoteId);
+      if (quote) openLeadModal(quote);
     });
     badge.style.cursor = "pointer";
   });
+}
+
+// Open the Add/Edit Lead modal. Pass null to add a new lead, or a quote
+// object (from allQuotes) to edit an existing one.
+function openLeadModal(quote) {
+  const form = document.getElementById("leadForm");
+  form.reset();
+  document.getElementById("leadId").value = "";
+
+  if (quote) {
+    document.getElementById("leadFormModalTitle").innerHTML =
+      '<i class="fas fa-edit me-2"></i>Edit Lead';
+    document.getElementById("leadId").value = quote.id;
+    document.getElementById("leadFirstName").value = quote.first_name || "";
+    document.getElementById("leadLastName").value = quote.last_name || "";
+    document.getElementById("leadEmail").value = quote.email || "";
+    document.getElementById("leadPhone").value = quote.phone || "";
+    document.getElementById("leadCompany").value = quote.company_name || "";
+    document.getElementById("leadService").value = quote.service || "";
+    document.getElementById("leadBudget").value = quote.budget || "";
+    document.getElementById("leadTimeline").value = quote.timeline || "";
+    document.getElementById("leadSource").value = quote.lead_source || "";
+    document.getElementById("leadCategory").value =
+      quote.lead_category || "genuine";
+    document.getElementById("leadStatus").value = quote.status || "pending";
+    document.getElementById("leadProjectDetails").value =
+      quote.project_details || "";
+  } else {
+    document.getElementById("leadFormModalTitle").innerHTML =
+      '<i class="fas fa-plus-circle me-2"></i>Add New Lead';
+  }
+
+  new bootstrap.Modal(document.getElementById("leadFormModal")).show();
+}
+
+// Create or update a lead from the Add/Edit Lead modal
+function saveLead() {
+  const id = document.getElementById("leadId").value;
+  const payload = {
+    first_name: document.getElementById("leadFirstName").value.trim(),
+    last_name: document.getElementById("leadLastName").value.trim(),
+    email: document.getElementById("leadEmail").value.trim(),
+    phone: document.getElementById("leadPhone").value.trim(),
+    company_name: document.getElementById("leadCompany").value.trim(),
+    service: document.getElementById("leadService").value,
+    budget: document.getElementById("leadBudget").value,
+    timeline: document.getElementById("leadTimeline").value,
+    lead_source: document.getElementById("leadSource").value,
+    lead_category: document.getElementById("leadCategory").value,
+    status: document.getElementById("leadStatus").value,
+    project_details: document.getElementById("leadProjectDetails").value.trim(),
+  };
+
+  const isEdit = !!id;
+  if (isEdit) payload.id = id;
+
+  const url = `${API_BASE_URL}/get-quotes.php?action=${
+    isEdit ? "update" : "create"
+  }`;
+
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.success) {
+        showNotification(
+          isEdit ? "Lead updated successfully" : "Lead added successfully",
+          "success"
+        );
+        bootstrap.Modal.getInstance(
+          document.getElementById("leadFormModal")
+        ).hide();
+        loadQuotes(currentPage, currentFilter, currentSearch);
+      } else {
+        showNotification("Failed to save lead: " + result.message, "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      showNotification("Error saving lead", "error");
+    });
+}
+
+// Open the Remark modal for a given lead
+function openRemarkModal(quote) {
+  document.getElementById("remarkLeadId").value = quote.id;
+  document.getElementById(
+    "remarkLeadName"
+  ).textContent = `${quote.first_name} ${quote.last_name} — ${quote.email}`;
+  document.getElementById("remarkText").value = quote.remarks || "";
+  new bootstrap.Modal(document.getElementById("remarkModal")).show();
+}
+
+// Save the remark/follow-up note for a lead
+function saveRemark() {
+  const id = document.getElementById("remarkLeadId").value;
+  const remarks = document.getElementById("remarkText").value;
+
+  fetch(`${API_BASE_URL}/get-quotes.php?action=update`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, remarks }),
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.success) {
+        showNotification("Remark saved", "success");
+        bootstrap.Modal.getInstance(
+          document.getElementById("remarkModal")
+        ).hide();
+        loadQuotes(currentPage, currentFilter, currentSearch);
+      } else {
+        showNotification("Failed to save remark: " + result.message, "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      showNotification("Error saving remark", "error");
+    });
 }
 
 // Attach pagination listeners
@@ -406,6 +578,18 @@ function showQuoteModal(quote) {
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
+                <strong>Lead Source:</strong>
+                <p>${formatLeadSource(quote.lead_source)}</p>
+            </div>
+            <div class="col-md-6">
+                <strong>Lead Category:</strong>
+                <p><span class="lead-category-badge ${getLeadCategoryClass(
+                  quote.lead_category
+                )}">${formatLeadCategory(quote.lead_category)}</span></p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
                 <strong>Status:</strong>
                 <p><span class="status-badge ${getStatusClass(
                   quote.status
@@ -422,6 +606,14 @@ function showQuoteModal(quote) {
                 <p>${quote.project_details}</p>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <strong>Remarks / Follow-up Notes:</strong>
+                <p class="${quote.remarks ? "" : "text-muted"}">${
+    quote.remarks || "No remarks yet."
+  }</p>
+            </div>
+        </div>
     `;
 
   const modal = new bootstrap.Modal(
@@ -430,63 +622,6 @@ function showQuoteModal(quote) {
   modal.show();
 }
 
-// Show status update dialog
-function showStatusUpdateDialog(quoteId) {
-  const quote = allQuotes.find((q) => q.id == quoteId);
-  if (!quote) return;
-
-  const newStatus = prompt(
-    `Update status for ${quote.first_name} ${
-      quote.last_name
-    }:\n\nCurrent: ${formatStatus(
-      quote.status
-    )}\n\nEnter new status:\n1 - Pending\n2 - In Progress\n3 - Completed\n\nEnter number (1-3):`
-  );
-
-  if (newStatus) {
-    let status;
-    switch (newStatus.trim()) {
-      case "1":
-        status = "pending";
-        break;
-      case "2":
-        status = "in-progress";
-        break;
-      case "3":
-        status = "completed";
-        break;
-      default:
-        showNotification("Invalid status selection", "error");
-        return;
-    }
-
-    updateQuoteStatus(quoteId, status);
-  }
-}
-
-// Update quote status
-function updateQuoteStatus(quoteId, status) {
-  fetch(`${API_BASE_URL}/get-quotes.php?action=update`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id: quoteId, status: status }),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.success) {
-        showNotification("Status updated successfully", "success");
-        loadQuotes(currentPage, currentFilter, currentSearch);
-      } else {
-        showNotification("Failed to update status: " + result.message, "error");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      showNotification("Error updating status", "error");
-    });
-}
 
 // Delete quote
 function deleteQuote(quoteId) {
@@ -561,7 +696,7 @@ function exportToCSV() {
   // Get headers
   const headers = [];
   table.querySelectorAll("thead th").forEach((th, index) => {
-    if (index < 9) {
+    if (index < 10) {
       // Exclude Actions column
       headers.push(th.textContent.trim());
     }
@@ -576,6 +711,7 @@ function exportToCSV() {
       quote.email,
       quote.phone || "N/A",
       formatService(quote.service),
+      formatLeadCategory(quote.lead_category),
       formatBudget(quote.budget),
       formatTimeline(quote.timeline),
       formatDate(quote.created_at),
@@ -626,6 +762,42 @@ function getStatusClass(status) {
     completed: "status-completed",
   };
   return statusMap[status] || "status-pending";
+}
+
+function getLeadCategoryClass(category) {
+  const categoryMap = {
+    genuine: "category-genuine",
+    spam: "category-spam",
+    fake: "category-fake",
+    internship: "category-internship",
+    job: "category-job",
+  };
+  return categoryMap[category] || "category-genuine";
+}
+
+function formatLeadCategory(category) {
+  const categoryNames = {
+    genuine: "Genuine Lead",
+    spam: "Spam",
+    fake: "Fake",
+    internship: "Internship Inquiry",
+    job: "Job Inquiry",
+  };
+  return categoryNames[category] || "Genuine Lead";
+}
+
+function formatLeadSource(source) {
+  if (!source) return "Not specified";
+
+  const sourceNames = {
+    google_ads: "Google / Paid Ads",
+    seo: "SEO / Organic Search",
+    referral: "Referral",
+    social_media: "Social Media",
+    direct: "Direct / Walk-in",
+    other: "Other",
+  };
+  return sourceNames[source] || source;
 }
 
 function formatService(service) {

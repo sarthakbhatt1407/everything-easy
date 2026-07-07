@@ -113,39 +113,136 @@ try {
             sendJSONResponse(true, 'Quote fetched successfully', ['quote' => $quote]);
             break;
             
-        case 'update':
-            // Update quote status
+        case 'create':
+            // Manually add a new lead from the admin panel
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 sendJSONResponse(false, 'Invalid request method.');
             }
-            
+
             $input = file_get_contents('php://input');
             $data = json_decode($input, true);
-            
+            if (!is_array($data)) {
+                $data = $_POST;
+            }
+
+            $required = ['first_name', 'last_name', 'email', 'service', 'project_details'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    sendJSONResponse(false, "Field '$field' is required");
+                }
+            }
+
+            $status = in_array($data['status'] ?? '', ['pending', 'in-progress', 'completed'], true)
+                ? $data['status'] : 'pending';
+            $leadCategory = in_array($data['lead_category'] ?? '', ['genuine', 'spam', 'fake', 'internship', 'job'], true)
+                ? $data['lead_category'] : 'genuine';
+
+            $stmt = $conn->prepare("INSERT INTO quotes
+                (first_name, last_name, email, phone, company_name, service, budget, timeline, lead_source, project_details, status, lead_category, remarks)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $phone = $data['phone'] ?? null;
+            $companyName = $data['company_name'] ?? null;
+            $budget = $data['budget'] ?? null;
+            $timeline = $data['timeline'] ?? null;
+            $leadSource = $data['lead_source'] ?? null;
+            $remarks = $data['remarks'] ?? null;
+            $stmt->bind_param(
+                'sssssssssssss',
+                $data['first_name'],
+                $data['last_name'],
+                $data['email'],
+                $phone,
+                $companyName,
+                $data['service'],
+                $budget,
+                $timeline,
+                $leadSource,
+                $data['project_details'],
+                $status,
+                $leadCategory,
+                $remarks
+            );
+
+            if ($stmt->execute()) {
+                sendJSONResponse(true, 'Lead added successfully.', ['id' => $stmt->insert_id]);
+            } else {
+                logError("Create lead error: " . $stmt->error);
+                sendJSONResponse(false, 'Failed to add lead.');
+            }
+            $stmt->close();
+            break;
+
+        case 'update':
+            // Update one or more fields on a quote/lead: status, lead_category,
+            // lead_source, and/or remarks. Only fields present in the request are changed.
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                sendJSONResponse(false, 'Invalid request method.');
+            }
+
+            $input = file_get_contents('php://input');
+            $data = json_decode($input, true);
+
             if (!$data) {
                 $data = $_POST;
             }
-            
+
             $id = isset($data['id']) ? (int)$data['id'] : 0;
-            $status = isset($data['status']) ? $data['status'] : '';
-            
+
             if ($id <= 0) {
                 sendJSONResponse(false, 'Invalid quote ID.');
             }
-            
-            if (!in_array($status, ['pending', 'in-progress', 'completed'])) {
-                sendJSONResponse(false, 'Invalid status.');
+
+            $setClauses = [];
+            $types = '';
+            $params = [];
+
+            if (array_key_exists('status', $data)) {
+                if (!in_array($data['status'], ['pending', 'in-progress', 'completed'], true)) {
+                    sendJSONResponse(false, 'Invalid status.');
+                }
+                $setClauses[] = 'status = ?';
+                $types .= 's';
+                $params[] = $data['status'];
             }
-            
-            $status = mysqli_real_escape_string($conn, $status);
-            $sql = "UPDATE quotes SET status = '$status' WHERE id = $id";
-            
-            if ($conn->query($sql)) {
-                sendJSONResponse(true, 'Quote status updated successfully.');
+
+            if (array_key_exists('lead_category', $data)) {
+                if (!in_array($data['lead_category'], ['genuine', 'spam', 'fake', 'internship', 'job'], true)) {
+                    sendJSONResponse(false, 'Invalid lead category.');
+                }
+                $setClauses[] = 'lead_category = ?';
+                $types .= 's';
+                $params[] = $data['lead_category'];
+            }
+
+            if (array_key_exists('lead_source', $data)) {
+                $setClauses[] = 'lead_source = ?';
+                $types .= 's';
+                $params[] = $data['lead_source'];
+            }
+
+            if (array_key_exists('remarks', $data)) {
+                $setClauses[] = 'remarks = ?';
+                $types .= 's';
+                $params[] = $data['remarks'];
+            }
+
+            if (empty($setClauses)) {
+                sendJSONResponse(false, 'No fields to update.');
+            }
+
+            $sql = "UPDATE quotes SET " . implode(', ', $setClauses) . " WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $types .= 'i';
+            $params[] = $id;
+            $stmt->bind_param($types, ...$params);
+
+            if ($stmt->execute()) {
+                sendJSONResponse(true, 'Lead updated successfully.');
             } else {
-                logError("Update failed: " . $conn->error);
-                sendJSONResponse(false, 'Failed to update quote status.');
+                logError("Update failed: " . $stmt->error);
+                sendJSONResponse(false, 'Failed to update lead.');
             }
+            $stmt->close();
             break;
             
         case 'delete':

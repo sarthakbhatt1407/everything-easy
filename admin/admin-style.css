@@ -472,6 +472,57 @@ body {
     color: #155724;
 }
 
+/* Lead Category Badges */
+.lead-category-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.category-genuine {
+    background: #d4edda;
+    color: #155724;
+}
+
+.category-spam {
+    background: #f1f1f1;
+    color: #6c757d;
+}
+
+.category-fake {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.category-internship {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.category-job {
+    background: #ede7f6;
+    color: #5e35b1;
+}
+
+/* Click-to-call phone link */
+.phone-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+}
+
+.phone-link i {
+    margin-right: 4px;
+}
+
 /* Action Buttons */
 .action-buttons {
     display: flex;
@@ -507,6 +558,16 @@ body {
 
 .btn-edit:hover {
     background: #f57c00;
+    color: #fff;
+}
+
+.btn-remark {
+    background: #ede7f6;
+    color: #5e35b1;
+}
+
+.btn-remark:hover {
+    background: #5e35b1;
     color: #fff;
 }
 
@@ -683,12 +744,73 @@ body {
     }
 
     .custom-table {
-        font-size: 12px;
+        font-size: 13px;
     }
 
-    .custom-table thead th,
-    .custom-table tbody td {
-        padding: 10px;
+    /* Convert table rows into stacked cards so leads/entries are easy to
+       scan and call on a phone, instead of scrolling a cramped wide table. */
+    .custom-table thead {
+        display: none;
+    }
+
+    .custom-table,
+    .custom-table tbody,
+    .custom-table tr,
+    .custom-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .custom-table tr {
+        margin-bottom: 15px;
+        border: 1px solid var(--surface-border, #e5e7eb);
+        border-radius: 10px;
+        padding: 4px 14px;
+        background: #fff;
+    }
+
+    .custom-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .custom-table td:last-child {
+        border-bottom: none;
+    }
+
+    .custom-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6b7280;
+        text-align: left;
+        margin-right: 10px;
+    }
+
+    .custom-table td[data-label="#"] {
+        display: none;
+    }
+
+    .custom-table td[data-label="Name"],
+    .custom-table td[data-label="Actions"] {
+        display: block;
+        text-align: left;
+        padding-top: 14px;
+    }
+
+    .custom-table td[data-label="Name"]::before,
+    .custom-table td[data-label="Actions"]::before {
+        display: none;
+    }
+
+    .custom-table td[data-label="Actions"] .action-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
     }
 
     .table-footer {

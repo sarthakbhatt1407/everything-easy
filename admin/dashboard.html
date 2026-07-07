@@ -172,6 +172,9 @@
                 <div class="card-header-flex">
                     <h5><i class="fas fa-list me-2"></i> All Quote Requests</h5>
                     <div class="header-actions">
+                        <button class="btn btn-sm btn-success" id="addLeadBtn">
+                            <i class="fas fa-plus"></i> Add Lead
+                        </button>
                         <button class="btn btn-sm btn-outline-primary">
                             <i class="fas fa-filter"></i> Filter
                         </button>
@@ -189,6 +192,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Service</th>
+                                <th>Category</th>
                                 <th>Budget</th>
                                 <th>Timeline</th>
                                 <th>Date</th>
@@ -269,10 +273,26 @@
                             </div>
                         </div>
                         <div class="row mb-3">
+                            <div class="col-md-6">
+                                <strong>Lead Source:</strong>
+                                <p>Direct</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Lead Category:</strong>
+                                <p>Genuine Lead</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-12">
                                 <strong>Project Details:</strong>
                                 <p>We need a responsive website for our IT services company with modern design, contact
                                     forms, and service showcase pages.</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <strong>Remarks / Follow-up Notes:</strong>
+                                <p class="quote-remarks-view text-muted">No remarks yet.</p>
                             </div>
                         </div>
                     </div>
@@ -282,6 +302,151 @@
                     <button type="button" class="btn btn-success">Mark as In Progress</button>
                     <button type="button" class="btn btn-primary">Send Response</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add / Edit Lead Modal -->
+    <div class="modal fade" id="leadFormModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="leadForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="leadFormModalTitle">
+                            <i class="fas fa-plus-circle me-2"></i>Add New Lead
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="leadId" name="id">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="leadFirstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="leadFirstName" name="first_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadLastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="leadLastName" name="last_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadEmail" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="leadEmail" name="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadPhone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="leadPhone" name="phone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadCompany" class="form-label">Company Name</label>
+                                <input type="text" class="form-control" id="leadCompany" name="company_name">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadService" class="form-label">Service *</label>
+                                <select class="form-select" id="leadService" name="service" required>
+                                    <option value="">Select Service</option>
+                                    <option value="web-development">Web Development</option>
+                                    <option value="app-development">Mobile App</option>
+                                    <option value="seo">SEO & Marketing</option>
+                                    <option value="cyber-security">Cyber Security</option>
+                                    <option value="data-analytics">Data Analytics</option>
+                                    <option value="cloud-solutions">Cloud Solutions</option>
+                                    <option value="consultation">Consultation</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadBudget" class="form-label">Budget</label>
+                                <select class="form-select" id="leadBudget" name="budget">
+                                    <option value="">Not specified</option>
+                                    <option value="under-5k">Under $5,000</option>
+                                    <option value="5k-10k">$5,000 - $10,000</option>
+                                    <option value="10k-25k">$10,000 - $25,000</option>
+                                    <option value="25k-50k">$25,000 - $50,000</option>
+                                    <option value="over-50k">Over $50,000</option>
+                                    <option value="discuss">Let's Discuss</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadTimeline" class="form-label">Timeline</label>
+                                <select class="form-select" id="leadTimeline" name="timeline">
+                                    <option value="">Not specified</option>
+                                    <option value="urgent">ASAP</option>
+                                    <option value="1-month">1 Month</option>
+                                    <option value="2-3-months">2-3 Months</option>
+                                    <option value="3-6-months">3-6 Months</option>
+                                    <option value="6-months-plus">6+ Months</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadSource" class="form-label">Lead Source</label>
+                                <select class="form-select" id="leadSource" name="lead_source">
+                                    <option value="">Not specified</option>
+                                    <option value="google_ads">Google / Paid Ads</option>
+                                    <option value="seo">SEO / Organic Search</option>
+                                    <option value="referral">Referral</option>
+                                    <option value="social_media">Social Media</option>
+                                    <option value="direct">Direct / Walk-in</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadCategory" class="form-label">Lead Category</label>
+                                <select class="form-select" id="leadCategory" name="lead_category">
+                                    <option value="genuine">Genuine Lead</option>
+                                    <option value="spam">Spam</option>
+                                    <option value="fake">Fake</option>
+                                    <option value="internship">Internship Inquiry</option>
+                                    <option value="job">Job Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="leadStatus" class="form-label">Status</label>
+                                <select class="form-select" id="leadStatus" name="status">
+                                    <option value="pending">Pending</option>
+                                    <option value="in-progress">In Progress</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="leadProjectDetails" class="form-label">Project Details *</label>
+                                <textarea class="form-control" id="leadProjectDetails" name="project_details" rows="4" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Save Lead
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remark Modal -->
+    <div class="modal fade" id="remarkModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="remarkForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-sticky-note me-2"></i>Follow-up Remark</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="remarkLeadId">
+                        <p class="mb-2" id="remarkLeadName"></p>
+                        <label for="remarkText" class="form-label">Notes (visible only to admin)</label>
+                        <textarea class="form-control" id="remarkText" rows="5" placeholder="e.g. Called on 7 Jul, client asked to follow up next week"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Save Remark
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
