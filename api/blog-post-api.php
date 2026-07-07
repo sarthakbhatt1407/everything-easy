@@ -40,15 +40,27 @@ $BLOG_POST_FIELDS = [
     'image_url'         => ['type' => 's', 'required' => true],
 ];
 
+// Image upload handling: max upload size and the max width we downscale to
+// before re-encoding as WebP.
+define('BLOG_IMAGE_MAX_BYTES', 5 * 1024 * 1024);
+define('BLOG_IMAGE_MAX_WIDTH', 1600);
+define('BLOG_IMAGE_WEBP_QUALITY', 80);
+
 try {
     $conn = getDBConnection();
 
     $action = '';
+    $data = [];
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $input = file_get_contents('php://input');
-        $data = json_decode($input, true);
-        if (!is_array($data)) {
-            $data = [];
+        if (!empty($_POST) || !empty($_FILES)) {
+            // multipart/form-data or x-www-form-urlencoded (used when uploading an image file)
+            $data = $_POST;
+        } else {
+            $input = file_get_contents('php://input');
+            $decoded = json_decode($input, true);
+            if (is_array($decoded)) {
+                $data = $decoded;
+            }
         }
         $action = isset($data['action']) ? $data['action'] : '';
     } else {
@@ -77,11 +89,11 @@ try {
             break;
 
         case 'create':
-            createBlogPost($conn, $data, $BLOG_POST_FIELDS);
+            createBlogPost($conn, $data, $BLOG_POST_FIELDS, $_FILES);
             break;
 
         case 'update':
-            updateBlogPost($conn, $data, $BLOG_POST_FIELDS);
+            updateBlogPost($conn, $data, $BLOG_POST_FIELDS, $_FILES);
             break;
 
         case 'delete':
@@ -195,7 +207,12 @@ function getBlogPostBySlug($conn, $slug) {
 }
 
 // Create Blog Post
-function createBlogPost($conn, $data, $fields) {
+function createBlogPost($conn, $data, $fields, $files) {
+    $uploadedImage = handleBlogImageUpload($files);
+    if ($uploadedImage !== null) {
+        $data['image_url'] = $uploadedImage;
+    }
+
     foreach ($fields as $name => $def) {
         if (!empty($def['required']) && $name !== 'slug' && empty($data[$name])) {
             sendJSONResponse(false, "Field '$name' is required");
@@ -241,7 +258,7 @@ function createBlogPost($conn, $data, $fields) {
 }
 
 // Update Blog Post (partial update - only fields present in the request are changed)
-function updateBlogPost($conn, $data, $fields) {
+function updateBlogPost($conn, $data, $fields, $files) {
     if (empty($data['id'])) {
         sendJSONResponse(false, 'Blog post ID is required');
     }
@@ -257,6 +274,12 @@ function updateBlogPost($conn, $data, $fields) {
     }
     $existing = $existingResult->fetch_assoc();
     $existingStmt->close();
+
+    $uploadedImage = handleBlogImageUpload($files);
+    if ($uploadedImage !== null) {
+        $data['image_url'] = $uploadedImage;
+        deleteLocalBlogImage($existing['image_url']);
+    }
 
     if (array_key_exists('title', $data) && empty($data['title'])) {
         sendJSONResponse(false, "Field 'title' is required");
@@ -342,6 +365,81 @@ function incrementBlogPostViews($conn, $id) {
         sendJSONResponse(true, 'Views incremented');
     } else {
         sendJSONResponse(false, 'Failed to increment views');
+    }
+}
+
+// Handles an uploaded 'image' file: validates it, downscales it if it's
+// wider than BLOG_IMAGE_MAX_WIDTH, and re-encodes it as WebP to keep storage
+// and page-load size down. Returns the relative path to store in image_url,
+// or null if no file was uploaded (caller falls back to a plain image_url).
+function handleBlogImageUpload($files) {
+    if (!isset($files['image']) || $files['image']['error'] === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+
+    $file = $files['image'];
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        sendJSONResponse(false, 'Image upload failed');
+    }
+
+    if ($file['size'] > BLOG_IMAGE_MAX_BYTES) {
+        sendJSONResponse(false, 'Image is too large. Maximum size is 5MB.');
+    }
+
+    $mime = mime_content_type($file['tmp_name']);
+    $creators = [
+        'image/jpeg' => 'imagecreatefromjpeg',
+        'image/png'  => 'imagecreatefrompng',
+        'image/gif'  => 'imagecreatefromgif',
+        'image/webp' => 'imagecreatefromwebp',
+    ];
+
+    if (!isset($creators[$mime])) {
+        sendJSONResponse(false, 'Invalid image type. Only JPG, PNG, GIF, and WEBP are allowed.');
+    }
+
+    $source = @$creators[$mime]($file['tmp_name']);
+    if ($source === false) {
+        sendJSONResponse(false, 'Unable to read the uploaded image.');
+    }
+
+    $width = imagesx($source);
+    $height = imagesy($source);
+
+    if ($width > BLOG_IMAGE_MAX_WIDTH) {
+        $newWidth = BLOG_IMAGE_MAX_WIDTH;
+        $newHeight = (int) round($height * ($newWidth / $width));
+
+        $resized = imagecreatetruecolor($newWidth, $newHeight);
+        imagealphablending($resized, false);
+        imagesavealpha($resized, true);
+        imagecopyresampled($resized, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagedestroy($source);
+        $source = $resized;
+    }
+
+    $uploadDir = '../uploads/blog-images/';
+    $fileName = 'blog_' . time() . '_' . uniqid() . '.webp';
+    $uploadPath = $uploadDir . $fileName;
+
+    $saved = imagewebp($source, $uploadPath, BLOG_IMAGE_WEBP_QUALITY);
+    imagedestroy($source);
+
+    if (!$saved) {
+        sendJSONResponse(false, 'Failed to save the uploaded image.');
+    }
+
+    return 'uploads/blog-images/' . $fileName;
+}
+
+// Deletes a previously uploaded local blog image (no-op for external URLs).
+function deleteLocalBlogImage($imageUrl) {
+    if (empty($imageUrl) || strpos($imageUrl, 'uploads/blog-images/') !== 0) {
+        return;
+    }
+    $path = '../' . $imageUrl;
+    if (file_exists($path)) {
+        unlink($path);
     }
 }
 
