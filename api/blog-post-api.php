@@ -29,12 +29,14 @@ $BLOG_POST_FIELDS = [
     'slug'              => ['type' => 's', 'required' => true],
     'meta_title'        => ['type' => 's'],
     'meta_description'  => ['type' => 's'],
+    'meta_keywords'     => ['type' => 's'],
     'description'       => ['type' => 's'],
     'content'           => ['type' => 's'],
     'publish_date'      => ['type' => 's'],
     'author'            => ['type' => 's'],
     'category'          => ['type' => 's'],
     'tags'              => ['type' => 's'],
+    'status'            => ['type' => 's', 'default' => 'published'],
     'image_url'         => ['type' => 's', 'required' => true],
 ];
 
@@ -84,6 +86,14 @@ try {
 
         case 'delete':
             deleteBlogPost($conn, $data['id'] ?? null);
+            break;
+
+        case 'incrementViews':
+            if (isset($_GET['id'])) {
+                incrementBlogPostViews($conn, $_GET['id']);
+            } else {
+                sendJSONResponse(false, 'Blog post ID is required');
+            }
             break;
 
         default:
@@ -319,6 +329,19 @@ function deleteBlogPost($conn, $id) {
     } else {
         logError("Delete blog post error: " . $stmt->error);
         sendJSONResponse(false, 'Failed to delete blog post');
+    }
+}
+
+// Increment Views
+function incrementBlogPostViews($conn, $id) {
+    $id = intval($id);
+    $stmt = $conn->prepare("UPDATE blog_post SET views = views + 1 WHERE id = ?");
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        sendJSONResponse(true, 'Views incremented');
+    } else {
+        sendJSONResponse(false, 'Failed to increment views');
     }
 }
 

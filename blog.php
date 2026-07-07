@@ -3,7 +3,7 @@ require_once 'backend/config.php';
 
 // Get all published blogs
 $conn = getDBConnection();
-$sql = "SELECT * FROM blogs WHERE status = 'published' ORDER BY created_at DESC";
+$sql = "SELECT * FROM blog_post WHERE status = 'published' ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 $blogs = [];
@@ -137,7 +137,7 @@ function getImageUrl($imageUrl) {
                       <?php echo htmlspecialchars($blog['title']); ?>
                     </a>
                   </h4>
-                  <p class="text-muted mb-3"><?php echo htmlspecialchars($blog['excerpt']); ?></p>
+                  <p class="text-muted mb-3"><?php echo htmlspecialchars($blog['description']); ?></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <a href="<?php echo htmlspecialchars(getBlogUrl($blog)); ?>" class="btn btn-outline-primary">
                       Read More <i class="fas fa-arrow-right ms-2"></i>

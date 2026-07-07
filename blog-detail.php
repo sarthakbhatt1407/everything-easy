@@ -15,11 +15,11 @@ $conn = getDBConnection();
 
 // Get blog details by slug if available, otherwise by legacy ID.
 if ($slug !== '') {
-  $sql = "SELECT * FROM blogs WHERE slug = ? AND status = 'published'";
+  $sql = "SELECT * FROM blog_post WHERE slug = ? AND status = 'published'";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $slug);
 } else {
-  $sql = "SELECT * FROM blogs WHERE id = ? AND status = 'published'";
+  $sql = "SELECT * FROM blog_post WHERE id = ? AND status = 'published'";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $blogId);
 }
@@ -41,7 +41,7 @@ if ($result->num_rows === 0) {
   }
 
   // Increment view count only for valid posts.
-  $updateSql = "UPDATE blogs SET views = views + 1 WHERE id = ?";
+  $updateSql = "UPDATE blog_post SET views = views + 1 WHERE id = ?";
   $updateStmt = $conn->prepare($updateSql);
   $updateStmt->bind_param("i", $blogId);
   $updateStmt->execute();
@@ -52,7 +52,7 @@ $stmt->close();
 // Get related posts
 $relatedBlogs = [];
 if ($blog) {
-    $relatedSql = "SELECT * FROM blogs WHERE id != ? AND category = ? AND status = 'published' ORDER BY created_at DESC LIMIT 2";
+    $relatedSql = "SELECT * FROM blog_post WHERE id != ? AND category = ? AND status = 'published' ORDER BY created_at DESC LIMIT 2";
     $relatedStmt = $conn->prepare($relatedSql);
     $relatedStmt->bind_param("is", $blogId, $blog['category']);
     $relatedStmt->execute();
@@ -100,8 +100,8 @@ $defaultDescription = 'Read the latest insights and updates from EverythingEasy 
 $metaDescription = $defaultDescription;
 if ($blog && !empty($blog['meta_description'])) {
   $metaDescription = trim($blog['meta_description']);
-} elseif ($blog && !empty($blog['excerpt'])) {
-  $metaDescription = trim(strip_tags($blog['excerpt']));
+} elseif ($blog && !empty($blog['description'])) {
+  $metaDescription = trim(strip_tags($blog['description']));
 }
 
 $metaKeywords = 'everythingeasy, technology, blog';
@@ -207,7 +207,7 @@ if ($blog && !empty($blog['meta_keywords'])) {
 
             <!-- Blog Content -->
             <div class="blog-detail-content" id="blog-content">
-              <p class="lead mb-4"><?php echo htmlspecialchars($blog['excerpt']); ?></p>
+              <p class="lead mb-4"><?php echo htmlspecialchars($blog['description']); ?></p>
               
               <div class="mb-4">
                 <span class="badge bg-primary me-2"><?php echo htmlspecialchars($blog['category']); ?></span>

@@ -21,7 +21,7 @@ $conn = getDBConnection();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rawTitle = trim($_POST['title']);
     $title = mysqli_real_escape_string($conn, $rawTitle);
-    $excerpt = mysqli_real_escape_string($conn, $_POST['excerpt']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
     $content = mysqli_real_escape_string($conn, $_POST['content']);
     $category = mysqli_real_escape_string($conn, $_POST['category']);
     $author = mysqli_real_escape_string($conn, $_POST['author']);
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Unable to generate slug from this title. Please use a different title.';
         $messageType = 'danger';
     } else {
-        $slugCheckSql = "SELECT id FROM blogs WHERE slug = ? AND id != ? LIMIT 1";
+        $slugCheckSql = "SELECT id FROM blog_post WHERE slug = ? AND id != ? LIMIT 1";
         $slugCheckStmt = $conn->prepare($slugCheckSql);
         $slugCheckStmt->bind_param('si', $slug, $blogId);
         $slugCheckStmt->execute();
@@ -89,10 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($message)) {
-        $sql = "UPDATE blogs SET
+        $sql = "UPDATE blog_post SET
                 title = ?,
                 slug = ?,
-                excerpt = ?,
+                description = ?,
                 content = ?,
                 image_url = ?,
                 category = ?,
@@ -100,8 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 status = ?,
                 tags = ?,
                 meta_description = ?,
-                meta_keywords = ?,
-                updated_at = CURRENT_TIMESTAMP
+                meta_keywords = ?
                 WHERE id = ?";
 
         $stmt = $conn->prepare($sql);
@@ -109,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'sssssssssssi',
             $title,
             $slug,
-            $excerpt,
+            $description,
             $content,
             $imageUrl,
             $category,
@@ -133,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $blog = null;
-$blogSql = 'SELECT * FROM blogs WHERE id = ? LIMIT 1';
+$blogSql = 'SELECT * FROM blog_post WHERE id = ? LIMIT 1';
 $blogStmt = $conn->prepare($blogSql);
 $blogStmt->bind_param('i', $blogId);
 $blogStmt->execute();
@@ -240,7 +239,7 @@ function generateSlug($title) {
 
                             <div class="mb-3">
                                 <label for="blogExcerpt" class="form-label">Excerpt (Short Description) *</label>
-                                <textarea class="form-control" id="blogExcerpt" name="excerpt" rows="2" required><?php echo htmlspecialchars($blog['excerpt']); ?></textarea>
+                                <textarea class="form-control" id="blogExcerpt" name="description" rows="2" required><?php echo htmlspecialchars($blog['description']); ?></textarea>
                             </div>
 
                             <div class="mb-3">

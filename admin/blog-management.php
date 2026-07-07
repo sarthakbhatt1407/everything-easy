@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             case 'create':
                 $rawTitle = trim($_POST['title']);
                 $title = mysqli_real_escape_string($conn, $rawTitle);
-                $excerpt = mysqli_real_escape_string($conn, $_POST['excerpt']);
+                $description = mysqli_real_escape_string($conn, $_POST['description']);
                 $content = mysqli_real_escape_string($conn, $_POST['content']);
                 $category = mysqli_real_escape_string($conn, $_POST['category']);
                 $author = mysqli_real_escape_string($conn, $_POST['author']);
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
 
-                $slugCheckSql = "SELECT id FROM blogs WHERE slug = ? LIMIT 1";
+                $slugCheckSql = "SELECT id FROM blog_post WHERE slug = ? LIMIT 1";
                 $slugCheckStmt = $conn->prepare($slugCheckSql);
                 $slugCheckStmt->bind_param("s", $slug);
                 $slugCheckStmt->execute();
@@ -84,10 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
                 
-                $sql = "INSERT INTO blogs (title, slug, excerpt, meta_description, meta_keywords, content, image_url, category, author, status, tags) 
+                $sql = "INSERT INTO blog_post (title, slug, description, meta_description, meta_keywords, content, image_url, category, author, status, tags) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssssssss", $title, $slug, $excerpt, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags);
+                $stmt->bind_param("sssssssssss", $title, $slug, $description, $metaDescription, $metaKeywords, $content, $imageUrl, $category, $author, $status, $tags);
                 
                 if ($stmt->execute()) {
                     $message = 'Blog post created successfully!';
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $id = intval($_POST['id']);
                 $rawTitle = trim($_POST['title']);
                 $title = mysqli_real_escape_string($conn, $rawTitle);
-                $excerpt = mysqli_real_escape_string($conn, $_POST['excerpt']);
+                $description = mysqli_real_escape_string($conn, $_POST['description']);
                 $content = mysqli_real_escape_string($conn, $_POST['content']);
                 $category = mysqli_real_escape_string($conn, $_POST['category']);
                 $author = mysqli_real_escape_string($conn, $_POST['author']);
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
 
-                $slugCheckSql = "SELECT id FROM blogs WHERE slug = ? AND id != ? LIMIT 1";
+                $slugCheckSql = "SELECT id FROM blog_post WHERE slug = ? AND id != ? LIMIT 1";
                 $slugCheckStmt = $conn->prepare($slugCheckSql);
                 $slugCheckStmt->bind_param("si", $slug, $id);
                 $slugCheckStmt->execute();
@@ -174,11 +174,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $imageUrl = mysqli_real_escape_string($conn, $_POST['image_url']);
                 }
                 
-                $sql = "UPDATE blogs SET title = ?, slug = ?, excerpt = ?, content = ?, image_url = ?, 
-                    category = ?, author = ?, status = ?, tags = ?, meta_description = ?, meta_keywords = ?, updated_at = CURRENT_TIMESTAMP 
+                $sql = "UPDATE blog_post SET title = ?, slug = ?, description = ?, content = ?, image_url = ?, 
+                    category = ?, author = ?, status = ?, tags = ?, meta_description = ?, meta_keywords = ? 
                         WHERE id = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssssssssi", $title, $slug, $excerpt, $content, $imageUrl, $category, $author, $status, $tags, $metaDescription, $metaKeywords, $id);
+                $stmt->bind_param("sssssssssssi", $title, $slug, $description, $content, $imageUrl, $category, $author, $status, $tags, $metaDescription, $metaKeywords, $id);
                 
                 if ($stmt->execute()) {
                     $message = 'Blog post updated successfully!';
@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
             case 'delete':
                 $id = intval($_POST['id']);
-                $sql = "DELETE FROM blogs WHERE id = ?";
+                $sql = "DELETE FROM blog_post WHERE id = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("i", $id);
                 
@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Get all blogs
 $conn = getDBConnection();
-$sql = "SELECT * FROM blogs ORDER BY created_at DESC";
+$sql = "SELECT * FROM blog_post ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 $blogs = [];
@@ -463,7 +463,7 @@ function generateSlug($title) {
                                         </td>
                                         <td>
                                             <div class="fw-bold"><?php echo htmlspecialchars(strip_tags($blog['title'])); ?></div>
-                                            <small class="text-muted"><?php echo htmlspecialchars(truncateText($blog['excerpt'], 50)); ?></small>
+                                            <small class="text-muted"><?php echo htmlspecialchars(truncateText($blog['description'], 50)); ?></small>
                                         </td>
                                         <td><span class="badge bg-info"><?php echo htmlspecialchars($blog['category']); ?></span></td>
                                         <td><?php echo htmlspecialchars($blog['author']); ?></td>
@@ -528,7 +528,7 @@ function generateSlug($title) {
 
                                 <div class="mb-3">
                                     <label for="blogExcerpt" class="form-label">Excerpt (Short Description) *</label>
-                                    <textarea class="form-control" id="blogExcerpt" name="excerpt" rows="2" required></textarea>
+                                    <textarea class="form-control" id="blogExcerpt" name="description" rows="2" required></textarea>
                                 </div>
 
                                 <div class="mb-3">
@@ -684,7 +684,7 @@ function generateSlug($title) {
             document.getElementById('formAction').value = 'update';
             document.getElementById('blogId').value = blog.id;
             document.getElementById('blogTitle').value = blog.title;
-            document.getElementById('blogExcerpt').value = blog.excerpt;
+            document.getElementById('blogExcerpt').value = blog.description;
             if (blogContentEditor) {
                 blogContentEditor.setData(blog.content || '');
             } else {
