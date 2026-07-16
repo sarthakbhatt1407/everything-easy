@@ -462,6 +462,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
           </div>
         </div>
+        <!-- SEO Developer -->
+        <div class="col-12 col-lg-10 mb-4">
+          <div class="service-detail-card bg-white rounded shadow p-3 p-md-4 h-100">
+            <div
+              class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-between text-center text-md-start">
+              <div class="flex-grow-1 mb-3 mb-md-0 w-100">
+                <div class="d-flex flex-column align-items-center align-items-md-start mb-3">
+                  <div
+                    class="icon-circle bg-danger bg-opacity-10 rounded-circle p-2 d-inline-flex align-items-center justify-content-center mb-2 me-md-3"
+                    style="width: 50px; height: 50px">
+                    <i class="fas fa-search text-danger"></i>
+                  </div>
+                  <div class="mt-2 mt-md-0">
+                    <h4 class="fw-bold mb-1">SEO Developer</h4>
+                    <small class="text-muted">
+                      <i class="fas fa-map-marker-alt me-1"></i>Dehradun,
+                      India
+                      <span class="mx-2">•</span>
+                      <i class="fas fa-briefcase me-1"></i>Full-time
+                      <span class="mx-2">•</span>
+                      <i class="fas fa-money-bill-wave me-1"></i>3.50-5.0 LPA
+                    </small>
+                  </div>
+                </div>
+                <p class="text-muted mb-3">
+                  Looking for a skilled SEO Developer to optimize website
+                  performance, improve search rankings, and implement
+                  technical SEO best practices across our web properties.
+                </p>
+                <div class="mb-2">
+                  <span class="badge bg-danger bg-opacity-10 text-danger me-2 mb-2">Technical SEO</span>
+                  <span class="badge bg-danger bg-opacity-10 text-danger me-2 mb-2">On-Page SEO</span>
+                  <span class="badge bg-danger bg-opacity-10 text-danger me-2 mb-2">Google Analytics</span>
+                  <span class="badge bg-danger bg-opacity-10 text-danger me-2 mb-2">Search Console</span>
+                </div>
+              </div>
+              <div class="align-self-center mt-3 mt-md-0">
+                <a href="#apply" class="btn btn-primary text-nowrap">Apply Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -574,6 +616,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </option>
                     <option value="Mobile App Developer" <?php echo $formData['position'] === 'Mobile App Developer' ? 'selected' : ''; ?>>
                       Mobile App Developer
+                    </option>
+                    <option value="SEO Developer" <?php echo $formData['position'] === 'SEO Developer' ? 'selected' : ''; ?>>
+                      SEO Developer
                     </option>
                     <option value="Other" <?php echo $formData['position'] === 'Other' ? 'selected' : ''; ?>>Other</option>
                   </select>
