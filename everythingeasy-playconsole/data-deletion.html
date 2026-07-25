@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account & Data Deletion Request - EverythingEasy Blogs</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        .warning {
+            background-color: #fcf8e3;
+            border-left: 4px solid #faebcc;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #8a6d3b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Data Deletion Request</h1>
+        
+        <div class="warning">
+            <strong>Warning:</strong> Deleting your account is a permanent action. All your blog posts, reading history, profile data, and associated information will be permanently erased and cannot be recovered.
+        </div>
+
+        <p>If you wish to proceed with deleting your EverythingEasy Blogs account and all associated data, please provide your account details below. We will process your request within 7-14 business days.</p>
+
+        <!-- Replace the "action" attribute with your form submission endpoint or email -->
+        <form action="mailto:your-support-email@example.com" method="POST" enctype="text/plain">
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Your app username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Your app password" required>
+            </div>
+
+            <button type="submit">Request Data Deletion</button>
+            
+        </form>
+    </div>
+
+</body>
+</html>
