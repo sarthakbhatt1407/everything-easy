@@ -3,3 +3,5 @@ vendor/
 .env.*
 backend/config.php
 .cache/
+.DS_Store
+**/.DS_Store
