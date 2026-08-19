@@ -340,9 +340,9 @@
                       Mobile App Development
                     </option>
                     <option value="cloud-solutions">Cloud Solutions</option>
-                    <option value="seo">E-Commerce Development</option>
-                    <option value="seo">UI/UX Design</option>
-                    <option value="seo">Digital Marketing</option>
+                    <option value="ecommerce-development">E-Commerce Development</option>
+                    <option value="ui-ux-design">UI/UX Design</option>
+                    <option value="digital-marketing">Digital Marketing</option>
                     <option value="other">Other Services</option>
                   </select>
                 </div>
@@ -1509,9 +1509,15 @@
 
         // Get form data
         const formData = new FormData(this);
+        const nameValue = (formData.get("name") || "").trim();
+
+        if (!nameValue) {
+          showQuoteToast("error", "Please enter your name.");
+          return;
+        }
 
         // Split name into firstName and lastName
-        const fullName = formData.get("name").trim().split(" ");
+        const fullName = nameValue.split(" ");
         const firstName = fullName[0];
         const lastName = fullName.slice(1).join(" ") || firstName;
 
@@ -1533,14 +1539,6 @@
           '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
         submitBtn.disabled = true;
 
-        // Show instant confirmation so users do not wait for email processing.
-        showQuoteToast("success", "Done! Your request has been submitted.");
-
-        // Reset form and button right away for better UX.
-        form.reset();
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-
         // Submit via AJAX
         fetch("backend/submit-quote.php", {
           method: "POST",
@@ -1549,21 +1547,40 @@
           },
           body: JSON.stringify(data),
         })
-          .then((response) => response.json())
-          .then((result) => {
-            if (!result.success) {
-              showQuoteToast(
-                "error",
+          .then(async (response) => {
+            const contentType = response.headers.get("content-type") || "";
+
+            if (!contentType.includes("application/json")) {
+              throw new Error("Server returned an invalid response.");
+            }
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+              throw new Error(
                 result.message || "Unable to submit your request. Please try again."
               );
             }
+
+            return result;
+          })
+          .then((result) => {
+            form.reset();
+            showQuoteToast(
+              "success",
+              result.message || "Done! Your request has been submitted."
+            );
           })
           .catch((error) => {
             console.error("Error:", error);
             showQuoteToast(
               "error",
-              "There was a network issue. Please submit again if needed."
+              error.message || "There was a network issue. Please submit again if needed."
             );
+          })
+          .finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
           });
       });
     }
